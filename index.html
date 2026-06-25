@@ -1,415 +1,758 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Shaikh China Sourcing — Hero</title>
+<!--
+  SHAIKH CHINA SOURCING — Hero section
+  Single self-contained file. Drop into your GitHub Pages repo as index.html (or a section partial).
+  No build step, no dependencies. Fonts load from Google Fonts; everything else is local.
+-->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0A0F1C" />
+<title>Shaikh China Sourcing — Factory-direct sourcing & freight</title>
 
-<!-- Fonts: Bricolage Grotesque (display), Hanken Grotesk (body), Space Mono (data), Ma Shan Zheng (seal glyph) -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Hanken+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
 <style>
-  :root{
-    --ink:#14110E;
-    --ink-2:#1d1813;
-    --cinnabar:#D6402A;
-    --cinnabar-deep:#b1311e;
-    --brass:#CBA24A;
-    --bone:#F4EEE3;
-    --clay:#B9A78F;
+  /* ============================================================
+     Tokens
+     ============================================================ */
+  :root {
+    --ink:        #0A0F1C;   /* deep midnight — ocean at night */
+    --ink-2:      #0E1626;
+    --ink-3:      #131F33;
+    --paper:      #F4EFE6;   /* warm off-white, not pure white */
+    --muted:      #9DAAC0;
+    --gold:       #E8A93A;   /* manifest gold */
+    --gold-bright:#FFD98A;
+    --teal:       #34D3C2;   /* route + cargo signal */
+    --origin:     #E2483D;   /* China origin node */
+    --line:       rgba(244,239,230,0.10);
 
-    --font-display:"Bricolage Grotesque", sans-serif;
-    --font-body:"Hanken Grotesk", sans-serif;
-    --font-mono:"Space Mono", monospace;
-    --font-seal:"Ma Shan Zheng", serif;
+    /* Emil's stronger curves — built-in easings lack punch */
+    --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
-    /* easing (per design-eng: built-in curves are too weak) */
-    --ease-out:cubic-bezier(0.23, 1, 0.32, 1);
-    --ease-in-out:cubic-bezier(0.77, 0, 0.175, 1);
+    --maxw: 1240px;
   }
 
-  *{box-sizing:border-box;margin:0;padding:0;}
+  *, *::before, *::after { box-sizing: border-box; }
 
-  html,body{height:100%;}
+  html, body { margin: 0; }
 
-  body{
-    font-family:var(--font-body);
-    background:var(--ink);
-    color:var(--bone);
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  /* ---------- HERO SHELL ---------- */
-  .hero{
-    position:relative;
-    min-height:100svh;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    isolation:isolate;
+  /* ============================================================
+     Hero shell
+     ============================================================ */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* ---------- BACKGROUND (Instagram reel) ---------- */
-  .hero__bg{position:absolute;inset:0;z-index:-3;}
-
-  .hero__video{
-    position:absolute;inset:0;
-    width:100%;height:100%;
-    object-fit:cover;
-    object-position:center;
+  /* --- Layer 1: Instagram reel background ------------------- */
+  .reel-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    overflow: hidden;
   }
-
-  /* Animated fallback so the hero looks alive before/without a reel */
-  .hero__fallback{
-    position:absolute;inset:0;z-index:-1;
+  /* Reel background. Wired to stationery.mp4 in the repo.
+     Muted + playsinline + loop = silent autoplay/loop as a background.
+     Swap the <source src> if you re-export the reel under a new name. */
+  .reel-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Visible placeholder so the slot reads as "live" before you wire the mp4 in */
+  .reel-placeholder {
+    position: absolute;
+    inset: 0;
     background:
-      radial-gradient(120% 90% at 78% 18%, rgba(214,64,42,.42), transparent 55%),
-      radial-gradient(100% 80% at 12% 92%, rgba(203,162,74,.28), transparent 58%),
-      linear-gradient(135deg, #241a14 0%, #14110E 48%, #0d0b09 100%);
-    background-size:160% 160%, 160% 160%, 100% 100%;
-    animation:drift 26s var(--ease-in-out) infinite alternate;
+      radial-gradient(120% 90% at 78% 18%, rgba(232,169,58,0.20), transparent 55%),
+      radial-gradient(120% 90% at 20% 88%, rgba(52,211,194,0.16), transparent 55%),
+      linear-gradient(125deg, #0c1424, #16243d 45%, #0a1120);
+    background-size: 200% 200%;
+    animation: reelDrift 22s var(--ease-in-out) infinite alternate;
+    filter: saturate(1.05);
   }
-  @keyframes drift{
-    from{background-position:0% 0%, 100% 100%, 0 0;}
-    to{background-position:30% 25%, 70% 60%, 0 0;}
+  @keyframes reelDrift {
+    from { background-position: 0% 0%; }
+    to   { background-position: 100% 100%; }
+  }
+  .reel-chip {
+    position: absolute;
+    left: clamp(16px, 4vw, 40px);
+    bottom: clamp(16px, 4vw, 36px);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: rgba(10,15,28,0.55);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+    font-family: "Space Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .reel-chip b { color: var(--paper); font-weight: 700; }
+  .reel-chip .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--origin);
+    box-shadow: 0 0 0 0 rgba(226,72,61,0.6);
+    animation: live 2s var(--ease-out) infinite;
+  }
+  @keyframes live {
+    0%   { box-shadow: 0 0 0 0 rgba(226,72,61,0.55); }
+    70%  { box-shadow: 0 0 0 7px rgba(226,72,61,0); }
+    100% { box-shadow: 0 0 0 0 rgba(226,72,61,0); }
   }
 
-  /* Directional scrim keeps the left-aligned type readable over any footage */
-  .hero__scrim{
-    position:absolute;inset:0;z-index:-2;
+  /* --- Layer 2: legibility scrim --------------------------- */
+  .scrim {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
     background:
-      linear-gradient(98deg, rgba(15,12,10,.94) 0%, rgba(15,12,10,.78) 34%, rgba(15,12,10,.28) 66%, rgba(15,12,10,.55) 100%),
-      linear-gradient(0deg, rgba(15,12,10,.92) 0%, rgba(15,12,10,0) 34%);
+      linear-gradient(180deg, rgba(10,15,28,0.55) 0%, rgba(10,15,28,0.72) 40%, rgba(10,15,28,0.92) 100%),
+      radial-gradient(90% 70% at 12% 20%, rgba(10,15,28,0.35), transparent 60%);
+  }
+  /* fine grid texture for a freight/manifest feel */
+  .grid-tex {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 78%);
+    opacity: 0.5;
   }
 
-  /* Fine film grain for a premium, less-digital surface */
-  .hero__grain{
-    position:absolute;inset:0;z-index:-1;opacity:.06;pointer-events:none;mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* ============================================================
+     Top bar
+     ============================================================ */
+  .bar {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: clamp(18px, 3vw, 28px) clamp(18px, 5vw, 44px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--paper);
+  }
+  .brand .glyph {
+    display: grid;
+    place-items: center;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(244,239,230,0.06);
+    border: 1px solid var(--line);
+    box-shadow: 0 8px 26px rgba(0,0,0,0.35);
+  }
+  .brand .glyph img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .brand .wm { line-height: 1; }
+  .brand .wm strong {
+    display: block;
+    font-family: "Unbounded", sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .brand .wm span {
+    font-family: "Space Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .bar nav {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+  }
+  .bar nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 160ms var(--ease-out);
+  }
+  .wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    background: rgba(244,239,230,0.04);
+    transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out), background 160ms var(--ease-out);
+  }
+  .wa:active { transform: scale(0.97); }
+
+  @media (hover: hover) and (pointer: fine) {
+    .bar nav a:hover { color: var(--paper); }
+    .wa:hover { background: rgba(244,239,230,0.09); border-color: rgba(244,239,230,0.25); }
   }
 
-  /* small badge marking where to drop the real reel */
-  .reel-badge{
-    position:absolute;right:18px;bottom:16px;z-index:5;
-    display:inline-flex;align-items:center;gap:8px;
-    font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--clay);background:rgba(15,12,10,.5);
-    border:1px solid rgba(203,162,74,.28);border-radius:999px;
-    padding:6px 12px;backdrop-filter:blur(6px);
-  }
-  .reel-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--cinnabar);
-    box-shadow:0 0 0 0 rgba(214,64,42,.55);animation:pulse 2.2s var(--ease-out) infinite;}
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(214,64,42,.55);}
-    70%{box-shadow:0 0 0 9px rgba(214,64,42,0);}
-    100%{box-shadow:0 0 0 0 rgba(214,64,42,0);}
+  /* ============================================================
+     Main grid
+     ============================================================ */
+  .stage {
+    flex: 1;
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: clamp(8px, 2vw, 24px) clamp(18px, 5vw, 44px) clamp(28px, 5vw, 56px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: center;
+    gap: clamp(24px, 4vw, 56px);
   }
 
-  /* ---------- TOP BAR ---------- */
-  .topbar{
-    position:relative;z-index:2;
-    display:flex;align-items:center;gap:24px;
-    padding:24px clamp(20px,5vw,64px);
-    border-bottom:1px solid rgba(203,162,74,.18);
+  /* --- copy column ----------------------------------------- */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Space Mono", monospace;
+    font-size: clamp(10px, 1.4vw, 12.5px);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin: 0 0 22px;
   }
-  .wordmark{
-    font-family:var(--font-display);
-    font-weight:800;font-size:clamp(15px,1.5vw,18px);
-    letter-spacing:.01em;line-height:1;white-space:nowrap;
-    color:var(--bone);
+  .eyebrow .pip {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--origin);
+    box-shadow: 0 0 12px var(--origin);
   }
-  .wordmark b{color:var(--cinnabar);font-weight:800;}
+  .eyebrow .arrow { color: var(--teal); }
+  .eyebrow .dest { color: var(--muted); }
 
-  .ticker{
-    flex:1;overflow:hidden;
-    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
-            mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  h1 {
+    margin: 0;
+    font-family: "Unbounded", "Arial Black", sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.7rem, 8.4vw, 6.4rem);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
   }
-  .ticker__track{
-    display:inline-flex;white-space:nowrap;will-change:transform;
-    animation:scroll 32s linear infinite;
-  }
-  .ticker__track span{
-    font-family:var(--font-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--clay);padding:0 26px;
-  }
-  .ticker__track span em{color:var(--brass);font-style:normal;}
-  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-
-  /* ---------- CONTENT ---------- */
-  .stage{
-    position:relative;z-index:2;flex:1;
-    display:flex;align-items:center;
-    padding:clamp(36px,6vw,80px) clamp(20px,5vw,64px) clamp(140px,16vw,180px);
-  }
-  .content{max-width:920px;}
-
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:12px;
-    font-family:var(--font-mono);font-size:12px;font-weight:700;
-    letter-spacing:.2em;text-transform:uppercase;color:var(--brass);
-    margin-bottom:26px;
-  }
-  .eyebrow::before{content:"";width:34px;height:1px;background:var(--brass);opacity:.7;}
-
-  h1.headline{
-    font-family:var(--font-display);
-    font-weight:800;
-    font-size:clamp(40px,7.4vw,104px);
-    line-height:.95;
-    letter-spacing:-.02em;
-    text-wrap:balance;
-  }
-  .headline .line{display:block;}
-  .headline .accent{color:var(--cinnabar);}
-  .headline .thin{
-    font-weight:500;color:var(--clay);
-    font-size:.92em;letter-spacing:-.01em;
+  h1 .l1 { display: block; color: var(--paper); }
+  h1 .l2 {
+    display: block;
+    background: linear-gradient(96deg, var(--gold-bright), var(--gold) 55%, var(--teal));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
-  .sub{
-    margin-top:28px;max-width:560px;
-    font-size:clamp(15px,1.5vw,18px);line-height:1.55;color:#e7ddcd;
+  .sub {
+    margin: 22px 0 0;
+    max-width: 30em;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.7vw, 1.18rem);
+    line-height: 1.55;
   }
-  .sub b{color:var(--bone);font-weight:600;}
+  .sub b { color: var(--paper); font-weight: 600; }
 
-  /* social proof cluster near the CTAs */
-  .proof{
-    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-    margin-top:30px;
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 30px;
   }
-  .avatars{display:flex;}
-  .avatars .av{
-    width:36px;height:36px;border-radius:50%;
-    display:grid;place-items:center;
-    font-family:var(--font-mono);font-weight:700;font-size:12px;color:var(--ink);
-    border:2px solid var(--ink);margin-left:-10px;
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 24px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 160ms var(--ease-out), box-shadow 200ms var(--ease-out), background 160ms var(--ease-out), border-color 160ms var(--ease-out);
   }
-  .avatars .av:first-child{margin-left:0;}
-  .av.a{background:#e0b35a;} .av.b{background:#d6402a;color:var(--bone);}
-  .av.c{background:#cdbfa6;} .av.d{background:#9c8a6e;color:var(--bone);}
-  .av.more{background:rgba(244,238,227,.12);color:var(--bone);border-color:var(--ink);}
-  .proof__text{font-size:13px;line-height:1.4;color:var(--clay);}
-  .proof__text .stars{color:var(--brass);letter-spacing:1px;}
-  .proof__text b{color:var(--bone);font-weight:600;}
-
-  /* CTAs */
-  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;}
-  .btn{
-    font-family:var(--font-body);font-weight:600;font-size:15px;
-    padding:15px 28px;border-radius:2px;cursor:pointer;border:1px solid transparent;
-    transition:transform .14s var(--ease-out), background-color .2s ease, color .2s ease, border-color .2s ease;
-    text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+  .btn:active { transform: scale(0.97); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: #2a1d05;
+    box-shadow: 0 12px 34px rgba(232,169,58,0.28);
   }
-  .btn:active{transform:scale(.97);}
-  .btn--primary{background:var(--cinnabar);color:var(--bone);}
-  .btn--primary .arrow{transition:transform .2s var(--ease-out);}
-  .btn--ghost{background:transparent;color:var(--bone);border-color:rgba(244,238,227,.32);}
-  .btn:focus-visible{outline:2px solid var(--brass);outline-offset:3px;}
-
-  @media (hover:hover) and (pointer:fine){
-    .btn--primary:hover{background:var(--cinnabar-deep);}
-    .btn--primary:hover .arrow{transform:translateX(4px);}
-    .btn--ghost:hover{border-color:var(--brass);color:var(--brass);}
+  .btn-ghost {
+    background: rgba(244,239,230,0.04);
+    border-color: var(--line);
+    color: var(--paper);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 44px rgba(232,169,58,0.38); }
+    .btn-ghost:hover { background: rgba(244,239,230,0.09); border-color: rgba(244,239,230,0.24); }
   }
 
-  /* ---------- SEAL / CHOP (signature) ---------- */
-  .seal{
-    position:absolute;z-index:3;
-    top:clamp(118px,16vh,168px);right:clamp(24px,6vw,86px);
-    width:clamp(108px,13vw,168px);aspect-ratio:1;
-    background:linear-gradient(155deg,#e0492f,#bc3320);
-    border-radius:14px;
-    display:grid;place-items:center;text-align:center;
-    transform:rotate(-7deg);
-    box-shadow:0 18px 50px rgba(214,64,42,.32), inset 0 0 0 2px rgba(244,238,227,.16);
+  /* ============================================================
+     Animated trade-route map (the signature)
+     ============================================================ */
+  .map-panel {
+    position: relative;
+    border-radius: 22px;
+    border: 1px solid var(--line);
+    background:
+      radial-gradient(120% 100% at 80% 10%, rgba(52,211,194,0.10), transparent 55%),
+      linear-gradient(160deg, rgba(19,31,51,0.85), rgba(10,15,28,0.85));
+    backdrop-filter: blur(10px);
+    padding: 16px 16px 12px;
+    box-shadow: 0 28px 60px rgba(0,0,0,0.45);
+    overflow: hidden;
   }
-  .seal::before{ /* carved inner frame */
-    content:"";position:absolute;inset:9px;border:1.5px solid rgba(244,238,227,.42);border-radius:7px;
+  .map-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Space Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 2px 4px 12px;
   }
-  .seal::after{ /* ink texture */
-    content:"";position:absolute;inset:0;border-radius:14px;opacity:.16;mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  .map-head .live {
+    display: inline-flex; align-items: center; gap: 7px;
+    color: var(--teal);
   }
-  .seal__glyph{
-    font-family:var(--font-seal);color:var(--bone);
-    font-size:clamp(44px,6vw,72px);line-height:.9;position:relative;z-index:1;
-    text-shadow:0 1px 2px rgba(0,0,0,.18);
+  .map-head .live i {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 0 rgba(52,211,194,0.6);
+    animation: live 2s var(--ease-out) infinite;
   }
-  .seal__cap{
-    position:relative;z-index:1;margin-top:2px;
-    font-family:var(--font-seal);color:rgba(244,238,227,.92);
-    font-size:clamp(12px,1.4vw,15px);letter-spacing:.18em;
+  svg.map { width: 100%; height: auto; display: block; }
+
+  .continent { fill: rgba(157,170,192,0.10); }
+  .route-base { fill: none; stroke: rgba(244,239,230,0.14); stroke-width: 1.4; }
+  .route-flow {
+    fill: none;
+    stroke: var(--teal);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 6 14;
+    filter: drop-shadow(0 0 4px rgba(52,211,194,0.55));
+    animation: flow 1.6s linear infinite;
+  }
+  @keyframes flow { to { stroke-dashoffset: -40; } }
+
+  .port { fill: var(--gold-bright); }
+  .port-ring {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1.5;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: ping 2.6s var(--ease-out) infinite;
+  }
+  .port-ring.b { animation-delay: 0.5s; }
+  .port-ring.c { animation-delay: 1.0s; }
+  .port-ring.d { animation-delay: 1.5s; }
+  .port-ring.e { animation-delay: 2.0s; }
+  @keyframes ping {
+    0%   { transform: scale(0.5); opacity: 0.9; }
+    80%  { transform: scale(3.4); opacity: 0; }
+    100% { transform: scale(3.4); opacity: 0; }
   }
 
-  /* ---------- MANIFEST STAT STRIP (social proof) ---------- */
-  .manifest{
-    position:absolute;left:0;right:0;bottom:0;z-index:2;
-    display:grid;grid-template-columns:repeat(4,1fr);
-    border-top:1px solid rgba(203,162,74,.22);
-    background:linear-gradient(0deg, rgba(13,11,9,.72), rgba(13,11,9,.35));
-    backdrop-filter:blur(3px);
-  }
-  .stat{
-    padding:20px clamp(16px,3vw,40px);
-    border-left:1px solid rgba(203,162,74,.14);
-  }
-  .stat:first-child{border-left:none;}
-  .stat__num{
-    font-family:var(--font-display);font-weight:800;
-    font-size:clamp(22px,2.7vw,34px);line-height:1;color:var(--bone);
-  }
-  .stat__num span{color:var(--cinnabar);}
-  .stat__label{
-    margin-top:7px;font-family:var(--font-mono);font-size:10.5px;
-    letter-spacing:.14em;text-transform:uppercase;color:var(--clay);
+  .origin-core { fill: var(--origin); }
+  .origin-ring {
+    fill: none; stroke: var(--origin); stroke-width: 1.6;
+    transform-box: fill-box; transform-origin: center;
+    animation: ping 2.2s var(--ease-out) infinite;
   }
 
-  /* ---------- ENTRANCE ANIMATION ---------- */
-  .reveal{opacity:0;transform:translateY(16px);animation:rise .8s var(--ease-out) forwards;}
-  .d1{animation-delay:.05s;} .d2{animation-delay:.16s;} .d3{animation-delay:.27s;}
-  .d4{animation-delay:.38s;} .d5{animation-delay:.49s;} .d6{animation-delay:.60s;}
-  @keyframes rise{to{opacity:1;transform:translateY(0);}}
+  .cargo { fill: var(--gold-bright); filter: drop-shadow(0 0 6px rgba(255,217,138,0.8)); }
+  .cargo-tail { fill: var(--teal); opacity: 0.85; }
 
-  .seal{opacity:0;animation:stamp .7s var(--ease-out) .72s forwards;}
-  @keyframes stamp{
-    0%{opacity:0;transform:rotate(-7deg) scale(1.18);}
-    60%{opacity:1;transform:rotate(-7deg) scale(.97);}
-    100%{opacity:1;transform:rotate(-7deg) scale(1);}
+  .lbl {
+    font-family: "Space Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    fill: var(--paper);
+  }
+  .lbl.dim { fill: var(--muted); font-size: 10.5px; }
+
+  /* ============================================================
+     Social proof
+     ============================================================ */
+  .proof {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 clamp(18px, 5vw, 44px) clamp(22px, 4vw, 40px);
+  }
+  .proof-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(16px, 3vw, 34px);
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .rating { display: inline-flex; align-items: center; gap: 12px; }
+  .stars { display: inline-flex; gap: 3px; }
+  .stars svg { width: 17px; height: 17px; fill: var(--gold); }
+  .rating .score { font-weight: 700; font-size: 15px; }
+  .rating .score span { color: var(--muted); font-weight: 500; }
+
+  .trust {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .trust b { color: var(--paper); font-weight: 600; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(14px, 2.4vw, 30px);
+    padding-top: 22px;
+  }
+  .stat .n {
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.4vw, 2.3rem);
+    line-height: 1;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+  .stat .n em { color: var(--gold); font-style: normal; }
+  .stat .k {
+    margin-top: 7px;
+    font-size: 12.5px;
+    color: var(--muted);
+    letter-spacing: 0.01em;
   }
 
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width:860px){
-    .ticker{display:none;}
-    .topbar{justify-content:flex-start;}
-    .seal{
-      top:auto;bottom:148px;right:18px;
-      width:84px;transform:rotate(-7deg);
+  /* marquee of categories / lanes */
+  .marquee {
+    margin-top: clamp(18px, 3vw, 30px);
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track {
+    display: inline-flex;
+    gap: 0;
+    white-space: nowrap;
+    animation: scroll 32s linear infinite;
+    will-change: transform;
+  }
+  .marquee-track span {
+    font-family: "Space Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 26px;
+  }
+  .marquee-track span::before {
+    content: "◆";
+    color: var(--gold);
+    margin-right: 26px;
+    font-size: 8px;
+    vertical-align: middle;
+  }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  /* ============================================================
+     Entrance reveal (predetermined → CSS, ease-out, staggered)
+     ============================================================ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise 0.7s var(--ease-out) forwards;
+  }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.13s; }
+  .d3 { animation-delay: 0.21s; }
+  .d4 { animation-delay: 0.29s; }
+  .d5 { animation-delay: 0.40s; }
+  .d6 { animation-delay: 0.50s; }
+  .d7 { animation-delay: 0.60s; }
+
+  /* ============================================================
+     Responsive
+     ============================================================ */
+  @media (max-width: 900px) {
+    .stage {
+      grid-template-columns: 1fr;
+      align-items: start;
+      padding-top: 10px;
+      gap: 26px;
     }
-    .stage{padding-bottom:200px;}
-    .manifest{grid-template-columns:repeat(2,1fr);}
-    .stat:nth-child(3){border-left:none;}
-    .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid rgba(203,162,74,.14);}
+    .bar nav a { display: none; }
+    .map-panel { order: 3; }
+    h1 { font-size: clamp(2.7rem, 13vw, 4.4rem); }
+    .stats { grid-template-columns: 1fr 1fr; gap: 18px 16px; }
+    .proof-top { gap: 14px; }
   }
-  @media (max-width:460px){
-    .seal{width:72px;bottom:158px;}
-    .proof__text{font-size:12px;}
+  @media (max-width: 460px) {
+    .stage { padding-left: 20px; padding-right: 20px; }
+    .lbl { font-size: 13px; }
+    .lbl.dim { font-size: 11.5px; }
   }
 
-  @media (prefers-reduced-motion:reduce){
-    .reveal,.seal{animation:none;opacity:1;transform:none;}
-    .seal{transform:rotate(-7deg);}
-    .ticker__track,.hero__fallback,.reel-badge .dot{animation:none;}
+  /* ============================================================
+     Reduced motion — keep fades, drop movement
+     ============================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { animation: rise 0.4s ease forwards; transform: none; }
+    .reel-placeholder,
+    .route-flow,
+    .port-ring, .origin-ring,
+    .marquee-track,
+    .map-head .live i, .reel-chip .dot { animation: none !important; }
+    .reveal { transform: none; }
   }
 </style>
-</head>
-<body>
 
 <section class="hero">
-  <!-- ============ BACKGROUND: INSTAGRAM REEL ============ -->
-  <div class="hero__bg">
-    <!--
-      Drop your Instagram reel here. For GitHub Pages, host the .mp4 in the repo
-      and point src at the raw URL, e.g.:
-      src="https://raw.githubusercontent.com/ahmadok12/Shaikh-China-Sourcing/main/assets/reel.mp4"
-      Reels are vertical — object-fit:cover crops it nicely to a wide hero.
-    -->
-    <video class="hero__video" autoplay muted loop playsinline poster="">
-      <source src="REPLACE_WITH_YOUR_REEL.mp4" type="video/mp4" />
+  <!-- background reel -->
+  <div class="reel-bg">
+    <!-- animated gradient shows until the video paints / if it fails to load -->
+    <div class="reel-placeholder"></div>
+    <video class="reel-video" autoplay muted loop playsinline preload="auto">
+      <source src="stationery.mp4" type="video/mp4" />
     </video>
-    <div class="hero__fallback"></div>
-    <div class="hero__scrim"></div>
-    <div class="hero__grain"></div>
   </div>
+  <div class="scrim"></div>
+  <div class="grid-tex"></div>
 
-  <span class="reel-badge"><span class="dot"></span> Instagram reel · replace src</span>
-
-  <!-- ============ TOP BAR ============ -->
-  <header class="topbar">
-    <div class="wordmark">SHAIKH <b>CHINA</b> SOURCING</div>
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker__track">
-        <span>义乌 YIWU <em>→</em> KARACHI</span>
-        <span>广州 GUANGZHOU <em>→</em> LAHORE</span>
-        <span>深圳 SHENZHEN <em>→</em> DUBAI</span>
-        <span>宁波 NINGBO <em>→</em> RIYADH</span>
-        <span>义乌 YIWU <em>→</em> KARACHI</span>
-        <span>广州 GUANGZHOU <em>→</em> LAHORE</span>
-        <span>深圳 SHENZHEN <em>→</em> DUBAI</span>
-        <span>宁波 NINGBO <em>→</em> RIYADH</span>
-      </div>
-    </div>
+  <!-- top bar -->
+  <header class="bar reveal d1">
+    <a class="brand" href="#">
+      <span class="glyph"><img src="Logo.jpeg" alt="Shaikh China Sourcing" /></span>
+      <span class="wm">
+        <strong>Shaikh China Sourcing</strong>
+        <span>Sourcing · Freight · QC</span>
+      </span>
+    </a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#lanes">Lanes</a>
+      <a href="#quote">Get a quote</a>
+      <a class="wa" href="#whatsapp">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.7 14.2c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .3-3.3-.7s-3.8-3.4-3.9-3.6c-.1-.2-1-1.3-1-2.5s.6-1.8.9-2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.6-.1l.6-.7c.2-.2.3-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.6-.1 1.2Z"/></svg>
+        WhatsApp
+      </a>
+    </nav>
   </header>
 
-  <!-- ============ CONTENT ============ -->
+  <!-- main grid -->
   <div class="stage">
-    <div class="content">
-      <span class="eyebrow reveal d1">Verified factory sourcing · 中国直采</span>
-
-      <h1 class="headline">
-        <span class="line reveal d2">Skip the middlemen.</span>
-        <span class="line accent reveal d3">Buy factory-direct</span>
-        <span class="line thin reveal d4">from China.</span>
-      </h1>
-
-      <p class="sub reveal d5">
-        We find the right factory, <b>inspect the goods before they ship</b>, and
-        move your order container-to-door across Pakistan &amp; the Gulf — so you
-        import like a local, without setting foot in China.
+    <!-- copy -->
+    <div class="copy">
+      <p class="eyebrow reveal d2">
+        <span class="pip"></span> SHENZHEN
+        <span class="arrow">→</span>
+        <span class="dest">KARACHI · DUBAI · ROTTERDAM</span>
       </p>
 
-      <div class="proof reveal d5">
-        <div class="avatars" aria-hidden="true">
-          <span class="av a">AK</span>
-          <span class="av b">MS</span>
-          <span class="av c">RЗ</span>
-          <span class="av d">HA</span>
-          <span class="av more">+1k</span>
-        </div>
-        <div class="proof__text">
-          <span class="stars">★★★★★</span> &nbsp;<b>4.9 / 5</b> from 1,200+ importers<br />
-          across Lahore, Karachi, Dubai &amp; Riyadh
-        </div>
+      <h1 class="reveal d3">
+        <span class="l1">SHAIKH</span>
+        <span class="l2">CHINA SOURCING</span>
+      </h1>
+
+      <p class="sub reveal d4">
+        We <b>source, inspect, and ship</b> products straight from vetted Chinese
+        factories to your door — across Pakistan, the Gulf, and the rest of the world.
+        One partner from quote to delivery.
+      </p>
+
+      <div class="cta-row reveal d5">
+        <a class="btn btn-primary" href="#quote">Get a sourcing quote →</a>
+        <a class="btn btn-ghost" href="#whatsapp">Talk to us on WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- signature: animated trade-route map -->
+    <div class="map-panel reveal d6" aria-label="Live cargo routes from China to ports worldwide">
+      <div class="map-head">
+        <span>LIVE TRADE LANES</span>
+        <span class="live"><i></i> SHIPPING NOW</span>
       </div>
 
-      <div class="cta-row reveal d6">
-        <a href="#quote" class="btn btn--primary">Get a sourcing quote <span class="arrow">→</span></a>
-        <a href="#how" class="btn btn--ghost">See how it works</a>
-      </div>
+      <svg class="map" viewBox="0 0 1000 560" role="img" aria-label="Cargo routes leaving China for ports around the world">
+        <!-- abstract continents (low opacity, evocative not literal) -->
+        <g class="continent">
+          <path d="M120 170 q40-30 110-22 q60 6 80 40 q30 50-8 86 q-50 40-120 26 q-70-16-78-66 q-6-44 16-64Z"/>            <!-- N. America -->
+          <path d="M250 330 q40-16 64 8 q26 30 6 86 q-22 56-58 60 q-30 2-34-44 q-6-70 16-110Z"/>                            <!-- S. America -->
+          <path d="M430 150 q44-22 72 2 q22 24-2 50 q-34 30-72 16 q-26-12-20-40 q4-20 22-28Z"/>                             <!-- Europe -->
+          <path d="M440 230 q56-20 92 18 q34 44 6 110 q-30 64-78 56 q-40-8-44-72 q-4-78 24-112Z"/>                          <!-- Africa -->
+          <path d="M590 130 q120-44 210 2 q56 32 50 96 q-8 70-96 96 q-110 30-188-18 q-56-36-44-104 q8-46 68-68Z"/>          <!-- Asia -->
+          <path d="M800 380 q44-16 78 8 q22 24 2 50 q-34 28-78 16 q-24-10-20-40 q4-22 18-34Z"/>                             <!-- Australia -->
+        </g>
+
+        <!-- routes: origin China (724,212) -> 5 ports -->
+        <!-- ids let the cargo follow the exact same curve -->
+        <path id="rKHI" class="route-base" d="M724 212 Q650 200 588 250"/>
+        <path id="rDXB" class="route-base" d="M724 212 Q600 300 522 296"/>
+        <path id="rRTM" class="route-base" d="M724 212 Q560 90 470 152"/>
+        <path id="rNYC" class="route-base" d="M724 212 Q470 120 255 205"/>
+        <path id="rLAX" class="route-base" d="M724 212 Q420 360 180 250"/>
+
+        <use href="#rKHI" class="route-flow" style="animation-delay:0s"/>
+        <use href="#rDXB" class="route-flow" style="animation-delay:.3s"/>
+        <use href="#rRTM" class="route-flow" style="animation-delay:.6s"/>
+        <use href="#rNYC" class="route-flow" style="animation-delay:.9s"/>
+        <use href="#rLAX" class="route-flow" style="animation-delay:1.2s"/>
+
+        <!-- destination ports -->
+        <g>
+          <circle class="port-ring"   cx="588" cy="250" r="5"/><circle class="port" cx="588" cy="250" r="4"/>
+          <text class="lbl" x="598" y="246">KHI</text><text class="lbl dim" x="598" y="262">Karachi</text>
+
+          <circle class="port-ring b" cx="522" cy="296" r="5"/><circle class="port" cx="522" cy="296" r="4"/>
+          <text class="lbl" x="486" y="318">DXB</text><text class="lbl dim" x="486" y="334">Jebel Ali</text>
+
+          <circle class="port-ring c" cx="470" cy="152" r="5"/><circle class="port" cx="470" cy="152" r="4"/>
+          <text class="lbl" x="430" y="142">RTM</text><text class="lbl dim" x="430" y="158">Rotterdam</text>
+
+          <circle class="port-ring d" cx="255" cy="205" r="5"/><circle class="port" cx="255" cy="205" r="4"/>
+          <text class="lbl" x="200" y="196">NYC</text><text class="lbl dim" x="200" y="212">New York</text>
+
+          <circle class="port-ring e" cx="180" cy="250" r="5"/><circle class="port" cx="180" cy="250" r="4"/>
+          <text class="lbl" x="124" y="272">LAX</text><text class="lbl dim" x="124" y="288">Los Angeles</text>
+        </g>
+
+        <!-- origin: China -->
+        <circle class="origin-ring" cx="724" cy="212" r="6"/>
+        <circle class="origin-core" cx="724" cy="212" r="5.5"/>
+        <text class="lbl" x="736" y="208" style="fill:var(--gold-bright)">CHINA</text>
+        <text class="lbl dim" x="736" y="224">Shenzhen · Yiwu · Guangzhou</text>
+
+        <!-- traveling cargo (SMIL animateMotion = reliable, off-thread feel) -->
+        <g>
+          <circle class="cargo-tail" r="2.4"><animateMotion dur="5s" begin="0s"   repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#rKHI"/></animateMotion></circle>
+          <circle class="cargo" r="3.4"><animateMotion dur="5s" begin="0.15s" repeatCount="indefinite"><mpath href="#rKHI"/></animateMotion></circle>
+
+          <circle class="cargo-tail" r="2.4"><animateMotion dur="6s" begin="0.6s" repeatCount="indefinite"><mpath href="#rDXB"/></animateMotion></circle>
+          <circle class="cargo" r="3.4"><animateMotion dur="6s" begin="0.75s" repeatCount="indefinite"><mpath href="#rDXB"/></animateMotion></circle>
+
+          <circle class="cargo-tail" r="2.4"><animateMotion dur="6.5s" begin="1.1s" repeatCount="indefinite"><mpath href="#rRTM"/></animateMotion></circle>
+          <circle class="cargo" r="3.4"><animateMotion dur="6.5s" begin="1.25s" repeatCount="indefinite"><mpath href="#rRTM"/></animateMotion></circle>
+
+          <circle class="cargo-tail" r="2.4"><animateMotion dur="7.5s" begin="1.6s" repeatCount="indefinite"><mpath href="#rNYC"/></animateMotion></circle>
+          <circle class="cargo" r="3.4"><animateMotion dur="7.5s" begin="1.75s" repeatCount="indefinite"><mpath href="#rNYC"/></animateMotion></circle>
+
+          <circle class="cargo-tail" r="2.4"><animateMotion dur="8s" begin="2.1s" repeatCount="indefinite"><mpath href="#rLAX"/></animateMotion></circle>
+          <circle class="cargo" r="3.4"><animateMotion dur="8s" begin="2.25s" repeatCount="indefinite"><mpath href="#rLAX"/></animateMotion></circle>
+        </g>
+      </svg>
     </div>
   </div>
 
-  <!-- ============ SIGNATURE: SEAL / CHOP ============ -->
-  <div class="seal" role="img" aria-label="Shaikh China Sourcing verified seal">
-    <div>
-      <div class="seal__glyph">源</div>
-      <div class="seal__cap">直采</div>
+  <!-- social proof -->
+  <div class="proof">
+    <div class="proof-top reveal d6">
+      <div class="rating">
+        <span class="stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.7L18.2 22 12 18.3 5.8 22 7.2 14 2 9.3l7-.8z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.7L18.2 22 12 18.3 5.8 22 7.2 14 2 9.3l7-.8z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.7L18.2 22 12 18.3 5.8 22 7.2 14 2 9.3l7-.8z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.7L18.2 22 12 18.3 5.8 22 7.2 14 2 9.3l7-.8z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.7L18.2 22 12 18.3 5.8 22 7.2 14 2 9.3l7-.8z"/></svg>
+        </span>
+        <span class="score">4.9 <span>/ 5 — 300+ importers</span></span>
+      </div>
+      <div class="trust">Trusted by importers across <b>Pakistan</b>, the <b>UAE</b> &amp; <b>Saudi Arabia</b></div>
     </div>
-  </div>
 
-  <!-- ============ MANIFEST STAT STRIP (social proof) ============ -->
-  <div class="manifest">
-    <div class="stat">
-      <div class="stat__num">$40M<span>+</span></div>
-      <div class="stat__label">Goods sourced</div>
+    <div class="stats reveal d7">
+      <div class="stat"><div class="n" data-to="2400" data-suffix="+">0</div><div class="k">Shipments delivered</div></div>
+      <div class="stat"><div class="n" data-to="1200" data-suffix="+">0</div><div class="k">Factories vetted</div></div>
+      <div class="stat"><div class="n" data-to="98"  data-suffix="%">0</div><div class="k">On-time arrival</div></div>
+      <div class="stat"><div class="n" data-to="12"  data-suffix=" yrs">0</div><div class="k">Sourcing on the ground</div></div>
     </div>
-    <div class="stat">
-      <div class="stat__num">650<span>+</span></div>
-      <div class="stat__label">Vetted factories</div>
-    </div>
-    <div class="stat">
-      <div class="stat__num">1,200<span>+</span></div>
-      <div class="stat__label">Importers served</div>
-    </div>
-    <div class="stat">
-      <div class="stat__num">12<span>yrs</span></div>
-      <div class="stat__label">On the ground in China</div>
+
+    <div class="marquee reveal d7" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Consumer electronics</span><span>Beauty &amp; cosmetics</span><span>Home &amp; kitchen</span><span>Machinery</span><span>Textiles &amp; apparel</span><span>Auto parts</span><span>Packaging</span><span>Solar &amp; energy</span>
+        <span>Consumer electronics</span><span>Beauty &amp; cosmetics</span><span>Home &amp; kitchen</span><span>Machinery</span><span>Textiles &amp; apparel</span><span>Auto parts</span><span>Packaging</span><span>Solar &amp; energy</span>
+      </div>
     </div>
   </div>
 </section>
 
-</body>
-</html>
+<script>
+  // Count-up for the proof stats — predetermined, respects reduced motion.
+  (function () {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var nums = Array.prototype.slice.call(document.querySelectorAll(".stat .n"));
+
+    function fmt(v) { return v >= 1000 ? v.toLocaleString("en-US") : String(v); }
+
+    function run(el) {
+      var to = parseInt(el.getAttribute("data-to"), 10);
+      var suffix = el.getAttribute("data-suffix") || "";
+      if (reduce) { el.textContent = fmt(to) + suffix; return; }
+      var start = performance.now(), dur = 1400;
+      function tick(now) {
+        var p = Math.min(1, (now - start) / dur);
+        var eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
+        el.textContent = fmt(Math.round(to * eased)) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { run(e.target); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.6 });
+      nums.forEach(function (n) { io.observe(n); });
+    } else {
+      nums.forEach(run);
+    }
+
+    // Freeze SVG cargo motion if the user prefers reduced motion (SMIL can't be killed via CSS).
+    if (reduce) {
+      var svg = document.querySelector("svg.map");
+      if (svg && svg.pauseAnimations) svg.pauseAnimations();
+    }
+  })();
+</script>
