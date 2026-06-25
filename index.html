@@ -1,476 +1,471 @@
-<!--
-  SHAIKH CHINA SOURCING — Hero Section
-  Single-file, drop-in. Glassmorphism, navy + vermilion, white space, trust-first.
-
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │  THE VIDEO                                                           │
-  │  Both <video> tags (marked data-reel) point at  stationery.mp4   │
-  │  in the repo root (same folder as index.html). Upload your clip       │
-  │  to the repo with EXACTLY that name and it goes live automatically:   │
-  │                                                                       │
-  │     Shaikh-China-Sourcing/stationery.mp4                           │
-  │                                                                       │
-  │  A vertical / phone-shaped clip works best (factory walk-through or   │
-  │  QC reel). Until the file exists, a built-in animated logistics       │
-  │  scene shows in its place, so the section never looks empty.          │
-  │   • Desktop: the clip plays inside the phone frame on the right.      │
-  │   • Mobile : the SAME clip fills the background behind the text.      │
-  │                                                                       │
-  │  LOGO: pulled from Logo.jpeg in the repo root.                        │
-  └─────────────────────────────────────────────────────────────────────┘
--->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sourcing Hero</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Schibsted+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  /* ───────────────────────── Tokens ───────────────────────── */
-  .scs-hero{
-    --ink:#16223D;
-    --ink-soft:#5A6377;
-    --canvas-a:#ECEAE5;
-    --canvas-b:#F5F3EE;
-    --accent:#D64526;
-    --accent-press:#BD3A1E;
-    --badge-bg:#FBE0D5;
-    --badge-ink:#C2451F;
-    --glass:rgba(255,255,255,0.55);
-    --glass-strong:rgba(255,255,255,0.72);
-    --glass-line:rgba(255,255,255,0.65);
-    --hair:rgba(22,34,61,0.09);
-    --shadow:0 24px 60px -24px rgba(22,34,61,0.30);
-    --shadow-sm:0 10px 30px -16px rgba(22,34,61,0.35);
-    --radius:26px;
-
-    --ease-out:cubic-bezier(0.23,1,0.32,1);
-    --ease-soft:cubic-bezier(0.32,0.72,0,1);
-
-    box-sizing:border-box;
-    font-family:"Inter",system-ui,-apple-system,sans-serif;
-    color:var(--ink);
-    -webkit-font-smoothing:antialiased;
-    position:relative;
-    min-height:100svh;
-    padding:28px;
-    display:flex;
-    overflow:hidden;
-    background:
-      radial-gradient(120% 90% at 85% 0%, rgba(214,69,38,0.06), transparent 55%),
-      radial-gradient(120% 100% at 10% 100%, rgba(22,34,61,0.07), transparent 50%),
-      linear-gradient(160deg, var(--canvas-a), var(--canvas-b));
+  :root{
+    --navy:#0B1F33;
+    --navy-deep:#071526;
+    --cargo:#FF4B1F;
+    --customs:#FFC23C;
+    --paper:#F2EEE3;
+    --steel:#7C8B9B;
   }
-  .scs-hero *,.scs-hero *::before,.scs-hero *::after{box-sizing:border-box;}
-
-  /* The frosted "panel" that everything floats inside (matches the reference) */
-  .scs-panel{
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--navy);}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--paper);
+    overflow-x:hidden;
+  }
+  .hero{
     position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    background:
+      linear-gradient(180deg, rgba(11,31,51,0.0) 0%, var(--navy) 92%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 14px),
+      radial-gradient(circle at 80% 20%, rgba(255,75,31,0.18), transparent 45%),
+      var(--navy-deep);
+    padding:0 6vw;
+    isolation:isolate;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:absolute; top:0; left:0; right:0;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:28px 6vw;
+    z-index:5;
+  }
+  .logo{
+    font-family:'Anton', sans-serif;
+    font-size:1.3rem;
+    letter-spacing:0.04em;
+    color:var(--paper);
+  }
+  .logo span{color:var(--cargo);}
+  .topbar-tag{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.12em;
+    color:var(--steel);
+    text-transform:uppercase;
+    border:1px solid rgba(124,139,155,0.4);
+    padding:6px 12px;
+    border-radius:2px;
+  }
+
+  /* ---------- content grid ---------- */
+  .hero-inner{
     width:100%;
-    max-width:1240px;
-    margin:auto;
-    border-radius:var(--radius);
-    background:linear-gradient(180deg, rgba(255,255,255,0.42), rgba(255,255,255,0.18));
-    border:1px solid var(--glass-line);
-    box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,0.6);
-    -webkit-backdrop-filter:blur(8px);
-    backdrop-filter:blur(8px);
-    padding:18px;
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:4vw;
+    align-items:center;
+    padding-top:90px;
+    padding-bottom:40px;
+    position:relative;
+    z-index:3;
+  }
+
+  .eyebrow{
     display:flex;
-    flex-direction:column;
-    gap:26px;
+    align-items:center;
+    gap:10px;
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--customs);
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:28px; height:2px;
+    background:var(--customs);
+    display:inline-block;
+  }
+
+  h1{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size:clamp(2.6rem, 6vw, 4.6rem);
+    line-height:0.98;
+    letter-spacing:-0.01em;
+    text-transform:uppercase;
+    color:var(--paper);
+    margin-bottom:26px;
+  }
+  h1 .accent{color:var(--cargo);}
+  h1 .outline{
+    color:transparent;
+    -webkit-text-stroke:2px var(--paper);
+  }
+
+  .sub{
+    font-size:1.08rem;
+    line-height:1.6;
+    color:#C9D2DC;
+    max-width:520px;
+    margin-bottom:36px;
+    font-weight:400;
+  }
+
+  .cta-row{display:flex; align-items:center; gap:22px; margin-bottom:54px; flex-wrap:wrap;}
+  .btn-primary{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    color:var(--navy-deep);
+    background:var(--customs);
+    padding:16px 30px;
+    border-radius:3px;
+    border:none;
+    cursor:pointer;
+    letter-spacing:0.01em;
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow:0 0 0 0 rgba(255,194,60,0.5);
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(255,194,60,0.55);}
+  .btn-secondary{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    color:var(--paper);
+    background:transparent;
+    border:1px solid rgba(242,238,227,0.35);
+    padding:15px 26px;
+    border-radius:3px;
+    cursor:pointer;
+    display:flex; align-items:center; gap:10px;
+    transition:border-color 0.18s ease, background 0.18s ease;
+  }
+  .btn-secondary:hover{border-color:var(--paper); background:rgba(242,238,227,0.06);}
+
+  /* ---------- manifest ticker (signature element) ---------- */
+  .manifest{
+    border-top:1px solid rgba(124,139,155,0.3);
+    padding-top:18px;
     overflow:hidden;
+    position:relative;
+    max-width:620px;
+  }
+  .manifest-label{
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.12em;
+    color:var(--steel);
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .manifest-track{
+    display:flex;
+    gap:36px;
+    white-space:nowrap;
+    animation:scrollManifest 22s linear infinite;
+    font-family:'Space Mono', monospace;
+    font-size:0.82rem;
+    color:#AEB9C4;
+  }
+  .manifest-track span b{color:var(--cargo); font-weight:700;}
+  @keyframes scrollManifest{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
   }
 
-  /* ───────────────────────── Nav ───────────────────────── */
-  .scs-nav{
-    display:flex;align-items:center;gap:18px;
-    padding:10px 12px 10px 16px;
-    border-radius:999px;
-    background:var(--glass-strong);
-    border:1px solid var(--glass-line);
-    -webkit-backdrop-filter:blur(20px) saturate(1.4);
-    backdrop-filter:blur(20px) saturate(1.4);
-    box-shadow:var(--shadow-sm);
+  /* ---------- right: phone reel mockup ---------- */
+  .reel-wrap{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    perspective:1200px;
   }
-  .scs-brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;}
-  /* Logo.jpeg is a square lockup on white with heavy padding —
-     this clip crops to the artwork's true bounds so it reads as a tight logo. */
-  .scs-logoclip{
-    position:relative;flex:none;height:44px;width:75px;overflow:hidden;
-    border-radius:9px;background:#fff;
+  .stamp{
+    position:absolute;
+    top:-26px; left:-26px;
+    width:96px; height:96px;
+    border:2px solid var(--customs);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    transform:rotate(-14deg);
+    z-index:6;
+    background:rgba(7,21,38,0.55);
+    backdrop-filter:blur(2px);
+    animation:floatStamp 5s ease-in-out infinite;
   }
-  .scs-logoclip img{position:absolute;top:-28px;left:-13px;width:95px;height:95px;display:block;}
-
-  .scs-links{display:flex;gap:26px;margin-left:14px;}
-  .scs-links a{
-    text-decoration:none;color:var(--ink);font-size:13.5px;font-weight:500;
-    opacity:.78;transition:opacity .18s var(--ease-out);
+  .stamp p{
+    font-family:'Space Mono', monospace;
+    font-size:0.56rem;
+    letter-spacing:0.08em;
+    color:var(--customs);
+    line-height:1.25;
+    text-transform:uppercase;
   }
-  .scs-links a:hover{opacity:1;}
-
-  .scs-news{
-    display:flex;align-items:center;gap:9px;margin-left:auto;
-    padding:7px 13px;border-radius:999px;border:1px solid var(--hair);
-    background:rgba(255,255,255,0.5);font-size:12px;color:var(--ink-soft);
-  }
-  .scs-news i{
-    font-style:normal;color:var(--badge-ink);font-weight:600;font-size:10px;
-    letter-spacing:.12em;text-transform:uppercase;
-  }
-  .scs-news::after{content:"›";opacity:.5;}
-
-  .scs-cta{
-    text-decoration:none;font-family:inherit;font-size:13.5px;font-weight:600;
-    border-radius:999px;cursor:pointer;border:1px solid var(--ink);
-    background:var(--ink);color:#fff;padding:11px 20px;
-    transition:transform .14s var(--ease-out), background .18s var(--ease-out);
-  }
-  .scs-cta:active{transform:scale(.97);}
-
-  .scs-burger{display:none;}
-
-  /* ───────────────────────── Hero grid ───────────────────────── */
-  .scs-grid{
-    flex:1;display:grid;grid-template-columns:1.05fr 0.95fr;gap:30px;
-    align-items:center;padding:18px 22px 6px;
-  }
-  .scs-copy{max-width:560px;}
-
-  .scs-badge{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:7px 14px;border-radius:999px;
-    background:var(--badge-bg);color:var(--badge-ink);
-    font-size:11.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
-  }
-  .scs-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--badge-ink);}
-
-  .scs-h1{
-    font-family:"Schibsted Grotesk";font-weight:700;
-    font-size:clamp(38px,5.4vw,62px);line-height:1.02;letter-spacing:-0.02em;
-    margin:18px 0 0;
-  }
-  .scs-h1 .accent{color:var(--accent);display:block;}
-
-  .scs-sub{
-    font-size:clamp(15px,1.4vw,17px);line-height:1.62;color:var(--ink-soft);
-    margin:20px 0 0;max-width:460px;
+  @keyframes floatStamp{
+    0%,100%{transform:rotate(-14deg) translateY(0);}
+    50%{transform:rotate(-10deg) translateY(-6px);}
   }
 
-  .scs-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
-  .scs-btn{
-    text-decoration:none;font-family:inherit;font-weight:600;font-size:15px;
-    padding:15px 26px;border-radius:14px;cursor:pointer;
-    display:inline-flex;align-items:center;gap:10px;
-    transition:transform .14s var(--ease-out), background .2s var(--ease-out), box-shadow .2s var(--ease-out);
-  }
-  .scs-btn-primary{
-    background:var(--accent);color:#fff;border:none;
-    box-shadow:0 12px 26px -12px rgba(214,69,38,0.7);
-  }
-  .scs-btn-primary:active{transform:scale(.98);background:var(--accent-press);}
-  .scs-btn-ghost{
-    background:rgba(255,255,255,0.55);color:var(--ink);
-    border:1px solid var(--hair);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
-  }
-  .scs-btn-ghost:active{transform:scale(.98);}
-  .scs-btn svg{width:18px;height:18px;}
-
-  /* trust strip */
-  .scs-trust{
-    display:flex;align-items:center;gap:22px;margin-top:34px;flex-wrap:wrap;
-  }
-  .scs-trust .label{
-    font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);
-    border-right:1px solid var(--hair);padding-right:22px;
-  }
-  .scs-stat b{font-family:"Schibsted Grotesk";font-weight:700;font-size:22px;display:block;line-height:1;}
-  .scs-stat span{font-size:12px;color:var(--ink-soft);}
-
-  /* ───────────── Right column: phone-width video frame ───────────── */
-  .scs-stage{position:relative;display:flex;justify-content:center;align-items:center;min-height:560px;}
-
-  .scs-phone{
-    position:relative;width:316px;aspect-ratio:9/16;
-    border-radius:38px;padding:9px;
-    background:linear-gradient(170deg, rgba(255,255,255,0.85), rgba(255,255,255,0.4));
-    border:1px solid var(--glass-line);
-    box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,0.7);
-    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-  }
-  .scs-screen{
-    position:relative;width:100%;height:100%;border-radius:30px;overflow:hidden;
-    background:#0E1830;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.06);
-  }
-  .scs-screen video,
-  .scs-screen .scs-scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-  .scs-screen video{z-index:2;background:transparent;}
-  /* notch */
-  .scs-phone::before{
-    content:"";position:absolute;top:18px;left:50%;transform:translateX(-50%);
-    width:88px;height:7px;border-radius:99px;background:rgba(22,34,61,0.18);z-index:4;
-  }
-
-  /* floating glass stat chips around the phone */
-  .scs-chip{
-    position:absolute;z-index:5;
-    background:var(--glass-strong);border:1px solid var(--glass-line);
-    -webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);
-    box-shadow:var(--shadow-sm);border-radius:16px;padding:13px 16px;
-    animation:scs-float 6s ease-in-out infinite;
-  }
-  .scs-chip b{font-family:"Schibsted Grotesk";font-weight:700;font-size:20px;display:block;line-height:1;}
-  .scs-chip span{font-size:11.5px;color:var(--ink-soft);}
-  .scs-chip.tl{top:42px;left:-2%;animation-delay:-1s;}
-  .scs-chip.br{bottom:64px;right:-4%;animation-delay:-3s;}
-  .scs-chip.bl{bottom:-10px;left:6%;display:flex;align-items:center;gap:11px;animation-delay:-2s;}
-  .scs-chip.bl .dot{width:34px;height:34px;border-radius:10px;background:var(--ink);color:#fff;display:grid;place-items:center;flex:none;}
-  .scs-chip.bl .dot svg{width:18px;height:18px;}
-
-  @keyframes scs-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-
-  /* ───────── Built-in animated logistics scene (video fallback) ───────── */
-  .scs-scene{z-index:1;transition:opacity .45s var(--ease-out);background:
-    radial-gradient(90% 70% at 70% 12%, rgba(214,69,38,0.30), transparent 60%),
-    radial-gradient(80% 60% at 20% 88%, rgba(74,108,167,0.45), transparent 60%),
-    linear-gradient(170deg,#13213D,#0B1228);
-    background-color:#0E1830;
+  .phone{
+    width:280px;
+    aspect-ratio:9/17.5;
+    border-radius:34px;
+    background:#000;
+    border:3px solid #1c2b3a;
+    box-shadow:
+      0 30px 60px -20px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(255,255,255,0.04) inset;
+    position:relative;
     overflow:hidden;
+    transform:rotate(2deg);
   }
-  .scs-scene .aurora{position:absolute;inset:-20%;filter:blur(38px);opacity:.85;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(91,140,214,0.55), transparent 42%),
-      radial-gradient(circle at 75% 70%, rgba(214,69,38,0.40), transparent 40%);
-    animation:scs-drift 14s ease-in-out infinite;}
-  @keyframes scs-drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-6%,5%) scale(1.08)}}
-
-  .scs-scene .route{position:absolute;inset:0;width:100%;height:100%;}
-  .scs-scene .route path{fill:none;stroke:rgba(255,255,255,0.35);stroke-width:2;stroke-dasharray:5 9;stroke-linecap:round;}
-  .scs-scene .pin{fill:#fff;}
-  .scs-scene .mover{offset-path:path('M 40 470 C 90 300, 220 360, 280 120');offset-rotate:0deg;
-    animation:scs-travel 5.5s linear infinite;}
-  @keyframes scs-travel{0%{offset-distance:0%;opacity:0}8%{opacity:1}92%{opacity:1}100%{offset-distance:100%;opacity:0}}
-
-  .scs-bubble{position:absolute;border-radius:50%;display:grid;place-items:center;
-    background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);
-    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff;
-    box-shadow:0 18px 40px -18px rgba(0,0,0,0.6);animation:scs-bob 7s ease-in-out infinite;}
-  .scs-bubble svg{width:46%;height:46%;opacity:.92;}
-  .scs-bubble.b1{width:64px;height:64px;top:14%;right:12%;animation-delay:-1.5s;}
-  .scs-bubble.b2{width:52px;height:52px;top:46%;left:10%;background:rgba(214,69,38,0.85);border-color:transparent;animation-delay:-3s;}
-  .scs-bubble.b3{width:46px;height:46px;bottom:20%;right:18%;animation-delay:-0.5s;}
-  @keyframes scs-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-
-  .scs-scene .reel-label{position:absolute;left:16px;bottom:16px;right:16px;z-index:3;color:#fff;}
-  .scs-scene .reel-label .t{font-family:"Schibsted Grotesk";font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px;}
-  .scs-scene .reel-label .t .live{width:7px;height:7px;border-radius:50%;background:#34D17A;box-shadow:0 0 0 4px rgba(52,209,122,0.25);animation:scs-pulse 1.8s ease-in-out infinite;}
-  .scs-scene .reel-label .s{font-size:11.5px;opacity:.7;margin-top:3px;}
-  .scs-scene .reel-label .bar{height:3px;border-radius:99px;background:rgba(255,255,255,0.18);margin-top:12px;overflow:hidden;}
-  .scs-scene .reel-label .bar i{display:block;height:100%;width:40%;border-radius:99px;background:#fff;animation:scs-load 5.5s ease-in-out infinite;}
-  @keyframes scs-pulse{0%,100%{opacity:1}50%{opacity:.4}}
-  @keyframes scs-load{0%{transform:translateX(-110%)}100%{transform:translateX(280%)}}
-
-  /* ───────────── Mobile background video (hidden on desktop) ───────────── */
-  .scs-bg{display:none;}
-
-  /* ───────────────────────── Partner band ───────────────────────── */
-  .scs-band{
-    margin:auto -18px -18px;border-radius:0 0 var(--radius) var(--radius);
-    background:linear-gradient(180deg,#16223D,#101A30);
-    padding:26px 34px;display:flex;align-items:center;gap:30px;flex-wrap:wrap;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,0.05);
+  .phone video{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
   }
-  .scs-band .cap{
-    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    color:rgba(255,255,255,0.55);max-width:160px;line-height:1.5;
+  .phone::before{
+    content:"";
+    position:absolute;
+    top:14px; left:50%;
+    transform:translateX(-50%);
+    width:84px; height:18px;
+    background:#000;
+    border-radius:12px;
+    z-index:5;
   }
-  .scs-logos{display:flex;align-items:center;gap:34px;flex:1;flex-wrap:wrap;justify-content:space-between;}
-  .scs-logos .logo{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,0.62);font-weight:600;font-size:14px;letter-spacing:.01em;}
-  .scs-logos .logo svg{width:20px;height:20px;opacity:.7;}
+  .reel-chrome{
+    position:absolute; inset:0;
+    z-index:4;
+    pointer-events:none;
+    background:linear-gradient(180deg, rgba(0,0,0,0.35) 0%, transparent 18%, transparent 70%, rgba(0,0,0,0.55) 100%);
+  }
+  .reel-tag{
+    position:absolute;
+    bottom:22px; left:18px; right:18px;
+    z-index:5;
+    font-family:'Inter',sans-serif;
+    color:#fff;
+  }
+  .reel-tag .handle{font-weight:700; font-size:0.82rem; display:flex; align-items:center; gap:8px;}
+  .reel-tag .handle::before{
+    content:"";
+    width:22px; height:22px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--cargo),var(--customs));
+    display:inline-block;
+  }
+  .reel-tag .cap{font-size:0.74rem; color:#E4E4E4; margin-top:6px; line-height:1.4;}
 
-  /* ───────────────────────── Responsive ───────────────────────── */
-  @media (max-width:980px){
-    .scs-links,.scs-news{display:none;}
-    .scs-grid{grid-template-columns:1fr;}
-    .scs-stage{transform:scale(.92);}
+  .reel-caption{
+    position:absolute;
+    bottom:-40px; left:0; right:0;
+    text-align:center;
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    color:var(--steel);
+    text-transform:uppercase;
   }
 
-  @media (max-width:720px){
-    /* Mobile: the SAME reel becomes a full-bleed background */
-    .scs-hero{padding:0;background:#0E1830;}
-    .scs-panel{
-      max-width:none;border-radius:0;border:none;box-shadow:none;background:transparent;
-      backdrop-filter:none;-webkit-backdrop-filter:none;padding:0;gap:0;min-height:100svh;
-    }
-    .scs-bg{
-      display:block;position:absolute;inset:0;z-index:0;overflow:hidden;
-    }
-    .scs-bg video,.scs-bg .scs-scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-    .scs-bg video{z-index:1;}
-    .scs-bg .scs-scene{z-index:0;border-radius:0;}
-    .scs-bg::after{ /* legibility overlay */
-      content:"";position:absolute;inset:0;z-index:2;
-      background:linear-gradient(180deg, rgba(11,18,38,0.55) 0%, rgba(11,18,38,0.35) 38%, rgba(11,18,38,0.92) 100%);
+  /* ---------- responsive ---------- */
+  @media (max-width:880px){
+
+    .hero{
+      min-height:100svh;
+      height:100svh;
+      padding:0;
+      display:block;
+      overflow:hidden;
     }
 
-    .scs-nav{
-      position:relative;z-index:5;margin:16px;background:rgba(255,255,255,0.10);
-      border-color:rgba(255,255,255,0.18);box-shadow:none;
+    /* Video becomes a true full-bleed background */
+    .reel-wrap{
+      position:absolute;
+      inset:0;
+      width:100%; height:100%;
+      z-index:0;
+      perspective:none;
     }
-    .scs-brand{color:#fff;}
-    .scs-logoclip{box-shadow:0 6px 18px -10px rgba(0,0,0,0.6);}
-    .scs-cta{background:#fff;color:var(--ink);border-color:#fff;margin-left:auto;}
+    .phone{
+      width:100%; height:100%;
+      border-radius:0;
+      border:none;
+      box-shadow:none;
+      transform:none;
+    }
+    .phone::before{display:none;} /* hide notch mockup */
+    .reel-chrome{
+      background:linear-gradient(180deg,
+        rgba(5,13,24,0.55) 0%,
+        rgba(5,13,24,0.35) 28%,
+        rgba(5,13,24,0.55) 60%,
+        rgba(5,13,24,0.92) 100%);
+    }
+    .reel-tag, .stamp, .reel-caption{display:none;} /* declutter for single-screen fit */
 
-    .scs-grid{position:relative;z-index:5;padding:8px 24px 40px;align-content:flex-end;min-height:0;flex:1;}
-    .scs-stage{display:none;}
-    .scs-copy{max-width:none;}
-    .scs-badge{background:rgba(251,224,213,0.18);color:#FBE0D5;}
-    .scs-h1{color:#fff;margin-top:14px;}
-    .scs-sub{color:rgba(255,255,255,0.78);}
-    .scs-trust{margin-top:26px;}
-    .scs-trust .label{color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.18);}
-    .scs-stat b{color:#fff;} .scs-stat span{color:rgba(255,255,255,0.65);}
-    .scs-btn-ghost{background:rgba(255,255,255,0.12);color:#fff;border-color:rgba(255,255,255,0.22);}
+    .topbar{
+      padding:18px 5vw;
+      z-index:5;
+    }
+    .logo{font-size:1.05rem;}
+    .topbar-tag{font-size:0.58rem; padding:5px 9px;}
 
-    .scs-band{display:none;}
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      height:100%;
+      grid-template-columns:none;
+      padding:84px 5.5vw 18px;
+      justify-content:flex-end;
+      gap:0;
+    }
+    /* text block must get its own stacking context, otherwise the
+       absolutely-positioned video layer paints above it regardless of z-index */
+    .hero-inner > div:first-child{
+      position:relative;
+      z-index:3;
+    }
+
+    .eyebrow{font-size:0.62rem; margin-bottom:10px;}
+    .eyebrow::before{width:18px;}
+
+    h1{
+      font-size:clamp(2.1rem, 9.5vw, 2.7rem);
+      line-height:0.96;
+      margin-bottom:12px;
+    }
+    h1 .outline{-webkit-text-stroke:1.4px var(--paper);}
+
+    .sub{
+      font-size:0.86rem;
+      line-height:1.45;
+      margin-bottom:18px;
+      max-width:none;
+    }
+
+    .cta-row{
+      gap:10px;
+      margin-bottom:16px;
+      flex-wrap:nowrap;
+    }
+    .btn-primary, .btn-secondary{
+      font-size:0.78rem;
+      padding:12px 14px;
+      flex:1;
+      text-align:center;
+      justify-content:center;
+      white-space:nowrap;
+    }
+
+    .manifest{
+      max-width:none;
+      padding-top:10px;
+      margin-bottom:env(safe-area-inset-bottom, 6px);
+    }
+    .manifest-label{font-size:0.56rem; margin-bottom:6px;}
+    .manifest-track{font-size:0.66rem; gap:22px; animation-duration:16s;}
   }
 
-  @media (max-width:420px){
-    .scs-trust{gap:14px;}
-    .scs-trust .label{display:none;}
-    .scs-actions{flex-direction:column;align-items:stretch;}
-    .scs-btn{justify-content:center;}
+  @media (max-width:880px) and (max-height:700px){
+    h1{font-size:clamp(1.85rem, 9vw, 2.3rem);}
+    .sub{font-size:0.78rem; margin-bottom:12px; -webkit-line-clamp:2; display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden;}
+    .cta-row{margin-bottom:10px;}
+    .manifest{display:none;} /* lowest priority content drops first on short screens */
   }
 
-  /* Accessibility */
-  .scs-hero a:focus-visible,.scs-hero button:focus-visible{
-    outline:2px solid var(--accent);outline-offset:3px;border-radius:8px;
-  }
-  @media (prefers-reduced-motion:reduce){
-    .scs-chip,.scs-bubble,.scs-scene .aurora,.scs-scene .mover,
-    .scs-scene .reel-label .bar i,.scs-scene .reel-label .t .live{animation:none !important;}
+  @media (prefers-reduced-motion: reduce){
+    .manifest-track, .stamp{animation:none;}
   }
 </style>
+</head>
+<body>
 
-<section class="scs-hero">
-  <!-- Mobile-only background reel (same file as the phone reel) -->
-  <div class="scs-bg" aria-hidden="true">
-    <!-- data-reel: point src at your clip; remove this comment line if unused -->
-    <video data-reel autoplay muted loop playsinline preload="auto">
-      <source src="stationery.mp4" type="video/mp4">
-    </video>
-    <!-- fallback scene (shows until a video loads) -->
-    <div class="scs-scene">
-      <div class="aurora"></div>
-      <svg class="route" viewBox="0 0 316 560" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M 40 470 C 90 300, 220 360, 280 120"/>
-        <circle class="pin" cx="40" cy="470" r="5"/><circle class="pin" cx="280" cy="120" r="5"/>
-      </svg>
-    </div>
+<section class="hero">
+  <div class="topbar">
+    <div class="logo">PORT&nbsp;<span>&amp;</span>&nbsp;PALLET</div>
+    <div class="topbar-tag">Sourcing · Guangzhou HQ</div>
   </div>
 
-  <div class="scs-panel">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">From factory floor to your front door</div>
+      <h1>WE&nbsp;SOURCE<br><span class="accent">CHINA</span>,<br><span class="outline">YOU SCALE.</span></h1>
+      <p class="sub">
+        Boots-on-the-ground sourcing across Guangzhou, Yiwu and Shenzhen.
+        We vet factories, negotiate MOQs, inspect QC, and ship —
+        so you never have to land in China to build there.
+      </p>
 
-    <!-- NAV -->
-    <nav class="scs-nav">
-      <a class="scs-brand" href="#" aria-label="Shaikh China Sourcing — home">
-        <span class="scs-logoclip"><img src="Logo.jpeg" alt="Shaikh China Sourcing"></span>
-      </a>
-      <div class="scs-links">
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Process</a>
-        <a href="#">Industries</a>
-      </div>
-      <span class="scs-news"><i>New</i> Yiwu office now open</span>
-      <a class="scs-cta" href="#contact">Get a quote</a>
-    </nav>
-
-    <!-- HERO -->
-    <div class="scs-grid">
-      <div class="scs-copy">
-        <span class="scs-badge">Yiwu · Guangzhou · Shenzhen</span>
-        <h1 class="scs-h1">Source from China<span class="accent">without the guesswork.</span></h1>
-        <p class="scs-sub">
-          We vet the factory, negotiate the price, inspect every order and manage the
-          freight — so you import with total confidence, not crossed fingers.
-        </p>
-
-        <div class="scs-actions">
-          <a class="scs-btn scs-btn-primary" href="#contact">
-            Get a free quote
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a class="scs-btn scs-btn-ghost" href="https://wa.me/0000000000" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.42 5.82c0 4.54-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm-2.7 4.4c-.13 0-.34.05-.52.25-.18.2-.69.67-.69 1.64 0 .97.71 1.9.81 2.04.1.13 1.39 2.12 3.36 2.97 1.64.71 1.97.57 2.33.53.36-.03 1.15-.47 1.31-.92.16-.45.16-.84.11-.92-.05-.08-.18-.13-.38-.23-.2-.1-1.15-.57-1.33-.63-.18-.07-.31-.1-.44.1-.13.2-.5.63-.62.76-.11.13-.23.15-.43.05-.2-.1-.84-.31-1.6-.99-.59-.53-.99-1.18-1.11-1.38-.11-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.33.07-.13.03-.25-.02-.35-.05-.1-.44-1.08-.61-1.48-.16-.39-.32-.33-.44-.34l-.38-.01z"/></svg>
-            Chat on WhatsApp
-          </a>
-        </div>
-
-        <div class="scs-trust">
-          <span class="label">Trusted on<br>the ground</span>
-          <div class="scs-stat"><b>12+ yrs</b><span>in China</span></div>
-          <div class="scs-stat"><b>1,000+</b><span>suppliers vetted</span></div>
-          <div class="scs-stat"><b>98%</b><span>on-time shipments</span></div>
-        </div>
+      <div class="cta-row">
+        <button class="btn-primary">Get a Sourcing Quote</button>
+        <button class="btn-secondary">
+          ▶ Watch us on the floor
+        </button>
       </div>
 
-      <!-- Phone-width embedded reel -->
-      <div class="scs-stage">
-        <div class="scs-phone">
-          <div class="scs-screen">
-            <video data-reel autoplay muted loop playsinline preload="auto">
-              <source src="stationery.mp4" type="video/mp4">
-            </video>
-            <div class="scs-scene">
-              <div class="aurora"></div>
-              <svg class="route" viewBox="0 0 316 560" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M 40 470 C 90 300, 220 360, 280 120"/>
-                <circle class="pin" cx="40" cy="470" r="5"/>
-                <circle class="pin" cx="280" cy="120" r="5"/>
-                <g class="mover"><circle r="6" fill="#fff"/><circle r="11" fill="none" stroke="#fff" stroke-opacity="0.4" stroke-width="2"/></g>
-              </svg>
-              <div class="scs-bubble b1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18l2-5h16l-2 6H4l-2-1zM4 13V7h7l3 3h3M9 7V4h3v3"/></svg></div>
-              <div class="scs-bubble b2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5L21 16z"/></svg></div>
-              <div class="scs-bubble b3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg></div>
-              <div class="reel-label">
-                <div class="t"><span class="live"></span> Live from the factory floor</div>
-                <div class="s">Order #SCS-2049 · Quality check in progress</div>
-                <div class="bar"><i></i></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="scs-chip tl"><b>100%</b><span>orders inspected</span></div>
-        <div class="scs-chip br"><b>$0</b><span>hidden margins</span></div>
-        <div class="scs-chip bl">
-          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
-          <span><b style="font-size:14px">Door-to-door</b><span>freight handled</span></span>
+      <div class="manifest">
+        <div class="manifest-label">Live manifest — what we're moving this week</div>
+        <div class="manifest-track" id="manifestTrack">
+          <!-- duplicated in JS for seamless loop -->
         </div>
       </div>
     </div>
 
-    <!-- PARTNER / TRUST BAND -->
-    <div class="scs-band">
-      <div class="cap">Trusted by importers across Pakistan &amp; the Gulf</div>
-      <div class="scs-logos">
-        <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Meridian Trade</span>
-        <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21V8l9-5 9 5v13M9 21v-6h6v6"/></svg>Karachi Imports</span>
-        <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7l10-5 10 5-10 5L2 7zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Gulf Source Co.</span>
-        <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12h8M12 8v8"/></svg>Dubai Retail Group</span>
-        <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5l8 4 8-4v14l-8-4-8 4z"/></svg>Lahore Wholesale</span>
+    <div class="reel-wrap">
+      <div class="stamp"><p>Verified<br>Factory<br>Visit</p></div>
+      <div class="phone">
+        <video
+          id="reelVideo"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          poster="">
+          <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+        </video>
+        <div class="reel-chrome"></div>
+        <div class="reel-tag">
+          <div class="handle">@portandpallet</div>
+          <div class="cap">Inside our QC walkthrough at a Guangzhou factory — Day 14 of sourcing run #082.</div>
+        </div>
       </div>
+      <div class="reel-caption">Swap this clip for your real Instagram reel export (.mp4)</div>
     </div>
-
   </div>
-
-  <script>
-    // Hide each fallback scene only once its paired <video> actually has a playable source.
-    document.querySelectorAll('.scs-hero video[data-reel]').forEach(function(v){
-      function reveal(){
-        var scene = v.parentElement.querySelector('.scs-scene');
-        if (scene && v.currentSrc) scene.style.opacity = '0';
-      }
-      v.addEventListener('loadeddata', reveal);
-    });
-  </script>
 </section>
+
+<script>
+  // Build a seamless scrolling manifest from real sourcing-style data
+  const items = [
+    'CTN-2291 <b>SILICONE KITCHENWARE</b> · FOB GUANGZHOU',
+    'CTN-2298 <b>LED STRIP LIGHTS</b> · FOB SHENZHEN',
+    'CTN-2304 <b>CUSTOM PACKAGING</b> · FOB YIWU',
+    'CTN-2310 <b>BLUETOOTH SPEAKERS</b> · CIF LOS ANGELES',
+    'CTN-2317 <b>STAINLESS STEEL TUMBLERS</b> · FOB NINGBO',
+    'CTN-2325 <b>PET ACCESSORIES</b> · FOB GUANGZHOU'
+  ];
+  const track = document.getElementById('manifestTrack');
+  const html = items.map(i => `<span>${i}</span>`).join('<span style="color:#4a5b6e">/</span>');
+  track.innerHTML = html + html; // duplicate for seamless marquee
+
+  // Best-effort autoplay (muted autoplay is allowed by browsers; this guards edge cases)
+  const vid = document.getElementById('reelVideo');
+  document.addEventListener('DOMContentLoaded', () => {
+    const p = vid.play();
+    if (p !== undefined) { p.catch(() => { /* user gesture may be required on some mobile browsers */ }); }
+  });
+</script>
+
+</body>
+</html>
