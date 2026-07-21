@@ -2,427 +2,1115 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>EzyChinaDirect — Hero</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shaikh China Sourcing — Source Smarter From China</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cream: '#fdf9f3',
+          ink: '#132139',
+          teal: '#0ea5ad',
+          tealDeep: '#0b6e76',
+          gold: '#eab308',
+          goldInk: '#8a5a00',
+          rust: '#e2584f',
+          rustDeep: '#b23a32',
+          stone: '#dedad0',
+          stoneDeep: '#b7b1a2',
+          charcoal: '#1c3350',
+          whatsapp: '#25D366',
+        },
+        fontFamily: { sans: ['Poppins','sans-serif'] },
+        boxShadow: {
+          soft: '0 18px 40px -18px rgba(42,36,56,0.22)',
+          lift: '0 26px 60px -22px rgba(42,36,56,0.30)',
+        },
+        borderRadius: { '28': '28px', '36': '36px' },
+      }
+    }
+  }
+</script>
 <style>
-  :root{
-    --navy:#161616;
-    --navy-deep:#000000;
-    --gold:#E63329;
-    --gold-light:#FF5C50;
-    --gray-50:#F6F7F9;
-    --gray-200:#E3E6EB;
-    --gray-500:#6B7280;
+  html { scroll-behavior: smooth; }
+  body { background:#fdf9f3; color:#2a2438; font-family:'Poppins',sans-serif; -webkit-font-smoothing:antialiased; }
+  .grain {
+    background-image: radial-gradient(circle at 1px 1px, rgba(19,33,57,0.05) 1px, transparent 0);
+    background-size: 22px 22px;
   }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Barlow',sans-serif;background:#fff;}
-
-  .hero{
-    display:flex;
-    min-height:620px;
-    width:100%;
+  .wiggle { transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s cubic-bezier(.34,1.56,.64,1); }
+  .wiggle:hover { transform: translateY(-6px) rotate(-1deg); }
+  .btn-nudge { transition: transform .2s ease; }
+  .btn-nudge:hover { transform: translateY(-2px); }
+  .highlighter { position:relative; display:inline-block; white-space:nowrap; }
+  .highlighter::before {
+    content:''; position:absolute; left:-4px; right:-4px; bottom:2px; height:14px;
+    background: rgba(234,179,8,0.45); border-radius:3px; z-index:0;
   }
-
-  /* LEFT 70% */
-  .hero-left{
-    flex:0 0 70%;
-    background:#ffffff;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:0 6vw;
-    position:relative;
+  .highlighter span { position:relative; z-index:1; }
+  .blob { position:absolute; border-radius:9999px; filter: blur(60px); pointer-events:none; }
+  /* ticker */
+  .ticker-track { display:flex; width:max-content; animation: ticker 28s linear infinite; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .ticker-wrap:hover .ticker-track { animation-play-state: paused; }
+  /* carousel */
+  .car-slide { transition: opacity .6s ease; }
+  /* whatsapp pulse */
+  @keyframes pulseRing {
+    0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.45); }
+    70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); }
+    100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
   }
-
-  .eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    font-family:'Barlow',sans-serif;
-    font-weight:600;
-    font-size:13px;
-    letter-spacing:.12em;
-    text-transform:uppercase;
-    color:var(--navy);
-    margin-bottom:22px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:28px;
-    height:2px;
-    background:var(--gold);
-    display:inline-block;
-  }
-
-  .hero-logo{
-    height:54px;
-    margin-bottom:28px;
-  }
-
-  .hero-title{
-    font-family:'Bebas Neue',sans-serif;
-    font-weight:400;
-    font-size:clamp(40px, 6.4vw, 76px);
-    line-height:0.98;
-    letter-spacing:0.01em;
-    color:var(--navy);
-    text-transform:uppercase;
-    max-width:760px;
-  }
-  .hero-title .accent{color:var(--gold);}
-
-  .hero-tagline{
-    font-family:'Barlow',sans-serif;
-    font-weight:400;
-    font-size:18px;
-    line-height:1.6;
-    color:#4B5567;
-    max-width:540px;
-    margin-top:24px;
-  }
-
-  .hero-cta{
-    display:flex;
-    align-items:center;
-    gap:18px;
-    margin-top:36px;
-  }
-  .btn-primary{
-    font-family:'Barlow',sans-serif;
-    font-weight:600;
-    font-size:15px;
-    letter-spacing:.02em;
-    color:#fff;
-    background:var(--navy);
-    border:none;
-    padding:16px 34px;
-    border-radius:4px;
-    cursor:pointer;
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    transition:background .2s ease;
-  }
-  .btn-primary:hover{background:var(--navy-deep);}
-  .btn-primary svg{width:16px;height:16px;}
-
-  .btn-secondary{
-    font-family:'Barlow',sans-serif;
-    font-weight:600;
-    font-size:15px;
-    color:var(--navy);
-    background:none;
-    border:none;
-    cursor:pointer;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    border-bottom:2px solid var(--gold);
-    padding-bottom:4px;
-  }
-
-  /* Social proof row */
-  .social-proof{
-    display:flex;
-    align-items:center;
-    gap:36px;
-    margin-top:54px;
-    flex-wrap:wrap;
-  }
-  .proof-item{
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  .proof-avatars{
-    display:flex;
-  }
-  .proof-avatars span{
-    width:38px;height:38px;
-    border-radius:50%;
-    border:2px solid #fff;
-    margin-left:-10px;
-    background:var(--navy);
-    color:#fff;
-    font-family:'Barlow',sans-serif;
-    font-weight:600;
-    font-size:13px;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .proof-avatars span:first-child{margin-left:0;}
-  .proof-avatars span:nth-child(2){background:#000000;}
-  .proof-avatars span:nth-child(3){background:var(--gold);color:var(--navy);}
-
-  .proof-text{
-    font-family:'Barlow',sans-serif;
-    font-size:14px;
-    color:var(--navy);
-  }
-  .proof-text strong{font-weight:600;}
-  .proof-text span{color:var(--gray-500);}
-
-  .proof-divider{
-    width:1px;height:34px;background:var(--gray-200);
-  }
-
-  .proof-stat{
-    display:flex;
-    flex-direction:column;
-  }
-  .proof-stat .num{
-    font-family:'Bebas Neue',sans-serif;
-    font-size:26px;
-    color:var(--navy);
-    line-height:1;
-  }
-  .proof-stat .num .gold{color:var(--gold);}
-  .proof-stat .label{
-    font-family:'Barlow',sans-serif;
-    font-size:12px;
-    color:var(--gray-500);
-    text-transform:uppercase;
-    letter-spacing:.05em;
-    margin-top:2px;
-  }
-
-  .star-row{display:flex;gap:2px;}
-  .star-row svg{width:14px;height:14px;fill:var(--gold);}
-
-  /* RIGHT 30% — instagram reel placeholder */
-  .hero-right{
-    flex:0 0 30%;
-    position:relative;
-    background:var(--navy-deep);
-    overflow:hidden;
-    min-height:620px;
-  }
-  .reel-video{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-  }
-  .reel-overlay{
-    position:absolute;
-    inset:0;
-    background:rgba(11,29,58,0.45);
-  }
-  .reel-frame-top, .reel-frame-bottom{
-    position:absolute;
-    left:0;right:0;
-    display:flex;
-    align-items:center;
-    z-index:2;
-    padding:20px;
-  }
-  .reel-frame-top{top:0;justify-content:space-between;}
-  .reel-frame-bottom{bottom:0;flex-direction:column;align-items:flex-start;gap:10px;}
-
-  .reel-badge{
-    display:flex;align-items:center;gap:8px;
-    background:rgba(255,255,255,0.12);
-    border:1px solid rgba(255,255,255,0.25);
-    backdrop-filter:blur(4px);
-    border-radius:20px;
-    padding:6px 12px;
-  }
-  .reel-badge .dot{
-    width:7px;height:7px;border-radius:50%;
-    background:#FF4D4D;
-    box-shadow:0 0 0 0 rgba(255,77,77,.6);
-    animation:pulse 1.6s infinite;
-  }
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(255,77,77,.55);}
-    70%{box-shadow:0 0 0 6px rgba(255,77,77,0);}
-    100%{box-shadow:0 0 0 0 rgba(255,77,77,0);}
-  }
-  .reel-badge span{
-    font-family:'Barlow',sans-serif;
-    font-weight:600;
-    font-size:11px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:#fff;
-  }
-
-  .reel-ig{
-    width:30px;height:30px;
-    border-radius:8px;
-    background:rgba(255,255,255,0.12);
-    border:1px solid rgba(255,255,255,0.25);
-    display:flex;align-items:center;justify-content:center;
-  }
-  .reel-ig svg{width:16px;height:16px;stroke:#fff;}
-
-  .reel-caption{
-    font-family:'Barlow',sans-serif;
-    color:#fff;
-  }
-  .reel-caption .handle{
-    font-weight:600;
-    font-size:13px;
-    display:flex;align-items:center;gap:6px;
-  }
-  .reel-caption .handle .avatar{
-    width:24px;height:24px;border-radius:50%;
-    background:var(--gold);
-    color:var(--navy);
-    font-size:10px;font-weight:700;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .reel-caption .desc{
-    font-size:12px;
-    color:rgba(255,255,255,0.85);
-    margin-top:6px;
-    max-width:220px;
-    line-height:1.5;
-  }
-
-  .reel-actions{
-    position:absolute;
-    right:14px;
-    bottom:90px;
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-    z-index:2;
-  }
-  .reel-actions .ic{
-    display:flex;flex-direction:column;align-items:center;gap:4px;
-  }
-  .reel-actions .ic svg{width:22px;height:22px;stroke:#fff;fill:none;}
-  .reel-actions .ic span{
-    font-family:'Barlow',sans-serif;
-    font-size:10px;color:#fff;font-weight:600;
-  }
-
-  .reel-progress{
-    position:absolute;
-    top:14px;left:14px;right:14px;
-    height:2px;
-    background:rgba(255,255,255,0.3);
-    border-radius:2px;
-    z-index:2;
-    overflow:hidden;
-  }
-  .reel-progress::after{
-    content:"";
-    position:absolute;
-    left:0;top:0;bottom:0;
-    width:40%;
-    background:#fff;
-    animation:progress 5s linear infinite;
-  }
-  @keyframes progress{
-    0%{width:0%;}
-    100%{width:100%;}
-  }
-
-  .reel-mute{
-    position:absolute;
-    top:54px;right:20px;
-    width:30px;height:30px;
-    border-radius:50%;
-    background:rgba(0,0,0,0.35);
-    border:1px solid rgba(255,255,255,0.3);
-    display:flex;align-items:center;justify-content:center;
-    z-index:2;
-  }
-  .reel-mute svg{width:14px;height:14px;stroke:#fff;}
-
-  @media (max-width:980px){
-    .hero{flex-direction:column;}
-    .hero-left{flex:1;padding:60px 6vw 40px;min-height:auto;}
-    .hero-right{flex:1;min-height:420px;}
-    .social-proof{margin-top:36px;}
-  }
-  @media (max-width:560px){
-    .hero-title{font-size:11vw;}
-    .proof-divider{display:none;}
-  }
+  .pulse { animation: pulseRing 2.4s ease-out infinite; }
+  input:focus, textarea:focus { outline: none; box-shadow: 0 0 0 3px rgba(14,165,173,0.18); }
+  ::selection { background: rgba(234,179,8,0.35); }
 </style>
 </head>
-<body>
+<body class="antialiased">
 
-<section class="hero">
-
-  <div class="hero-left">
-    <img src="https://raw.githubusercontent.com/ahmadok12/Shaikh-China-Sourcing/main/Logo.jpeg" alt="Shaikh China Sourcing" class="hero-logo">
-    <div class="eyebrow">China sourcing, simplified</div>
-    <h1 class="hero-title">Sourced in China.<br>Delivered <span class="accent">door to door</span><br>across Pakistan &amp; the Gulf.</h1>
-    <p class="hero-tagline">We find the factory, negotiate the price, and ship it home — so you get verified suppliers and landed costs without ever leaving Karachi, Dubai or Riyadh.</p>
-
-    <div class="hero-cta">
-      <button class="btn-primary">Get a free quote
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+<!-- ============ NAV ============ -->
+<header class="sticky top-0 z-40 bg-cream/85 backdrop-blur border-b border-ink/8">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 h-20 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-3">
+      <span class="w-11 h-11 rounded-full bg-ink text-cream flex items-center justify-center font-extrabold text-lg shrink-0">SC</span>
+      <span class="font-extrabold tracking-tight text-lg leading-none">Shaikh China<br class="hidden sm:block"> Sourcing</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-ink/70">
+      <a href="#services" class="hover:text-ink transition">Services</a>
+      <a href="#how" class="hover:text-ink transition">How it works</a>
+      <a href="#categories" class="hover:text-ink transition">Categories</a>
+      <a href="#process" class="hover:text-ink transition">Process</a>
+      <a href="#contact" class="hover:text-ink transition">Contact</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="#contact" class="btn-nudge hidden sm:inline-flex items-center gap-2 bg-ink text-cream font-semibold text-sm px-6 py-3 rounded-full shadow-soft hover:shadow-lift">
+        Get a Free Quote
+      </a>
+      <button id="menuBtn" class="lg:hidden w-11 h-11 rounded-full border border-ink/15 flex items-center justify-center">
+        <iconify-icon icon="ph:list-bold" width="22"></iconify-icon>
       </button>
-      <button class="btn-secondary">See how it works</button>
+    </div>
+  </div>
+  <div id="mobileMenu" class="hidden lg:hidden border-t border-ink/8 bg-cream px-5 py-5 flex flex-col gap-4 text-sm font-semibold text-ink/80">
+    <a href="#services">Services</a>
+    <a href="#how">How it works</a>
+    <a href="#categories">Categories</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="bg-ink text-cream text-center font-semibold px-6 py-3 rounded-full">Get a Free Quote</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="relative overflow-hidden grain pt-14 pb-20 md:pt-20 md:pb-28">
+  <div class="blob w-96 h-96 bg-teal/20 -top-20 -left-24"></div>
+  <div class="blob w-80 h-80 bg-rust/15 top-40 -right-16"></div>
+  <div class="blob w-72 h-72 bg-gold/20 bottom-0 left-1/3"></div>
+
+  <div class="max-w-7xl mx-auto px-5 md:px-8 relative grid lg:grid-cols-2 gap-14 items-center">
+    <!-- LEFT: copy -->
+    <div class="order-1">
+      <div class="inline-flex items-center gap-2 bg-white border border-ink/10 rounded-full px-4 py-2 text-xs font-bold tracking-wide uppercase shadow-soft mb-6">
+        <iconify-icon icon="ph:map-pin-fill" width="14"></iconify-icon>
+        Yiwu · Guangzhou · Lahore
+      </div>
+      <h1 class="font-extrabold tracking-tight text-[2.6rem] leading-[1.05] sm:text-5xl md:text-[3.4rem] md:leading-[1.05] mb-6">
+        Source from China<br>
+        without the
+        <span class="highlighter"><span>guesswork</span></span>
+      </h1>
+      <p class="text-ink/70 text-lg leading-relaxed max-w-xl mb-8">
+        We find verified factories, negotiate better than Alibaba listings, consolidate every vendor into one shipment, and land your products at your door. Private labelling and factory audits included, wherever in the world you're shipping to.
+      </p>
+      <div class="flex flex-wrap items-center gap-4 mb-10">
+        <a href="#contact" class="btn-nudge bg-ink text-cream font-semibold px-7 py-4 rounded-full shadow-lift inline-flex items-center gap-2">
+          Start Sourcing <iconify-icon icon="ph:arrow-up-right-bold" width="18"></iconify-icon>
+        </a>
+        <a href="#how" class="btn-nudge bg-white border border-ink/15 text-ink font-semibold px-7 py-4 rounded-full inline-flex items-center gap-2">
+          How it works
+        </a>
+      </div>
+      <div class="flex flex-wrap gap-8">
+        <div>
+          <p class="font-extrabold text-3xl text-tealDeep">40+</p>
+          <p class="text-ink/60 text-sm font-medium">Countries served</p>
+        </div>
+        <div>
+          <p class="font-extrabold text-3xl text-rustDeep">3</p>
+          <p class="text-ink/60 text-sm font-medium">Registered offices</p>
+        </div>
+        <div>
+          <p class="font-extrabold text-3xl text-goldInk">1,200+</p>
+          <p class="text-ink/60 text-sm font-medium">Shipments handled</p>
+        </div>
+      </div>
     </div>
 
-    <div class="social-proof">
-      <div class="proof-item">
-        <div class="proof-avatars">
-          <span>KH</span><span>DX</span><span>JD</span>
+    <!-- RIGHT: vertical video placeholder -->
+    <div class="order-2 relative flex justify-center lg:justify-end">
+      <div class="relative w-[260px] sm:w-[300px] aspect-[9/16] rounded-36 overflow-hidden shadow-lift bg-ink wiggle">
+        <div class="absolute inset-0 bg-gradient-to-br from-tealDeep via-ink to-black/90"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <button class="w-16 h-16 rounded-full bg-cream/95 flex items-center justify-center shadow-lift">
+            <iconify-icon icon="ph:play-fill" width="26" class="text-ink"></iconify-icon>
+          </button>
         </div>
-        <div class="proof-text"><strong>2,400+</strong><br><span>importers shipped this year</span></div>
-      </div>
-      <div class="proof-divider"></div>
-      <div class="proof-stat">
-        <div class="num">4.9<span class="gold">/5</span></div>
-        <div class="star-row">
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L10 15l-5.6 3.1 1.4-6.3L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L10 15l-5.6 3.1 1.4-6.3L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L10 15l-5.6 3.1 1.4-6.3L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L10 15l-5.6 3.1 1.4-6.3L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L10 15l-5.6 3.1 1.4-6.3L1 7.5l6.4-.6z"/></svg>
+        <div class="absolute top-4 left-4 right-4 flex items-center justify-between">
+          <span class="bg-white/15 backdrop-blur text-cream text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
+            <iconify-icon icon="ph:video-camera-fill" width="13"></iconify-icon> Warehouse Tour
+          </span>
         </div>
-        <div class="label">Trustpilot rating</div>
+        <div class="absolute bottom-5 left-5 right-5">
+          <p class="text-cream font-bold text-sm leading-snug">Inside our Yiwu sourcing floor</p>
+          <p class="text-cream/60 text-xs mt-1">Reel · 0:42</p>
+        </div>
       </div>
-      <div class="proof-divider"></div>
-      <div class="proof-stat">
-        <div class="num">4</div>
-        <div class="label">Direct routes — PK / AE / SA / OM</div>
+      <!-- floating badges -->
+      <div class="wiggle hidden sm:flex absolute -left-6 top-8 bg-white rounded-28 shadow-soft border border-ink/8 px-4 py-3 items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-gold/20 flex items-center justify-center">
+          <iconify-icon icon="ph:star-fill" width="18" class="text-goldInk"></iconify-icon>
+        </div>
+        <div>
+          <p class="font-extrabold text-sm leading-none">4.9/5</p>
+          <p class="text-ink/50 text-[11px] font-medium mt-1">Client rating</p>
+        </div>
+      </div>
+      <div class="wiggle hidden sm:flex absolute -right-4 -bottom-6 bg-ink text-cream rounded-28 shadow-lift px-4 py-3 items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-teal/25 flex items-center justify-center">
+          <iconify-icon icon="ph:shield-check-fill" width="18" class="text-teal"></iconify-icon>
+        </div>
+        <div>
+          <p class="font-extrabold text-sm leading-none">Verified</p>
+          <p class="text-cream/60 text-[11px] font-medium mt-1">Every supplier</p>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="hero-right">
-    <div class="reel-progress"></div>
-    <video class="reel-video" autoplay muted loop playsinline poster="">
-      <source src="https://raw.githubusercontent.com/ahmadok12/Shaikh-China-Sourcing/main/stationery.mp4" type="video/mp4">
-    </video>
-    <div class="reel-overlay"></div>
-
-    <div class="reel-mute">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M16 9a3 3 0 010 6"/></svg>
-    </div>
-
-    <div class="reel-frame-top">
-      <div class="reel-badge"><span class="dot"></span><span>Live on Instagram</span></div>
-      <div class="reel-ig">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-      </div>
-    </div>
-
-    <div class="reel-actions">
-      <div class="ic"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg><span>1.2k</span></div>
-      <div class="ic"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 01-1.1 4.2L21 21l-5.5-1.4a8.5 8.5 0 11-1.4-16.9 8.5 8.5 0 016.9 8.8z"/></svg><span>86</span></div>
-      <div class="ic"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg><span>Share</span></div>
-    </div>
-
-    <div class="reel-frame-bottom">
-      <div class="reel-caption">
-        <div class="handle"><span class="avatar">SCS</span> shaikhchinasourcing</div>
-        <div class="desc">Build your brand in stationery — sourced, branded, and shipped from our China network.</div>
-      </div>
-    </div>
-  </div>
-
 </section>
+
+<!-- ============ PORTS TICKER ============ -->
+<section class="bg-ink py-5 overflow-hidden ticker-wrap border-y-2 border-teal/40">
+  <div class="ticker-track text-cream">
+    <div class="flex items-center gap-10 pr-10 shrink-0">
+      <span class="flex items-center gap-2 font-semibold text-sm whitespace-nowrap"><iconify-icon icon="ph:package-fill" width="16"></iconify-icon> Yiwu, China</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Port of Karachi</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Jebel Ali, Dubai</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Rotterdam</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Los Angeles</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Jebel Ali</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Southampton</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Jeddah Islamic Port</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Toronto</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+    </div>
+    <!-- duplicate for seamless loop -->
+    <div class="flex items-center gap-10 pr-10 shrink-0">
+      <span class="flex items-center gap-2 font-semibold text-sm whitespace-nowrap"><iconify-icon icon="ph:package-fill" width="16"></iconify-icon> Yiwu, China</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Port of Karachi</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Jebel Ali, Dubai</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Rotterdam</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Los Angeles</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Jebel Ali</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Southampton</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Jeddah Islamic Port</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+      <span class="font-semibold text-sm whitespace-nowrap">Toronto</span>
+      <iconify-icon icon="ph:arrow-right-bold" width="16" class="opacity-40"></iconify-icon>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES (chips) ============ -->
+<section id="services" class="max-w-7xl mx-auto px-5 md:px-8 py-20">
+  <div class="text-center max-w-2xl mx-auto mb-14">
+    <p class="uppercase text-xs font-bold tracking-widest text-ink/50 mb-3">What we solve</p>
+    <h2 class="font-extrabold tracking-tight text-3xl md:text-[2.6rem] leading-tight">
+      The five things every importer<br class="hidden md:block"> gets stuck on
+    </h2>
+  </div>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="wiggle bg-white border border-ink/8 rounded-28 p-7 shadow-soft">
+      <div class="w-12 h-12 rounded-full bg-gold/20 text-goldInk flex items-center justify-center mb-5"><iconify-icon icon="ph:tag-fill" width="22"></iconify-icon></div>
+      <h3 class="font-extrabold text-lg mb-2">Better than Alibaba pricing</h3>
+      <p class="text-ink/60 text-sm leading-relaxed">We negotiate factory-direct, cutting out the markups baked into platform listings.</p>
+    </div>
+    <div class="wiggle bg-ink text-cream rounded-28 p-7 shadow-soft">
+      <div class="w-12 h-12 rounded-full bg-teal/25 text-teal flex items-center justify-center mb-5"><iconify-icon icon="ph:package-fill" width="22"></iconify-icon></div>
+      <h3 class="font-extrabold text-lg mb-2">Multi-vendor shipping, handled</h3>
+      <p class="text-cream/65 text-sm leading-relaxed">We consolidate orders from many factories into one shipment, so you never juggle freight forwarders.</p>
+    </div>
+    <div class="wiggle bg-white border border-ink/8 rounded-28 p-7 shadow-soft">
+      <div class="w-12 h-12 rounded-full bg-rust/15 text-rustDeep flex items-center justify-center mb-5"><iconify-icon icon="ph:stack-fill" width="22"></iconify-icon></div>
+      <h3 class="font-extrabold text-lg mb-2">Lower minimum order quantities</h3>
+      <p class="text-ink/60 text-sm leading-relaxed">Our factory relationships let small and first-time importers order far below standard MOQs.</p>
+    </div>
+    <div class="wiggle bg-white border border-ink/8 rounded-28 p-7 shadow-soft">
+      <div class="w-12 h-12 rounded-full bg-teal/15 text-tealDeep flex items-center justify-center mb-5"><iconify-icon icon="ph:shield-check-fill" width="22"></iconify-icon></div>
+      <h3 class="font-extrabold text-lg mb-2">Verified, audited suppliers</h3>
+      <p class="text-ink/60 text-sm leading-relaxed">Every factory is inspected on the ground in Yiwu and Guangzhou before we recommend it.</p>
+    </div>
+    <div class="wiggle bg-ink text-cream rounded-28 p-7 shadow-soft">
+      <div class="w-12 h-12 rounded-full bg-gold/25 text-gold flex items-center justify-center mb-5"><iconify-icon icon="ph:paint-brush-fill" width="22"></iconify-icon></div>
+      <h3 class="font-extrabold text-lg mb-2">Private labelling</h3>
+      <p class="text-cream/65 text-sm leading-relaxed">Your logo, your packaging, your brand, produced at the same factories at scale.</p>
+    </div>
+    <div class="wiggle bg-white border border-ink/8 rounded-28 p-7 shadow-soft">
+      <div class="w-12 h-12 rounded-full bg-rust/15 text-rustDeep flex items-center justify-center mb-5"><iconify-icon icon="ph:globe-hemisphere-east-fill" width="22"></iconify-icon></div>
+      <h3 class="font-extrabold text-lg mb-2">Global port delivery</h3>
+      <p class="text-ink/60 text-sm leading-relaxed">From Karachi to Rotterdam to Los Angeles, we route cargo to whichever port suits you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW TO SOURCE ============ -->
+<section id="how" class="max-w-7xl mx-auto px-5 md:px-8 py-20">
+  <div class="grid lg:grid-cols-2 gap-14 items-center">
+    <!-- steps -->
+    <div>
+      <p class="uppercase text-xs font-bold tracking-widest text-ink/50 mb-3">How to source</p>
+      <h2 class="font-extrabold tracking-tight text-3xl md:text-[2.6rem] leading-tight mb-10">
+        Three steps between you<br> and a
+        <span class="highlighter"><span>finished shipment</span></span>
+      </h2>
+      <div class="space-y-6">
+        <div class="wiggle flex gap-5 bg-white border border-ink/8 rounded-28 p-6 shadow-soft">
+          <span class="w-11 h-11 shrink-0 rounded-full bg-teal text-white font-extrabold flex items-center justify-center">1</span>
+          <div>
+            <h3 class="font-extrabold text-lg mb-1">Contact us</h3>
+            <p class="text-ink/60 text-sm leading-relaxed">Tell us what you're looking for, however rough the idea is. A WhatsApp message is enough to start.</p>
+          </div>
+        </div>
+        <div class="wiggle flex gap-5 bg-white border border-ink/8 rounded-28 p-6 shadow-soft">
+          <span class="w-11 h-11 shrink-0 rounded-full bg-gold text-ink font-extrabold flex items-center justify-center">2</span>
+          <div>
+            <h3 class="font-extrabold text-lg mb-1">Send us the details</h3>
+            <p class="text-ink/60 text-sm leading-relaxed">Quantity, budget, specs, branding needs. We turn it into a sourcing brief within 24 hours.</p>
+          </div>
+        </div>
+        <div class="wiggle flex gap-5 bg-ink text-cream rounded-28 p-6 shadow-soft">
+          <span class="w-11 h-11 shrink-0 rounded-full bg-rust text-white font-extrabold flex items-center justify-center">3</span>
+          <div>
+            <h3 class="font-extrabold text-lg mb-1">We handle everything else</h3>
+            <p class="text-cream/65 text-sm leading-relaxed">Sourcing, audits, negotiation, consolidation and shipping, right to your door, anywhere in the world.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 image carousel -->
+    <div class="relative">
+      <div class="relative rounded-36 overflow-hidden shadow-lift bg-ink aspect-[4/5] wiggle">
+        <div class="car-slide absolute inset-0 flex items-center justify-center bg-gradient-to-br from-tealDeep to-ink" data-slide="0">
+          <div class="text-center px-8">
+            <iconify-icon icon="ph:factory-fill" width="46" class="text-cream/80"></iconify-icon>
+            <p class="text-cream font-bold mt-4">Factory floor, Guangzhou</p>
+          </div>
+        </div>
+        <div class="car-slide absolute inset-0 opacity-0 flex items-center justify-center bg-gradient-to-br from-goldInk to-ink" data-slide="1">
+          <div class="text-center px-8">
+            <iconify-icon icon="ph:clipboard-text-fill" width="46" class="text-cream/80"></iconify-icon>
+            <p class="text-cream font-bold mt-4">Quality check before packing</p>
+          </div>
+        </div>
+        <div class="car-slide absolute inset-0 opacity-0 flex items-center justify-center bg-gradient-to-br from-rustDeep to-ink" data-slide="2">
+          <div class="text-center px-8">
+            <iconify-icon icon="ph:truck-fill" width="46" class="text-cream/80"></iconify-icon>
+            <p class="text-cream font-bold mt-4">Loading the consolidated container</p>
+          </div>
+        </div>
+        <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2" id="carDots">
+          <button class="w-2.5 h-2.5 rounded-full bg-cream" data-dot="0"></button>
+          <button class="w-2.5 h-2.5 rounded-full bg-cream/40" data-dot="1"></button>
+          <button class="w-2.5 h-2.5 rounded-full bg-cream/40" data-dot="2"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCT CATEGORIES ============ -->
+<section id="categories" class="max-w-7xl mx-auto px-5 md:px-8 py-20">
+  <div class="text-center max-w-2xl mx-auto mb-14">
+    <p class="uppercase text-xs font-bold tracking-widest text-ink/50 mb-3">Product categories</p>
+    <h2 class="font-extrabold tracking-tight text-3xl md:text-[2.6rem] leading-tight mb-4">
+      If China makes it,<br class="hidden md:block"> we can source it
+    </h2>
+    <p class="text-ink/60 text-base leading-relaxed">Tap any category to browse 20+ curated products, with factory pricing, MOQ and direct sourcing from Yiwu &amp; Guangzhou.</p>
+  </div>
+
+  <div class="cat-grid" id="catGrid"></div>
+</section>
+
+<!-- category explorer overlay -->
+<div class="overlay-backdrop" id="overlayBackdrop"></div>
+<div class="overlay-panel" id="overlayPanel">
+  <div class="overlay-top">
+    <div class="overlay-cat-icon" id="overlayIcon"></div>
+    <div class="overlay-top-text">
+      <div class="overlay-cat-name" id="overlayName"></div>
+      <div class="overlay-sub" id="overlaySub"></div>
+    </div>
+    <button class="overlay-close" id="overlayClose" aria-label="Close">
+      <iconify-icon icon="ph:x-bold" width="16"></iconify-icon>
+    </button>
+  </div>
+  <div class="overlay-body">
+    <div class="product-grid" id="productGrid"></div>
+
+    <div class="overlay-notfound">
+      <iconify-icon icon="ph:magnifying-glass-bold" width="24" class="text-ink/40"></iconify-icon>
+      <div class="overlay-notfound-title">Didn't find your product?</div>
+      <div class="overlay-notfound-text">No problem, tell us exactly what you're looking for and we'll source it for you directly from the factory.</div>
+      <a class="overlay-notfound-btn" id="overlayNotFoundBtn" href="#" target="_blank" rel="noopener">
+        <iconify-icon icon="ph:whatsapp-logo-fill" width="16"></iconify-icon>
+        Request a Custom Product
+      </a>
+    </div>
+  </div>
+  <div class="overlay-footer">
+    <button class="overlay-enquire" id="overlayEnquire">
+      <iconify-icon icon="ph:package-fill" width="16"></iconify-icon> Enquire About This Category
+    </button>
+    <div class="overlay-note">MOQ negotiable · Factory-direct pricing · Sample orders available</div>
+  </div>
+</div>
+
+<style>
+  /* ---- Product showcase: category grid + explorer overlay, in the site's design language ---- */
+  .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .cat-block{background:#fff;border:1px solid rgba(19,33,57,0.08);border-radius:28px;box-shadow:0 18px 40px -18px rgba(19,33,57,0.22);overflow:hidden;transition:transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s cubic-bezier(.34,1.56,.64,1)}
+  .cat-block:hover{transform:translateY(-6px) rotate(-1deg);box-shadow:0 26px 60px -22px rgba(19,33,57,0.30)}
+  .cat-header{display:flex;align-items:center;gap:12px;padding:16px 18px 14px;border-bottom:1px solid rgba(19,33,57,0.07)}
+  .cat-icon{width:40px;height:40px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+  .cat-name{font-weight:800;font-size:15px;letter-spacing:-0.01em;color:#132139;flex:1;line-height:1.25}
+  .cat-count{font-size:10.5px;font-weight:600;color:rgba(19,33,57,0.5);white-space:nowrap}
+  .cat-preview{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;padding:10px}
+  .preview-thumb{aspect-ratio:1;border-radius:16px;overflow:hidden;position:relative;background:#fdf9f3;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;text-decoration:none}
+  .preview-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .preview-thumb .thumb-fallback{font-size:24px;opacity:.55}
+  .preview-thumb .thumb-overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(19,33,57,.90) 0%, rgba(19,33,57,.35) 55%, transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:8px;opacity:0;transition:opacity .22s ease}
+  .preview-thumb:hover .thumb-overlay,.preview-thumb:focus .thumb-overlay{opacity:1}
+  @media(hover:none){.preview-thumb .thumb-overlay{opacity:1}}
+  .thumb-pname{font-size:9.5px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .thumb-pmeta{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+  .thumb-price{font-size:11px;font-weight:800;color:#ffc94d;letter-spacing:.2px}
+  .thumb-moq{font-size:8px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);border-radius:4px;padding:1px 5px;white-space:nowrap}
+  .thumb-wa-badge{margin-top:4px;display:inline-flex;align-items:center;gap:3px;background:#25D366;border-radius:5px;padding:2px 6px;font-size:8px;font-weight:700;color:#fff;width:fit-content}
+  .thumb-wa-badge svg{width:9px;height:9px;fill:#fff;flex-shrink:0}
+  .cat-explore{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px 15px;cursor:pointer;border-top:1px solid rgba(19,33,57,0.06);transition:background .18s;user-select:none}
+  .cat-explore:hover{background:#fdf9f3}
+  .cat-explore-text{font-size:12.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:#132139}
+  .cat-explore-arrow{width:24px;height:24px;border-radius:50%;background:#132139;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+  .cat-explore:hover .cat-explore-arrow{transform:scale(1.15)}
+  .cat-explore-arrow svg{width:11px;height:11px;fill:none;stroke:#fdf9f3;stroke-width:2.5}
+  @media(max-width:900px){.cat-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.cat-grid{grid-template-columns:1fr;gap:16px}}
+
+  /* overlay */
+  .overlay-backdrop{position:fixed;inset:0;z-index:400;background:rgba(19,33,57,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .35s}
+  .overlay-backdrop.open{opacity:1;pointer-events:all}
+  .overlay-panel{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.96);z-index:401;width:min(880px,94vw);max-height:90vh;background:#fdf9f3;border-radius:36px;box-shadow:0 26px 60px -22px rgba(19,33,57,0.35);display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:transform .38s cubic-bezier(.34,1.2,.64,1), opacity .3s;overflow:hidden}
+  .overlay-panel.open{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+  .overlay-top{display:flex;align-items:center;gap:14px;padding:20px 24px 18px;border-bottom:1px solid rgba(19,33,57,0.08);flex-shrink:0;background:#fff}
+  .overlay-cat-icon{width:46px;height:46px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+  .overlay-top-text{flex:1;min-width:0}
+  .overlay-cat-name{font-weight:800;font-size:20px;letter-spacing:-0.01em;color:#132139;line-height:1.2}
+  .overlay-sub{font-size:12.5px;color:rgba(19,33,57,0.55);font-weight:500;margin-top:2px}
+  .overlay-close{width:36px;height:36px;border-radius:50%;background:rgba(19,33,57,0.07);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#132139;transition:background .18s,color .18s;flex-shrink:0}
+  .overlay-close:hover{background:#e2584f;color:#fff}
+  .overlay-body{overflow-y:auto;padding:22px 22px 26px;flex:1}
+  .product-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .product-card{border-radius:18px;overflow:hidden;border:1px solid rgba(19,33,57,0.08);background:#fff;box-shadow:0 8px 20px -14px rgba(19,33,57,0.25);display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;cursor:pointer}
+  .product-card:hover{transform:translateY(-4px);box-shadow:0 18px 32px -18px rgba(19,33,57,0.32)}
+  .product-thumb{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fdf9f3;position:relative;overflow:hidden}
+  .product-thumb img{width:100%;height:100%;object-fit:cover}
+  .product-thumb .p-fallback{font-size:28px;opacity:.55}
+  .product-info{padding:9px 10px 11px;background:#fff}
+  .product-name{font-size:10.5px;font-weight:700;color:#132139;line-height:1.3;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .product-meta{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+  .product-price{font-size:12.5px;font-weight:800;color:#8a5a00;letter-spacing:.2px}
+  .product-moq{font-size:9px;font-weight:600;color:rgba(19,33,57,0.55);background:rgba(19,33,57,0.06);border-radius:5px;padding:1px 5px;white-space:nowrap}
+  .overlay-footer{padding:16px 24px 18px;border-top:1px solid rgba(19,33,57,0.07);display:flex;align-items:center;gap:16px;flex-wrap:wrap;flex-shrink:0;background:#fff}
+  .overlay-enquire{background:#132139;color:#fdf9f3;border:none;padding:13px 26px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer;transition:transform .2s ease, background .2s ease;display:inline-flex;align-items:center;gap:8px;box-shadow:0 18px 40px -18px rgba(19,33,57,0.4)}
+  .overlay-enquire:hover{transform:translateY(-2px)}
+  .overlay-note{font-size:12px;color:rgba(19,33,57,0.5);line-height:1.5}
+  .overlay-notfound{margin-top:22px;padding:26px 22px;border-radius:24px;background:#fff;border:1.5px dashed rgba(19,33,57,0.2);text-align:center}
+  .overlay-notfound-title{font-weight:800;font-size:17px;color:#132139;margin:10px 0 6px}
+  .overlay-notfound-text{font-size:13px;color:rgba(19,33,57,0.6);line-height:1.55;max-width:420px;margin:0 auto 16px}
+  .overlay-notfound-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;border:none;padding:12px 26px;border-radius:999px;font-weight:700;font-size:13.5px;cursor:pointer;text-decoration:none;transition:transform .2s ease;box-shadow:0 18px 40px -18px rgba(37,211,102,0.55)}
+  .overlay-notfound-btn:hover{transform:translateY(-2px)}
+  @media(max-width:900px){.product-grid{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:600px){
+    .overlay-panel{width:96vw;max-height:92vh;border-radius:24px}
+    .product-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+    .overlay-top{padding:16px 18px 14px}
+    .overlay-body{padding:16px 14px 20px}
+    .overlay-footer{flex-direction:column;align-items:stretch}
+    .overlay-enquire{justify-content:center}
+  }
+</style>
+
+<!-- ============ PROCESS + WHY US ============ -->
+<section id="process" class="max-w-7xl mx-auto px-5 md:px-8 py-20">
+  <div class="grid lg:grid-cols-2 gap-6">
+    <!-- sourcing process -->
+    <div class="bg-white border border-ink/8 rounded-36 p-8 md:p-10 shadow-soft">
+      <p class="uppercase text-xs font-bold tracking-widest text-ink/50 mb-3">Our sourcing process</p>
+      <h3 class="font-extrabold text-2xl mb-8 tracking-tight">From brief to your warehouse</h3>
+      <div class="space-y-7">
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-9 h-9 rounded-full bg-teal text-white text-sm font-extrabold flex items-center justify-center">1</span>
+            <span class="w-px flex-1 bg-ink/15 mt-1"></span>
+          </div>
+          <div class="pb-1">
+            <p class="font-bold text-sm mb-1">Brief &amp; supplier matching</p>
+            <p class="text-ink/60 text-sm leading-relaxed">We shortlist verified factories that fit your product, budget and MOQ.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-9 h-9 rounded-full bg-gold text-ink text-sm font-extrabold flex items-center justify-center">2</span>
+            <span class="w-px flex-1 bg-ink/15 mt-1"></span>
+          </div>
+          <div class="pb-1">
+            <p class="font-bold text-sm mb-1">Sampling &amp; negotiation</p>
+            <p class="text-ink/60 text-sm leading-relaxed">We order samples, push pricing below platform rates and lock terms.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-9 h-9 rounded-full bg-rust text-white text-sm font-extrabold flex items-center justify-center">3</span>
+            <span class="w-px flex-1 bg-ink/15 mt-1"></span>
+          </div>
+          <div class="pb-1">
+            <p class="font-bold text-sm mb-1">Factory audit &amp; production</p>
+            <p class="text-ink/60 text-sm leading-relaxed">Our Yiwu and Guangzhou teams inspect the line and monitor production.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-9 h-9 rounded-full bg-ink text-cream text-sm font-extrabold flex items-center justify-center">4</span>
+          </div>
+          <div class="pb-1">
+            <p class="font-bold text-sm mb-1">Consolidation &amp; delivery</p>
+            <p class="text-ink/60 text-sm leading-relaxed">All vendors combined into one shipment, cleared and delivered to your port.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- why us -->
+    <div class="bg-ink text-cream rounded-36 p-8 md:p-10 shadow-soft">
+      <p class="uppercase text-xs font-bold tracking-widest text-cream/50 mb-3">Why source with us</p>
+      <h3 class="font-extrabold text-2xl mb-8 tracking-tight">Built for importers who got burned before</h3>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="bg-gold/15 rounded-28 p-5">
+          <iconify-icon icon="ph:currency-circle-dollar-fill" width="24" class="mb-3 text-gold"></iconify-icon>
+          <p class="font-bold text-sm mb-1">Real factory pricing</p>
+          <p class="text-cream/60 text-xs leading-relaxed">No platform markup, negotiated direct.</p>
+        </div>
+        <div class="bg-teal/15 rounded-28 p-5">
+          <iconify-icon icon="ph:boxes-fill" width="24" class="mb-3 text-teal"></iconify-icon>
+          <p class="font-bold text-sm mb-1">One consolidated shipment</p>
+          <p class="text-cream/60 text-xs leading-relaxed">Even across a dozen different vendors.</p>
+        </div>
+        <div class="bg-rust/15 rounded-28 p-5">
+          <iconify-icon icon="ph:shield-check-fill" width="24" class="mb-3 text-rust"></iconify-icon>
+          <p class="font-bold text-sm mb-1">Boots-on-ground audits</p>
+          <p class="text-cream/60 text-xs leading-relaxed">Every supplier visited before you commit.</p>
+        </div>
+        <div class="bg-teal/15 rounded-28 p-5">
+          <iconify-icon icon="ph:handshake-fill" width="24" class="mb-3 text-teal"></iconify-icon>
+          <p class="font-bold text-sm mb-1">Low MOQ access</p>
+          <p class="text-cream/60 text-xs leading-relaxed">Start small without losing factory quality.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="relative overflow-hidden grain py-20">
+  <div class="blob w-96 h-96 bg-teal/15 -bottom-24 -right-24"></div>
+  <div class="blob w-72 h-72 bg-gold/15 top-10 -left-16"></div>
+  <div class="max-w-7xl mx-auto px-5 md:px-8 relative grid lg:grid-cols-2 gap-14">
+    <!-- info -->
+    <div>
+      <p class="uppercase text-xs font-bold tracking-widest text-ink/50 mb-3">Get in touch</p>
+      <h2 class="font-extrabold tracking-tight text-3xl md:text-[2.6rem] leading-tight mb-6">
+        Let's price out<br> your first order
+      </h2>
+      <p class="text-ink/60 text-base leading-relaxed mb-8 max-w-md">
+        Share your product idea and we'll come back with factory options, pricing and a realistic timeline, usually within a day.
+      </p>
+      <div class="space-y-4 mb-8">
+        <div class="wiggle flex items-start gap-4 bg-white border border-ink/8 rounded-28 p-5 shadow-soft">
+          <span class="w-10 h-10 shrink-0 rounded-full bg-tealDeep text-cream flex items-center justify-center"><iconify-icon icon="ph:buildings-fill" width="18"></iconify-icon></span>
+          <div>
+            <p class="font-bold text-sm">Yiwu Office</p>
+            <p class="text-ink/60 text-sm">Futian Market District, Yiwu, Zhejiang, China</p>
+          </div>
+        </div>
+        <div class="wiggle flex items-start gap-4 bg-white border border-ink/8 rounded-28 p-5 shadow-soft">
+          <span class="w-10 h-10 shrink-0 rounded-full bg-tealDeep text-cream flex items-center justify-center"><iconify-icon icon="ph:buildings-fill" width="18"></iconify-icon></span>
+          <div>
+            <p class="font-bold text-sm">Guangzhou Office</p>
+            <p class="text-ink/60 text-sm">Baiyun District, Guangzhou, China</p>
+          </div>
+        </div>
+        <div class="wiggle flex items-start gap-4 bg-white border border-ink/8 rounded-28 p-5 shadow-soft">
+          <span class="w-10 h-10 shrink-0 rounded-full bg-tealDeep text-cream flex items-center justify-center"><iconify-icon icon="ph:buildings-fill" width="18"></iconify-icon></span>
+          <div>
+            <p class="font-bold text-sm">Lahore Office</p>
+            <p class="text-ink/60 text-sm">Gulberg, Lahore, Pakistan</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <a href="mailto:hello@shaikhchinasourcing.com" class="btn-nudge inline-flex items-center gap-2 bg-white border border-ink/15 font-semibold text-sm px-5 py-3 rounded-full">
+          <iconify-icon icon="ph:envelope-simple-fill" width="16"></iconify-icon> hello@shaikhchinasourcing.com
+        </a>
+        <a href="https://wa.me/923000000000" class="btn-nudge inline-flex items-center gap-2 bg-whatsapp text-white font-semibold text-sm px-5 py-3 rounded-full shadow-soft">
+          <iconify-icon icon="ph:whatsapp-logo-fill" width="16"></iconify-icon> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- form -->
+    <div class="bg-white border border-ink/8 rounded-36 p-7 md:p-9 shadow-lift">
+      <h3 class="font-extrabold text-xl mb-6">Send us your product details</h3>
+      <form class="space-y-4" onsubmit="event.preventDefault(); this.reset(); document.getElementById('formSent').classList.remove('hidden');">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <input type="text" required placeholder="Full name" class="w-full bg-cream border border-ink/12 rounded-full px-5 py-3.5 text-sm font-medium placeholder:text-ink/40">
+          <input type="tel" required placeholder="WhatsApp number" class="w-full bg-cream border border-ink/12 rounded-full px-5 py-3.5 text-sm font-medium placeholder:text-ink/40">
+        </div>
+        <input type="email" required placeholder="Email address" class="w-full bg-cream border border-ink/12 rounded-full px-5 py-3.5 text-sm font-medium placeholder:text-ink/40">
+        <input type="text" id="f-product" placeholder="Product you want to source" class="w-full bg-cream border border-ink/12 rounded-full px-5 py-3.5 text-sm font-medium placeholder:text-ink/40">
+        <textarea rows="4" placeholder="Quantity, budget and any other details" class="w-full bg-cream border border-ink/12 rounded-28 px-5 py-4 text-sm font-medium placeholder:text-ink/40 resize-none"></textarea>
+        <button type="submit" class="btn-nudge w-full bg-ink text-cream font-semibold py-4 rounded-full shadow-soft inline-flex items-center justify-center gap-2">
+          Request a Quote <iconify-icon icon="ph:paper-plane-tilt-fill" width="16"></iconify-icon>
+        </button>
+        <p id="formSent" class="hidden text-center text-xs font-semibold text-ink/60">Thanks, we'll be in touch within 24 hours.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-ink text-cream pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-10 h-10 rounded-full bg-cream text-ink flex items-center justify-center font-extrabold">SC</span>
+        <span class="font-extrabold">Shaikh China Sourcing</span>
+      </div>
+      <p class="text-cream/55 text-sm leading-relaxed max-w-xs">Sourcing, auditing and shipping from China to importers everywhere, with offices in Yiwu, Guangzhou and Lahore.</p>
+    </div>
+    <div>
+      <p class="font-bold text-sm mb-4 text-cream/80">Services</p>
+      <ul class="space-y-2 text-sm text-cream/55">
+        <li>Product Sourcing</li>
+        <li>Factory Audits</li>
+        <li>Shipping &amp; Consolidation</li>
+        <li>Private Labelling</li>
+      </ul>
+    </div>
+    <div>
+      <p class="font-bold text-sm mb-4 text-cream/80">Company</p>
+      <ul class="space-y-2 text-sm text-cream/55">
+        <li><a href="#services" class="hover:text-cream">Services</a></li>
+        <li><a href="#how" class="hover:text-cream">How it works</a></li>
+        <li><a href="#categories" class="hover:text-cream">Categories</a></li>
+        <li><a href="#contact" class="hover:text-cream">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="font-bold text-sm mb-4 text-cream/80">Offices</p>
+      <ul class="space-y-2 text-sm text-cream/55">
+        <li>Yiwu, China</li>
+        <li>Guangzhou, China</li>
+        <li>Gulberg, Lahore, Pakistan</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-5 md:px-8 pt-6 border-t border-cream/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-cream/40">
+    <p>© 2026 Shaikh China Sourcing. All rights reserved.</p>
+    <div class="flex items-center gap-4">
+      <iconify-icon icon="ph:instagram-logo-fill" width="18" class="hover:text-rust transition"></iconify-icon>
+      <iconify-icon icon="ph:linkedin-logo-fill" width="18" class="hover:text-teal transition"></iconify-icon>
+      <iconify-icon icon="ph:whatsapp-logo-fill" width="18" class="hover:text-whatsapp transition"></iconify-icon>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP FLOATING BUTTON ============ -->
+<a href="https://wa.me/923000000000" target="_blank" class="pulse fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-whatsapp text-white flex items-center justify-center shadow-lift btn-nudge">
+  <iconify-icon icon="ph:whatsapp-logo-fill" width="30"></iconify-icon>
+</a>
+
+<script>
+  // mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+  // carousel
+  const slides = document.querySelectorAll('.car-slide');
+  const dots = document.querySelectorAll('[data-dot]');
+  let current = 0;
+  function showSlide(i) {
+    slides.forEach((s, idx) => s.style.opacity = idx === i ? '1' : '0');
+    dots.forEach((d, idx) => d.className = idx === i ? 'w-2.5 h-2.5 rounded-full bg-cream' : 'w-2.5 h-2.5 rounded-full bg-cream/40');
+    current = i;
+  }
+  dots.forEach(d => d.addEventListener('click', () => showSlide(parseInt(d.dataset.dot))));
+  setInterval(() => showSlide((current + 1) % slides.length), 4000);
+</script>
+
+<!-- ============ PRODUCT SHOWCASE LOGIC (categories + explorer overlay) ============ -->
+<script>
+(function(){
+
+var CATEGORIES = [
+  {
+    id:'mobile',
+    name:'Mobile Accessories &amp; Wearables',
+    icon:'📱',
+    color:'#e3f5f6',
+    accent:'#DE2910',
+    preview:[
+      'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/1.%20ANC%20TWS%20Wireless%20Earbuds.jpg',
+      'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/2.%20Magnetic%20Wireless%20Power%20Banks.jpg',
+      'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/3.%20Smartwatches%20and%20Fitness%20Trackers.jpg',
+      'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/4.%20Foldable%203-in-1%20Wireless%20Charging%20Stations.jpg'
+    ],
+    products:[
+      {name:'ANC TWS Wireless Earbuds',price:'$7.20',moq:'100 pcs',emoji:'🎧',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/1.%20ANC%20TWS%20Wireless%20Earbuds.jpg'},
+      {name:'Magnetic Wireless Power Banks',price:'$6.80',moq:'100 pcs',emoji:'🔋',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/2.%20Magnetic%20Wireless%20Power%20Banks.jpg'},
+      {name:'Smartwatches and Fitness Trackers',price:'$9.40',moq:'50 pcs',emoji:'⌚',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/3.%20Smartwatches%20and%20Fitness%20Trackers.jpg'},
+      {name:'Foldable 3-in-1 Wireless Charging Stations',price:'$8.60',moq:'50 pcs',emoji:'⚡',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/4.%20Foldable%203-in-1%20Wireless%20Charging%20Stations.jpg'},
+      {name:'GaN Fast Chargers, 45W–140W',price:'$6.20',moq:'100 pcs',emoji:'🔌',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/5.%20GaN%20fast%20chargers%2C%2045W-140W.jpg'},
+      {name:'Braided USB-C PD Fast-Charging Cables',price:'$1.10',moq:'300 pcs',emoji:'🔌',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/6.%20Braided%20USB-C%20PD%20fast-charging%20cables.jpg'},
+      {name:'Premium Leather &amp; Magnetic Phone Cases',price:'$2.80',moq:'200 pcs',emoji:'📱',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/7.%20Premium%20leather%20and%20magnetic%20phone%20cases.jpg'},
+      {name:'Privacy &amp; Anti-Glare Tempered Glass',price:'$0.60',moq:'500 pcs',emoji:'🛡️',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/8.%20Privacy%20and%20anti-glare%20tempered%20glass.jpg'},
+      {name:'Magnetic &amp; Gravity Car Phone Mounts',price:'$2.40',moq:'200 pcs',emoji:'🚗',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/9.%20Magnetic%20and%20gravity%20car%20phone%20mounts.jpg'},
+      {name:'Wireless Lavalier Microphones',price:'$5.60',moq:'100 pcs',emoji:'🎙️',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/10.%20Wireless%20lavalier%20microphones.jpg'},
+      {name:'Smartphone Gimbals &amp; Stabilisers',price:'$12.80',moq:'30 pcs',emoji:'🎥',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/11.%20Smartphone%20gimbals%20and%20stabilisers.jpg'},
+      {name:'Mobile Gaming Cooling Fans',price:'$3.40',moq:'150 pcs',emoji:'🌀',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/12.%20Mobile%20gaming%20cooling%20fans.jpg'},
+      {name:'Ring Lights with Adjustable Tripods',price:'$4.20',moq:'100 pcs',emoji:'💡',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/13.%20Ring%20lights%20with%20adjustable%20tripods.jpg'},
+      {name:'Selfie Sticks',price:'$1.60',moq:'300 pcs',emoji:'🤳',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/14.%20Selfie-sticks.jpg'},
+      {name:'Portable Bluetooth Speakers',price:'$7.80',moq:'80 pcs',emoji:'🔊',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/15.%20Portable%20Bluetooth%20speakers.jpg'},
+      {name:'Wireless Neckband Earphones',price:'$4.60',moq:'150 pcs',emoji:'🎧',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/16.%20Wireless%20neckband%20earphones.jpg'},
+      {name:'Universal Travel Adapters with USB-C',price:'$2.20',moq:'200 pcs',emoji:'🔌',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/17.%20Universal%20travel%20adapters%20with%20USB-C.jpg'},
+      {name:'Multi-Port Fast Car Chargers',price:'$1.90',moq:'250 pcs',emoji:'🚗',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/18.%20Multi-port%20fast%20car%20chargers.jpg'},
+      {name:'Foldable Tablet &amp; Laptop Stands',price:'$3.80',moq:'150 pcs',emoji:'💻',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/19.%20Foldable%20tablet%20and%20laptop%20stands.jpg'},
+      {name:"Kids' GPS Smartwatches with Calling",price:'$11.40',moq:'40 pcs',emoji:'⌚',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/1.%20Mobile%20Accessories%20%26%20Wearables/20.%20Kids%27%20GPS%20smartwatches%20with%20calling.jpg'}
+    ]
+  },
+  {
+    id:'kitchen', name:'Kitchen & Home', icon:'🍳', color:'#fdf3d9', accent:'#e07d00',
+    preview:['🍳','🥄','🧴','🫖'],
+    products:[
+      {name:'Stainless Steel Mixing Bowl Set 3pc',price:'$4.80',moq:'100 pcs',emoji:'🥣'},
+      {name:'Silicone Spatula Set 4pc',price:'$2.20',moq:'200 pcs',emoji:'🥄'},
+      {name:'Ceramic Non-Stick Frying Pan 28cm',price:'$6.40',moq:'50 pcs',emoji:'🍳'},
+      {name:'Bamboo Cutting Board with Groove',price:'$3.50',moq:'100 pcs',emoji:'🪵'},
+      {name:'Vacuum Insulated Food Jar 500ml',price:'$4.20',moq:'100 pcs',emoji:'🫙'},
+      {name:'Electric Garlic Press Chopper',price:'$5.80',moq:'50 pcs',emoji:'🧄'},
+      {name:'Kitchen Scale Digital 10kg',price:'$4.40',moq:'100 pcs',emoji:'⚖️'},
+      {name:'Glass Storage Containers 6pc Set',price:'$7.60',moq:'50 pcs',emoji:'🫙'},
+      {name:'Cheese Grater 4-Sided Stainless',price:'$2.80',moq:'200 pcs',emoji:'🧀'},
+      {name:'Silicone Oven Mitts Pair',price:'$2.10',moq:'200 pcs',emoji:'🧤'},
+      {name:'Tea Strainer Stainless Fine Mesh',price:'$0.90',moq:'500 pcs',emoji:'🫖'},
+      {name:'Peeler Y-Shape Stainless Steel',price:'$0.65',moq:'500 pcs',emoji:'🥕'},
+      {name:'Airtight Cereal Dispenser 3.5L',price:'$5.20',moq:'100 pcs',emoji:'🏺'},
+      {name:'Wooden Serving Board with Handle',price:'$4.80',moq:'100 pcs',emoji:'🪵'},
+      {name:'Magnetic Knife Strip Stainless',price:'$3.60',moq:'100 pcs',emoji:'🔪'},
+      {name:'Collapsible Measuring Cups Set',price:'$1.80',moq:'300 pcs',emoji:'🧪'},
+      {name:'Silicone Baking Mat Non-Stick',price:'$2.40',moq:'200 pcs',emoji:'🍞'},
+      {name:'Egg Beater Hand Rotary Stainless',price:'$1.60',moq:'300 pcs',emoji:'🥚'},
+      {name:'Oil Dispenser Glass Bottle 500ml',price:'$2.90',moq:'200 pcs',emoji:'🫒'},
+      {name:'Salad Spinner Large Capacity',price:'$5.40',moq:'100 pcs',emoji:'🥗'}
+    ]
+  },
+  {
+    id:'fashion', name:'Fashion & Bags', icon:'👜', color:'#fbe7e5', accent:'#7c3aed',
+    preview:['👜','🧢','🕶️','🧣'],
+    products:[
+      {name:'Canvas Tote Bag OEM Printed',price:'$1.80',moq:'300 pcs',emoji:'🛍️'},
+      {name:'Baseball Cap 5-Panel Unisex',price:'$2.40',moq:'200 pcs',emoji:'🧢'},
+      {name:'Waist Bag Crossbody Mini Nylon',price:'$3.60',moq:'150 pcs',emoji:'👜'},
+      {name:'PU Leather Laptop Backpack 15"',price:'$9.80',moq:'50 pcs',emoji:'💼'},
+      {name:'Scrunchies Satin Set 10pc',price:'$1.20',moq:'500 pcs',emoji:'🎀'},
+      {name:'UV Protection Sunglasses Retro',price:'$2.80',moq:'200 pcs',emoji:'🕶️'},
+      {name:'Oversized Scarf Solid Colour',price:'$3.20',moq:'200 pcs',emoji:'🧣'},
+      {name:'Foldable Shopping Bag Ripstop',price:'$1.40',moq:'500 pcs',emoji:'🛍️'},
+      {name:'Gym Duffel Bag 35L Oxford',price:'$7.20',moq:'100 pcs',emoji:'🏋️'},
+      {name:'Slim Wallet RFID Blocking',price:'$3.40',moq:'200 pcs',emoji:'💳'},
+      {name:'Headband Terry Cloth Sports',price:'$0.80',moq:'500 pcs',emoji:'🤸'},
+      {name:'Transparent PVC Jelly Bag',price:'$4.60',moq:'100 pcs',emoji:'👛'},
+      {name:'Baseball Jersey Blank Oversize',price:'$5.80',moq:'100 pcs',emoji:'👕'},
+      {name:'Beanie Winter Knit Unisex',price:'$2.20',moq:'300 pcs',emoji:'🧶'},
+      {name:'Laptop Sleeve Neoprene 14"',price:'$3.80',moq:'150 pcs',emoji:'💻'},
+      {name:'Silk Sleep Mask Adjustable',price:'$1.60',moq:'300 pcs',emoji:'😴'},
+      {name:'Reusable Produce Mesh Bags 6pc',price:'$2.00',moq:'300 pcs',emoji:'🌿'},
+      {name:'Travel Pouch Set 3pc Organizer',price:'$4.20',moq:'100 pcs',emoji:'🧳'},
+      {name:'Scrunchie Velvet Jumbo 5pc',price:'$1.80',moq:'300 pcs',emoji:'🎀'},
+      {name:'Crossbody Bag Woven Straw',price:'$5.60',moq:'100 pcs',emoji:'👜'}
+    ]
+  },
+  {
+    id:'electronics', name:'Electronics', icon:'💡', color:'#e3f5f6', accent:'#1d4ed8',
+    preview:[
+      'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/AI%20voice%20assistants.jpg',
+      'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Bluetooth%20speakers.jpg',
+      'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Gaming%20controllers.jpg',
+      'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Mini%20projector.jpg'
+    ],
+    products:[
+      {name:'AI Voice Assistants',price:'$8.40',moq:'50 pcs',emoji:'🤖',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/AI%20voice%20assistants.jpg'},
+      {name:'Android Tablet Devices',price:'$22.00',moq:'20 pcs',emoji:'📱',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Android%20Tablet%20devices.jpg'},
+      {name:'Bluetooth Speakers',price:'$7.60',moq:'50 pcs',emoji:'🔊',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Bluetooth%20speakers.jpg'},
+      {name:'Car Android Dashboard Panel',price:'$18.80',moq:'20 pcs',emoji:'🚗',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Car%20Android%20dashboard%20panel.jpg'},
+      {name:'Dash Cams',price:'$11.60',moq:'30 pcs',emoji:'📷',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Dash%20cams.jpg'},
+      {name:'Gaming Controllers',price:'$9.20',moq:'50 pcs',emoji:'🎮',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Gaming%20controllers.jpg'},
+      {name:'LED Ring Lights',price:'$4.80',moq:'100 pcs',emoji:'💡',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/LED%20ring%20lights.jpg'},
+      {name:'Mini Projector',price:'$36.00',moq:'20 pcs',emoji:'📽️',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Mini%20projector.jpg'},
+      {name:'Portable Monitors',price:'$44.00',moq:'10 pcs',emoji:'🖥️',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Portable%20monitors.jpg'},
+      {name:'Power Banks',price:'$8.20',moq:'100 pcs',emoji:'🔋',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Power%20banks.jpg'},
+      {name:'RGB Gaming Keyboard + Mouse',price:'$14.80',moq:'50 pcs',emoji:'⌨️',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/RGB%20gaming%20keyboard%20%2B%20mouse.jpg'},
+      {name:'Smart Glasses',price:'$28.00',moq:'20 pcs',emoji:'🕶️',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Smart%20glasses.jpg'},
+      {name:'Smart Home Hubs',price:'$16.40',moq:'30 pcs',emoji:'🏠',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Smart%20home%20hubs.jpg'},
+      {name:'Smartwatch Premium Style',price:'$18.60',moq:'30 pcs',emoji:'⌚',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Smartwatch%20(premium%20style).jpg'},
+      {name:'Spy Cameras',price:'$12.80',moq:'30 pcs',emoji:'📷',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Spy%20cameras.jpg'},
+      {name:'Streaming Sticks',price:'$9.60',moq:'50 pcs',emoji:'📺',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Streaming%20sticks.jpg'},
+      {name:'TWS Earbuds',price:'$6.50',moq:'100 pcs',emoji:'🎧',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/TWS%20earbuds.jpg'},
+      {name:'USB Hubs',price:'$3.40',moq:'150 pcs',emoji:'🔌',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/USB%20hubs.jpg'},
+      {name:'VR Headsets',price:'$32.00',moq:'10 pcs',emoji:'🥽',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/VR%20headsets.jpg'},
+      {name:'Wireless Chargers',price:'$4.20',moq:'200 pcs',emoji:'⚡',img:'https://raw.githubusercontent.com/ahmadok12/Ezychinadirect2/main/Consumer%20Electronics/Wireless%20chargers.jpg'}
+    ]
+  },
+  {
+    id:'beauty', name:'Beauty & Personal Care', icon:'✨', color:'#fdf3d9', accent:'#be185d',
+    preview:['✨','💄','🧴','🪞'],
+    products:[
+      {name:'Jade Roller Face Massager Set',price:'$2.40',moq:'200 pcs',emoji:'🌿'},
+      {name:'LED Face Mask 7-Colour Therapy',price:'$8.60',moq:'50 pcs',emoji:'💡'},
+      {name:'Derma Roller 0.5mm Titanium',price:'$1.80',moq:'300 pcs',emoji:'✨'},
+      {name:'Gua Sha Stone Rose Quartz',price:'$1.60',moq:'300 pcs',emoji:'💎'},
+      {name:'Facial Steamer Nano Ionic 40ml',price:'$6.80',moq:'100 pcs',emoji:'💨'},
+      {name:'Eyebrow Lamination Kit Complete',price:'$4.20',moq:'100 pcs',emoji:'✨'},
+      {name:'Blackhead Remover Vacuum USB',price:'$5.60',moq:'100 pcs',emoji:'🔋'},
+      {name:'Eyelash Curler Heated Electric',price:'$3.40',moq:'150 pcs',emoji:'👁️'},
+      {name:'Makeup Brush Set 15pc Synthetic',price:'$4.80',moq:'100 pcs',emoji:'💄'},
+      {name:'Hair Scrunchie Silk 6pc Pack',price:'$2.00',moq:'300 pcs',emoji:'🎀'},
+      {name:'Manicure Drill Machine Portable',price:'$7.20',moq:'50 pcs',emoji:'💅'},
+      {name:'Lip Plumper Device USB-C',price:'$4.60',moq:'100 pcs',emoji:'💋'},
+      {name:'Micellar Water Dispenser Pump',price:'$2.80',moq:'200 pcs',emoji:'🧴'},
+      {name:'Travel Makeup Bag Clear PVC',price:'$1.60',moq:'300 pcs',emoji:'👜'},
+      {name:'Teeth Whitening Pen Carbamide',price:'$2.20',moq:'200 pcs',emoji:'😁'},
+      {name:'Hair Growth Oil Serum Bottled',price:'$3.40',moq:'200 pcs',emoji:'🌿'},
+      {name:'Cotton Makeup Remover Pads 100pc',price:'$1.20',moq:'300 pcs',emoji:'🌸'},
+      {name:'Mini Perfume Atomiser 5ml Metal',price:'$1.80',moq:'300 pcs',emoji:'💐'},
+      {name:'Body Scrub Glove Exfoliate Set',price:'$1.40',moq:'300 pcs',emoji:'🧤'},
+      {name:'Electric Face Cleansing Brush',price:'$5.80',moq:'100 pcs',emoji:'✨'}
+    ]
+  },
+  {
+    id:'tools', name:'Tools & Hardware', icon:'🔧', color:'#fbe7e5', accent:'#166534',
+    preview:['🔧','🪛','🔩','🪚'],
+    products:[
+      {name:'Cordless Screwdriver 36-Bit Set',price:'$11.60',moq:'50 pcs',emoji:'🪛'},
+      {name:'Digital Vernier Caliper 150mm',price:'$3.80',moq:'100 pcs',emoji:'📐'},
+      {name:'Laser Level Self-Levelling 2-Line',price:'$8.40',moq:'50 pcs',emoji:'📏'},
+      {name:'LED Work Light USB Rechargeable',price:'$5.20',moq:'100 pcs',emoji:'🔦'},
+      {name:'Heavy Duty Zip Ties 300pc Mixed',price:'$2.80',moq:'100 pcs',emoji:'🔗'},
+      {name:'Multimeter Digital Auto-Range',price:'$7.60',moq:'50 pcs',emoji:'⚡'},
+      {name:'Magnetic Wristband Tool Holder',price:'$2.40',moq:'200 pcs',emoji:'🧲'},
+      {name:'Drill Bit Set 135pc HSS Titanium',price:'$6.80',moq:'50 pcs',emoji:'🔩'},
+      {name:'Utility Knife Box Cutter 10pc',price:'$1.60',moq:'300 pcs',emoji:'🔪'},
+      {name:'Soldering Iron 60W Temperature',price:'$8.20',moq:'50 pcs',emoji:'🔥'},
+      {name:'Padlock Combination 4-Digit Zinc',price:'$2.60',moq:'200 pcs',emoji:'🔒'},
+      {name:'Extension Cord 3-Socket 5m',price:'$4.40',moq:'100 pcs',emoji:'🔌'},
+      {name:'Pipe Wrench Adjustable 14"',price:'$5.80',moq:'50 pcs',emoji:'🔧'},
+      {name:'Cable Management Clips 50pc',price:'$1.80',moq:'500 pcs',emoji:'🗂️'},
+      {name:'Stud Finder Electronic LCD',price:'$6.20',moq:'100 pcs',emoji:'📡'},
+      {name:'Silicone Sealant Gun Professional',price:'$3.60',moq:'100 pcs',emoji:'🛠️'},
+      {name:'Wire Stripper Crimper Cutter 3-in-1',price:'$4.80',moq:'100 pcs',emoji:'✂️'},
+      {name:'Telescopic Magnetic Pick-Up Tool',price:'$1.20',moq:'300 pcs',emoji:'🧲'},
+      {name:'Work Gloves Cut-Resistant L XL',price:'$2.80',moq:'200 pcs',emoji:'🧤'},
+      {name:'Heavy Duty Staple Gun 3 Size',price:'$5.60',moq:'100 pcs',emoji:'🔫'}
+    ]
+  },
+  {
+    id:'baby', name:'Baby & Kids', icon:'🧸', color:'#e3f5f6', accent:'#2563eb',
+    preview:['🧸','🍼','👶','🚼'],
+    products:[
+      {name:'Silicone Baby Feeding Set 6pc',price:'$3.20',moq:'200 pcs',emoji:'🍼'},
+      {name:'Baby Swaddle Wrap Muslin 3pc',price:'$2.60',moq:'300 pcs',emoji:'👶'},
+      {name:'Educational Wooden Blocks Set',price:'$4.80',moq:'150 pcs',emoji:'🧸'},
+      {name:'Baby Monitor Camera Wireless',price:'$16.40',moq:'30 pcs',emoji:'📷'},
+      {name:'Kids Foam Play Mat Puzzle 12pc',price:'$6.20',moq:'100 pcs',emoji:'🧩'},
+      {name:'Baby Bath Thermometer Digital',price:'$1.40',moq:'300 pcs',emoji:'🌡️'},
+      {name:'Stroller Organizer Bag Insulated',price:'$3.60',moq:'150 pcs',emoji:'👜'},
+      {name:'Silicone Teether Toy BPA-Free',price:'$1.10',moq:'500 pcs',emoji:'🦷'},
+      {name:'Kids Backpack Cartoon Print',price:'$3.80',moq:'200 pcs',emoji:'🎒'},
+      {name:'Baby Night Light Projector Star',price:'$5.60',moq:'100 pcs',emoji:'✨'},
+      {name:'Nursing Cover Breastfeeding Scarf',price:'$2.80',moq:'200 pcs',emoji:'🧣'},
+      {name:'Toddler Sippy Cup Leak-Proof',price:'$1.60',moq:'300 pcs',emoji:'🥤'},
+      {name:'Baby Carrier Ergonomic Adjustable',price:'$8.40',moq:'100 pcs',emoji:'👶'},
+      {name:'Kids Learning Tablet Toy',price:'$7.20',moq:'80 pcs',emoji:'📱'},
+      {name:'Baby Proofing Corner Guards 12pc',price:'$1.80',moq:'300 pcs',emoji:'🛡️'},
+      {name:'Diaper Bag Backpack Multi-Pocket',price:'$6.80',moq:'100 pcs',emoji:'🎒'},
+      {name:'Baby High Chair Foldable Portable',price:'$12.40',moq:'50 pcs',emoji:'🪑'},
+      {name:'Kids Ride-On Toy Car Push',price:'$18.60',moq:'30 pcs',emoji:'🚗'},
+      {name:'Baby Wipes Warmer Electric',price:'$4.60',moq:'100 pcs',emoji:'🍼'},
+      {name:'Toddler Silicone Bib Waterproof 3pc',price:'$1.80',moq:'300 pcs',emoji:'👶'}
+    ]
+  },
+  {
+    id:'sports', name:'Sports & Outdoor', icon:'🏸', color:'#fdf3d9', accent:'#059669',
+    preview:['🏸','⚽','🏕️','🚴'],
+    products:[
+      {name:'Resistance Bands Set 5pc Latex',price:'$2.40',moq:'300 pcs',emoji:'🏋️'},
+      {name:'Foldable Camping Chair Portable',price:'$8.60',moq:'100 pcs',emoji:'🏕️'},
+      {name:'Yoga Mat Non-Slip 6mm TPE',price:'$4.20',moq:'150 pcs',emoji:'🧘'},
+      {name:'Cycling Helmet Adjustable Vented',price:'$9.80',moq:'80 pcs',emoji:'🚴'},
+      {name:'Football Size 5 Match Quality',price:'$5.40',moq:'100 pcs',emoji:'⚽'},
+      {name:'Insulated Sports Water Bottle 1L',price:'$3.60',moq:'200 pcs',emoji:'🍶'},
+      {name:'Camping Tent 2-Person Waterproof',price:'$22.00',moq:'30 pcs',emoji:'⛺'},
+      {name:'Fitness Tracker Band Waterproof',price:'$7.80',moq:'100 pcs',emoji:'⌚'},
+      {name:'Badminton Racket Set 2pc + Shuttles',price:'$6.60',moq:'100 pcs',emoji:'🏸'},
+      {name:'Hiking Backpack 40L Waterproof',price:'$14.20',moq:'50 pcs',emoji:'🎒'},
+      {name:'Skipping Rope Speed Adjustable',price:'$1.20',moq:'400 pcs',emoji:'🪢'},
+      {name:'Portable Camping Lantern LED',price:'$3.80',moq:'150 pcs',emoji:'🏮'},
+      {name:'Swimming Goggles Anti-Fog UV',price:'$1.80',moq:'300 pcs',emoji:'🥽'},
+      {name:'Sports Duffel Bag Ventilated',price:'$6.40',moq:'100 pcs',emoji:'🏋️'},
+      {name:'Camping Sleeping Bag 3-Season',price:'$11.60',moq:'50 pcs',emoji:'🛌'},
+      {name:'Knee Support Brace Compression',price:'$2.20',moq:'300 pcs',emoji:'🦵'},
+      {name:'Basketball Official Size Indoor/Outdoor',price:'$6.80',moq:'80 pcs',emoji:'🏀'},
+      {name:'Portable Fishing Rod Combo Set',price:'$9.40',moq:'50 pcs',emoji:'🎣'},
+      {name:'Waterproof Dry Bag 20L Roll-Top',price:'$3.20',moq:'150 pcs',emoji:'🎒'},
+      {name:'Adjustable Dumbbell Set Neoprene',price:'$14.60',moq:'40 pcs',emoji:'🏋️'}
+    ]
+  },
+  {
+    id:'pet', name:'Pet Supplies', icon:'🐾', color:'#fbe7e5', accent:'#c2410c',
+    preview:['🐾','🦴','🐕','🐈'],
+    products:[
+      {name:'Automatic Pet Feeder Timed',price:'$14.80',moq:'50 pcs',emoji:'🍽️'},
+      {name:'Dog Leash Retractable Heavy Duty',price:'$4.20',moq:'150 pcs',emoji:'🐕'},
+      {name:'Cat Scratching Post Sisal Rope',price:'$9.60',moq:'80 pcs',emoji:'🐈'},
+      {name:'Pet Carrier Bag Breathable Mesh',price:'$7.40',moq:'100 pcs',emoji:'🎒'},
+      {name:'Dog Grooming Brush Deshedding',price:'$2.60',moq:'200 pcs',emoji:'🪮'},
+      {name:'Cat Litter Box with Scoop',price:'$5.80',moq:'80 pcs',emoji:'🐾'},
+      {name:'Pet Water Fountain Filtered',price:'$11.20',moq:'50 pcs',emoji:'⛲'},
+      {name:'Chew Toy Durable Rubber Bone',price:'$1.40',moq:'300 pcs',emoji:'🦴'},
+      {name:'Pet Bed Orthopedic Washable',price:'$8.80',moq:'80 pcs',emoji:'🛏️'},
+      {name:'Cat Tree Tower Multi-Level',price:'$24.00',moq:'20 pcs',emoji:'🐈'},
+      {name:'Dog Training Clicker Set',price:'$0.90',moq:'500 pcs',emoji:'🔔'},
+      {name:'Pet Travel Bowl Collapsible 2pc',price:'$1.60',moq:'300 pcs',emoji:'🥣'},
+      {name:'Adjustable Pet Harness Padded',price:'$3.40',moq:'200 pcs',emoji:'🦮'},
+      {name:'GPS Pet Tracker Collar Waterproof',price:'$18.60',moq:'30 pcs',emoji:'📡'},
+      {name:'Cat Toy Interactive Feather Wand',price:'$1.10',moq:'400 pcs',emoji:'🪶'},
+      {name:'Pet Nail Clipper with Safety Guard',price:'$1.80',moq:'300 pcs',emoji:'✂️'},
+      {name:'Dog Winter Coat Reflective Waterproof',price:'$4.40',moq:'150 pcs',emoji:'🧥'},
+      {name:'Cat Window Perch Hammock',price:'$5.20',moq:'100 pcs',emoji:'🐈'},
+      {name:'Pet Hair Remover Roller Reusable',price:'$1.60',moq:'300 pcs',emoji:'🧹'},
+      {name:'Automatic Ball Launcher Dog Toy',price:'$16.80',moq:'30 pcs',emoji:'🎾'}
+    ]
+  },
+  {
+    id:'stationery', name:'Stationery & Office', icon:'✏️', color:'#e3f5f6', accent:'#6d28d9',
+    preview:['✏️','📓','🖊️','📎'],
+    products:[
+      {name:'Gel Pen Set 20 Colours',price:'$1.80',moq:'300 pcs',emoji:'🖊️'},
+      {name:'A5 Hardcover Notebook Ruled',price:'$1.40',moq:'500 pcs',emoji:'📓'},
+      {name:'Desk Organizer Multi-Compartment',price:'$4.60',moq:'150 pcs',emoji:'🗄️'},
+      {name:'Mechanical Pencil Set 0.5mm',price:'$1.20',moq:'400 pcs',emoji:'✏️'},
+      {name:'Sticky Notes Set Assorted Sizes',price:'$0.80',moq:'500 pcs',emoji:'📝'},
+      {name:'Whiteboard Magnetic A3 with Pen',price:'$6.20',moq:'100 pcs',emoji:'📋'},
+      {name:'Highlighter Set 6 Colours Chisel Tip',price:'$1.50',moq:'400 pcs',emoji:'🖍️'},
+      {name:'Binder Clips Assorted 100pc',price:'$1.00',moq:'500 pcs',emoji:'📎'},
+      {name:'Laminating Pouches A4 100pc',price:'$3.80',moq:'150 pcs',emoji:'📄'},
+      {name:'Desk Calendar Stand Planner',price:'$2.40',moq:'300 pcs',emoji:'📅'},
+      {name:'Correction Tape Set 3pc',price:'$1.10',moq:'400 pcs',emoji:'🩹'},
+      {name:'Stapler Heavy Duty with Staples',price:'$3.20',moq:'200 pcs',emoji:'📎'},
+      {name:'Document File Folder Set 12pc',price:'$4.20',moq:'150 pcs',emoji:'📁'},
+      {name:'Whiteboard Markers 8-Colour Set',price:'$2.60',moq:'300 pcs',emoji:'🖊️'},
+      {name:'Scientific Calculator Solar',price:'$5.40',moq:'100 pcs',emoji:'🧮'},
+      {name:'Printer Label Sticker Rolls 5pc',price:'$3.00',moq:'200 pcs',emoji:'🏷️'},
+      {name:'Desk Lamp LED Adjustable USB',price:'$5.80',moq:'100 pcs',emoji:'💡'},
+      {name:'Business Card Holder Case Metal',price:'$1.40',moq:'300 pcs',emoji:'💳'},
+      {name:'Expanding File Organizer 13-Pocket',price:'$3.60',moq:'150 pcs',emoji:'🗂️'},
+      {name:'Ergonomic Mouse Pad Wrist Support',price:'$1.90',moq:'300 pcs',emoji:'🖱️'}
+    ]
+  }
+];
+
+var catGrid = document.getElementById('catGrid');
+CATEGORIES.forEach(function(cat){
+  var block = document.createElement('div');
+  block.className = 'cat-block';
+  var hdr = '<div class="cat-header">';
+  hdr += '<div class="cat-icon" style="background:'+cat.color+'">'+cat.icon+'</div>';
+  hdr += '<div class="cat-name">'+cat.name+'</div>';
+  hdr += '<div class="cat-count">'+cat.products.length+' products</div>';
+  hdr += '</div>';
+
+  var prev = '<div class="cat-preview">';
+  for(var i=0;i<4;i++){
+    var pItem = cat.preview[i];
+    var prod = cat.products[i] || null;
+    var waHref = '#';
+    if(prod){
+      var waTxt = '*Shaikh China Sourcing Product Enquiry*\n📦 Product: '+prod.name+'\n💰 Listed at: '+prod.price+' (MOQ: '+prod.moq+')\n\nHi, I\'m interested in sourcing this product. Please send me a quote.';
+      waHref = 'https://wa.me/923000000000?text='+encodeURIComponent(waTxt);
+    }
+    var overlayHtml = '';
+    if(prod){
+      overlayHtml = '<div class="thumb-overlay">'
+        +'<div class="thumb-pname">'+prod.name+'</div>'
+        +'<div class="thumb-pmeta">'
+          +'<span class="thumb-price">'+prod.price+'</span>'
+          +'<span class="thumb-moq">MOQ '+prod.moq+'</span>'
+        +'</div>'
+        +'<div class="thumb-wa-badge">'
+          +'<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 2C8.28 2 2 8.28 2 16c0 2.44.65 4.72 1.78 6.7L2 30l7.56-1.74A13.93 13.93 0 0 0 16 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm7.56 19.34c-.32.9-1.88 1.72-2.58 1.82-.66.1-1.48.14-2.38-.16-.56-.18-1.28-.42-2.2-.82-3.88-1.68-6.42-5.6-6.62-5.86-.2-.26-1.6-2.14-1.6-4.08 0-1.94 1.02-2.9 1.38-3.3.36-.4.78-.5 1.04-.5h.74c.24 0 .56-.08.88.66l1.22 2.98c.1.22.04.48-.08.68l-.46.68c-.12.18-.24.36-.1.62.14.26.62 1.04 1.34 1.68.92.82 1.7 1.08 1.94 1.2.24.12.38.1.52-.06l.66-.76c.16-.2.32-.26.52-.18l2.82 1.32c.26.12.42.18.48.28.06.46-.26 1.86-.58 2.76z"/></svg>'
+          +' WhatsApp'
+        +'</div>'
+      +'</div>';
+    }
+    if(typeof pItem === 'string' && pItem.startsWith('http')){
+      prev += '<a class="preview-thumb" href="'+waHref+'" target="_blank" rel="noopener"><img src="'+pItem+'" alt="'+(prod?prod.name:'')+'" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"/><span class="thumb-fallback" style="display:none">📷</span>'+overlayHtml+'</a>';
+    } else {
+      prev += '<a class="preview-thumb" href="'+waHref+'" target="_blank" rel="noopener"><span class="thumb-fallback">'+pItem+'</span>'+overlayHtml+'</a>';
+    }
+  }
+  prev += '</div>';
+
+  var exp = '<div class="cat-explore" data-cat="'+cat.id+'">';
+  exp += '<span class="cat-explore-text">Tap to Explore</span>';
+  exp += '<div class="cat-explore-arrow"><svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4"/></svg></div>';
+  exp += '</div>';
+
+  block.innerHTML = hdr + prev + exp;
+  catGrid.appendChild(block);
+});
+
+var backdrop = document.getElementById('overlayBackdrop');
+var panel = document.getElementById('overlayPanel');
+var overlayIcon = document.getElementById('overlayIcon');
+var overlayName = document.getElementById('overlayName');
+var overlaySub  = document.getElementById('overlaySub');
+var productGrid = document.getElementById('productGrid');
+var closeBtn    = document.getElementById('overlayClose');
+var enquireBtn  = document.getElementById('overlayEnquire');
+var notFoundBtn = document.getElementById('overlayNotFoundBtn');
+var activeCatId = null;
+
+function openOverlay(catId){
+  var cat = CATEGORIES.find(function(c){return c.id===catId;});
+  if(!cat) return;
+  activeCatId = catId;
+  overlayIcon.style.background = cat.color;
+  overlayIcon.textContent = cat.icon;
+  overlayName.textContent = cat.name;
+  overlaySub.textContent = cat.products.length+' products · Factory-direct pricing';
+
+  productGrid.innerHTML = '';
+  cat.products.forEach(function(p){
+    var card = document.createElement('div');
+    card.className = 'product-card';
+    var thumbContent = p.img
+      ? '<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'block\'"/><span class="p-fallback" style="display:none">'+p.emoji+'</span>'
+      : '<span class="p-fallback">'+p.emoji+'</span>';
+    var waMsg = '*Shaikh China Sourcing Product Enquiry*\n📦 Product: '+p.name+'\n💰 Listed at: '+p.price+' (MOQ: '+p.moq+')\n\nHi, I\'m interested in sourcing this product. Please send me a quote.';
+    var waLink = 'https://wa.me/923000000000?text='+encodeURIComponent(waMsg);
+    card.innerHTML =
+      '<a class="product-card-wa" href="'+waLink+'" target="_blank" rel="noopener" title="Enquire about '+p.name+' on WhatsApp">'+
+      '<div class="product-thumb">'+thumbContent+'</div>'+
+      '<div class="product-info">'+
+        '<div class="product-name">'+p.name+'</div>'+
+        '<div class="product-meta">'+
+          '<span class="product-price">'+p.price+'</span>'+
+          '<span class="product-moq">MOQ '+p.moq+'</span>'+
+        '</div>'+
+      '</div>'+
+      '</a>';
+    productGrid.appendChild(card);
+  });
+
+  var nfMsg = '*Shaikh China Sourcing Custom Product Request*\n📂 Category: '+cat.name+'\n\nHi, I couldn\'t find the exact product I need in this category. Could you help me source it?';
+  notFoundBtn.href = 'https://wa.me/923000000000?text='+encodeURIComponent(nfMsg);
+
+  backdrop.classList.add('open');
+  panel.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  panel.scrollTop = 0;
+  var ob = panel.querySelector('.overlay-body');
+  if(ob) ob.scrollTop = 0;
+}
+
+function closeOverlay(){
+  backdrop.classList.remove('open');
+  panel.classList.remove('open');
+  document.body.style.overflow = '';
+  activeCatId = null;
+}
+
+catGrid.addEventListener('click',function(e){
+  if(e.target.closest('.preview-thumb')) return;
+  var strip = e.target.closest('.cat-explore');
+  if(strip) openOverlay(strip.dataset.cat);
+});
+
+closeBtn.addEventListener('click', closeOverlay);
+backdrop.addEventListener('click', closeOverlay);
+
+enquireBtn.addEventListener('click',function(){
+  closeOverlay();
+  var cat = activeCatId ? CATEGORIES.find(function(c){return c.id===activeCatId;}) : null;
+  var section = document.querySelector('#contact');
+  if(section) section.scrollIntoView({behavior:'smooth',block:'start'});
+  if(cat){
+    var productField = document.getElementById('f-product');
+    if(productField && !productField.value){
+      productField.value = cat.name+' – ';
+      productField.focus();
+    }
+  }
+});
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closeOverlay();
+});
+
+})();
+</script>
 
 </body>
 </html>
