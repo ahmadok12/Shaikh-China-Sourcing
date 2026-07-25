@@ -327,6 +327,25 @@
   .footer-operations>a:focus-visible{
     color:#fff;
   }
+  @media (width<=460px){
+    .whatsapp-float{
+      width:54px;
+      height:54px;
+      min-height:54px;
+      padding:0;
+      justify-content:center;
+      gap:0;
+      overflow:hidden;
+      white-space:nowrap;
+      font-size:0;
+    }
+    .whatsapp-float>span{
+      flex:none;
+      width:38px;
+      height:38px;
+      font-size:14px;
+    }
+  }
 </style>
 </head>
 <body class="__variable_geist_0tvmz3h antialiased">
@@ -1820,7 +1839,7 @@
 </a>
 </div>
 <div class="products-explore">
-<a class="explore-products-button" href="https://wa.me/8613250703045?text=Hi%2C%20I%27d%20like%20to%20explore%20more%20products%20from%20China." target="_blank" rel="noopener noreferrer"><span class="whatsapp-cta-mark" aria-hidden="true">◉</span>Explore more products on WhatsApp<span aria-hidden="true">→</span>
+<a class="explore-products-button" href="https://wa.me/8613250703045?text=Hi%2C%20I%27d%20like%20to%20explore%20more%20products%20from%20China." target="_blank" rel="noopener noreferrer"><span class="whatsapp-cta-mark" aria-hidden="true">◉</span>Start sourcing<span aria-hidden="true">→</span>
 </a>
 <span>Swipe or drag any row to browse at your own pace.</span>
 </div>
@@ -2205,33 +2224,51 @@
     let startX = 0;
     let startScroll = 0;
     let lastTime = performance.now();
+    let autoPosition = 0;
+    let resumeTimer = 0;
     const direction = rowIndex % 2 === 0 ? 1 : -1;
 
     requestAnimationFrame(() => {
-      if (direction < 0) marquee.scrollLeft = marquee.scrollWidth / 2;
+      const loopWidth = marquee.scrollWidth / 2;
+      autoPosition = direction < 0 ? loopWidth : 0;
+      marquee.scrollLeft = autoPosition;
     });
 
     marquee.addEventListener("pointerdown", (event) => {
       dragging = true;
       paused = true;
+      clearTimeout(resumeTimer);
       startX = event.clientX;
       startScroll = marquee.scrollLeft;
+      autoPosition = startScroll;
       marquee.classList.add("is-dragging");
       marquee.setPointerCapture(event.pointerId);
     });
     marquee.addEventListener("pointermove", (event) => {
-      if (dragging) marquee.scrollLeft = startScroll - (event.clientX - startX);
+      if (!dragging) return;
+      const loopWidth = marquee.scrollWidth / 2;
+      let nextPosition = startScroll - (event.clientX - startX);
+      if (loopWidth > 0) {
+        nextPosition = ((nextPosition % loopWidth) + loopWidth) % loopWidth;
+      }
+      autoPosition = nextPosition;
+      marquee.scrollLeft = nextPosition;
     });
     const stop = () => {
       dragging = false;
       marquee.classList.remove("is-dragging");
-      setTimeout(() => { paused = false; }, 900);
+      autoPosition = marquee.scrollLeft;
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => { paused = false; }, 900);
     };
     marquee.addEventListener("pointerup", stop);
     marquee.addEventListener("pointercancel", stop);
     marquee.addEventListener("mouseenter", () => { paused = true; });
     marquee.addEventListener("mouseleave", () => {
-      if (!dragging) paused = false;
+      if (!dragging) {
+        autoPosition = marquee.scrollLeft;
+        paused = false;
+      }
     });
 
     const animate = (time) => {
@@ -2239,9 +2276,11 @@
       lastTime = time;
       const loopWidth = marquee.scrollWidth / 2;
       if (!paused && !matchMedia("(prefers-reduced-motion: reduce)").matches && loopWidth > 0) {
-        marquee.scrollLeft += direction * 0.03 * delta;
-        if (marquee.scrollLeft >= loopWidth) marquee.scrollLeft -= loopWidth;
-        if (marquee.scrollLeft <= 0) marquee.scrollLeft += loopWidth;
+        autoPosition += direction * 0.03 * delta;
+        autoPosition = ((autoPosition % loopWidth) + loopWidth) % loopWidth;
+        marquee.scrollLeft = autoPosition;
+      } else if (!dragging) {
+        autoPosition = marquee.scrollLeft;
       }
       requestAnimationFrame(animate);
     };
