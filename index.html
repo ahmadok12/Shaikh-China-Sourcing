@@ -275,6 +275,58 @@
       gap:4px;
     }
   }
+  .explore-products-button{
+    background:#1fae55;
+    box-shadow:0 15px 30px rgba(31,174,85,.28);
+  }
+  .explore-products-button:hover,
+  .explore-products-button:focus-visible{
+    background:#168c43;
+    box-shadow:0 18px 34px rgba(22,140,67,.3);
+  }
+  .explore-products-button .whatsapp-cta-mark{
+    display:grid;
+    place-items:center;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:rgba(255,255,255,.18);
+    font-size:14px;
+  }
+  .footer-service-pills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:20px;
+  }
+  .footer-service-pills span{
+    display:inline-flex;
+    align-items:center;
+    min-height:31px;
+    padding:0 12px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:999px;
+    color:#d8d9dc;
+    background:rgba(255,255,255,.055);
+    font-size:9px;
+    font-weight:750;
+  }
+  .footer-service-pills span::before{
+    content:"✓";
+    margin-right:6px;
+    color:#ff8266;
+    font-weight:900;
+  }
+  .footer-operations>a{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#a6a8ad;
+  }
+  .footer-operations>a:hover,
+  .footer-operations>a:focus-visible{
+    color:#fff;
+  }
 </style>
 </head>
 <body class="__variable_geist_0tvmz3h antialiased">
@@ -1768,7 +1820,7 @@
 </a>
 </div>
 <div class="products-explore">
-<a class="explore-products-button" href="https://wa.me/8613250703045?text=Hi%2C%20I%27d%20like%20to%20explore%20more%20products%20from%20China.">Explore more products<span aria-hidden="true">→</span>
+<a class="explore-products-button" href="https://wa.me/8613250703045?text=Hi%2C%20I%27d%20like%20to%20explore%20more%20products%20from%20China." target="_blank" rel="noopener noreferrer"><span class="whatsapp-cta-mark" aria-hidden="true">◉</span>Explore more products on WhatsApp<span aria-hidden="true">→</span>
 </a>
 <span>Swipe or drag any row to browse at your own pace.</span>
 </div>
@@ -2009,6 +2061,12 @@
 <span class="footer-eyebrow">YOUR CHINA SOURCING TEAM</span>
 <h2>Have a product in mind?</h2>
 <p>Send us a photo, link, or specification. We&#x27;ll take it from there.</p>
+<div class="footer-service-pills" aria-label="Our sourcing services">
+<span>Product sourcing</span>
+<span>Supplier verification</span>
+<span>Quality control</span>
+<span>Global shipping</span>
+</div>
 </div>
 <a href="#contact">Start a sourcing request<span aria-hidden="true">→</span>
 </a>
@@ -2034,12 +2092,12 @@
 </div>
 <div class="footer-column footer-operations">
 <span class="footer-heading">Operations</span>
-<span>
-<i>CN</i> Yiwu, Zhejiang</span>
-<span>
-<i>CN</i> Guangzhou, Guangdong</span>
-<span>
-<i>PK</i> Gulberg III, Lahore</span>
+<a href="https://www.google.com/maps/search/?api=1&amp;query=Yijia%20Shandong%20Street%2C%20Choucheng%20Street%2C%20Yiwu%20City%2C%20Jinhua%20City%2C%20Zhejiang%20Province" target="_blank" rel="noopener noreferrer" aria-label="Open Yiwu office in Google Maps">
+<i>CN</i> Yiwu, Zhejiang ↗</a>
+<a href="https://www.google.com/maps/search/?api=1&amp;query=Room%20101%2C%20No.%20288%20Hedong%20Road%2C%20Liwan%20District%2C%20Guangzhou" target="_blank" rel="noopener noreferrer" aria-label="Open Guangzhou office in Google Maps">
+<i>CN</i> Guangzhou, Guangdong ↗</a>
+<a href="https://www.google.com/maps/search/?api=1&amp;query=Office%20No.%20LG%2008%2C%20Big%20City%20Plaza%2C%20Main%20Boulevard%20Gulberg%20III%2C%20Lahore" target="_blank" rel="noopener noreferrer" aria-label="Open Lahore office in Google Maps">
+<i>PK</i> Gulberg III, Lahore ↗</a>
 </div>
 <div class="footer-column footer-contact">
 <span class="footer-heading">Let&#x27;s talk</span>
