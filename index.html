@@ -327,6 +327,11 @@
   .footer-operations>a:focus-visible{
     color:#fff;
   }
+  .whatsapp-float .whatsapp-icon svg{
+    width:20px;
+    height:20px;
+    display:block;
+  }
   @media (width<=460px){
     .whatsapp-float{
       width:54px;
@@ -345,6 +350,256 @@
       height:38px;
       font-size:14px;
     }
+    .whatsapp-float .whatsapp-icon svg{
+      width:24px;
+      height:24px;
+      display:block;
+    }
+  }
+
+  /* Customer tracking portal links and sourcing journey redesign */
+  .primary-nav .nav-tracking{
+    color:#b91c0c;
+    font-weight:850;
+  }
+  .primary-nav .nav-tracking::before{
+    content:"";
+    display:inline-block;
+    width:7px;
+    height:7px;
+    margin-right:7px;
+    border-radius:50%;
+    background:#22a957;
+    box-shadow:0 0 0 4px rgba(34,169,87,.12);
+    vertical-align:1px;
+  }
+  .process-section{
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 82% 12%,rgba(222,41,16,.24),transparent 28%),
+      radial-gradient(circle at 10% 88%,rgba(255,106,0,.13),transparent 25%),
+      linear-gradient(145deg,#09090a,#111114 58%,#0b0b0d);
+  }
+  .process-section::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    opacity:.24;
+    background-image:
+      linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px),
+      linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:48px 48px;
+  }
+  .process-shell{
+    position:relative;
+    z-index:1;
+    align-items:start;
+  }
+  .journey-portal-note{
+    display:flex;
+    align-items:flex-start;
+    gap:13px;
+    margin:25px 0 8px;
+    padding:15px 16px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:16px;
+    background:rgba(255,255,255,.055);
+  }
+  .journey-portal-note>span{
+    flex:none;
+    display:grid;
+    place-items:center;
+    width:34px;
+    height:34px;
+    border-radius:11px;
+    color:#fff;
+    background:linear-gradient(135deg,var(--orange),var(--red));
+    font-size:15px;
+    font-weight:900;
+  }
+  .journey-portal-note strong{
+    display:block;
+    color:#fff;
+    font-size:13px;
+  }
+  .journey-portal-note p{
+    margin:4px 0 0;
+    color:#a9abb1;
+    font-size:11px;
+    line-height:1.55;
+  }
+  .process-steps{
+    margin-top:22px;
+    padding:0 18px;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:21px;
+    background:rgba(255,255,255,.025);
+  }
+  .process-step:last-child{
+    border-bottom:0;
+  }
+  .process-step.is-active{
+    margin-inline:-8px;
+    width:calc(100% + 16px);
+    padding-inline:12px;
+    border-radius:14px;
+    background:linear-gradient(90deg,rgba(222,41,16,.16),rgba(255,106,0,.06));
+  }
+  .tracking-panel{
+    border-color:rgba(255,255,255,.15);
+    background:
+      radial-gradient(circle at 100% 0,rgba(222,41,16,.18),transparent 32%),
+      linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025)),
+      #111113;
+  }
+  .portal-access{
+    position:relative;
+    z-index:2;
+    margin:-28px -28px 26px;
+    padding:25px 28px 23px;
+    border-bottom:1px solid rgba(255,255,255,.11);
+    background:rgba(0,0,0,.18);
+  }
+  .portal-access-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:#8fe0ad;
+    letter-spacing:.12em;
+    font-size:9px;
+    font-weight:850;
+  }
+  .portal-access-badge i{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#24bc68;
+    box-shadow:0 0 0 5px rgba(36,188,104,.13);
+  }
+  .portal-access h3{
+    margin:14px 0 0;
+    color:#fff;
+    letter-spacing:-.035em;
+    font-size:25px;
+    font-weight:850;
+    line-height:1.08;
+  }
+  .portal-access p{
+    margin:10px 0 0;
+    color:#a7a9af;
+    font-size:11px;
+    line-height:1.65;
+  }
+  .portal-features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+    margin-top:17px;
+  }
+  .portal-features span{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    min-height:32px;
+    padding:6px 8px;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:10px;
+    color:#c8c9cd;
+    background:rgba(255,255,255,.035);
+    font-size:8px;
+    font-weight:750;
+  }
+  .portal-features span::before{
+    content:"✓";
+    color:#ff8266;
+    font-weight:900;
+  }
+  .tracking-example-label{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:4px;
+    color:#777a82;
+    letter-spacing:.11em;
+    font-size:8px;
+    font-weight:850;
+  }
+  .tracking-example-label span:last-child{
+    color:#a5a7ad;
+    letter-spacing:0;
+    font-weight:700;
+  }
+  .tracking-panel>a.portal-button{
+    color:#fff;
+    background:linear-gradient(90deg,var(--orange),var(--red));
+    box-shadow:0 15px 30px rgba(222,41,16,.28);
+  }
+  .tracking-panel>a.portal-button:hover,
+  .tracking-panel>a.portal-button:focus-visible{
+    color:#fff;
+    background:linear-gradient(90deg,#ff7a1d,#ee351b);
+  }
+  .tracking-help{
+    margin:12px 0 0;
+    color:#777a82;
+    text-align:center;
+    font-size:9px;
+    line-height:1.5;
+  }
+  .footer-tracking-link{
+    color:#fff!important;
+    font-weight:800;
+  }
+  .footer-tracking-link::before{
+    content:"●";
+    margin-right:7px;
+    color:#39cb79;
+    font-size:8px;
+  }
+  .footer-portal-card{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    margin-top:5px;
+    padding:13px 14px;
+    border:1px solid rgba(255,255,255,.13);
+    border-radius:13px;
+    background:rgba(255,255,255,.055);
+  }
+  .footer-portal-card small{
+    color:#777a82;
+    letter-spacing:.1em;
+    font-size:8px;
+    font-weight:850;
+  }
+  .footer-portal-card strong{
+    color:#fff;
+    font-size:11px;
+  }
+  .footer-portal-card span{
+    color:#ff8561;
+    font-size:9px;
+    font-weight:800;
+  }
+  @media (width<=760px){
+    .primary-nav .nav-tracking{
+      margin-top:4px;
+      color:#168c43;
+      background:#ecf9f1;
+    }
+    .portal-access{
+      margin:-23px -23px 23px;
+      padding:23px;
+    }
+    .portal-features{
+      grid-template-columns:1fr;
+    }
+    .process-steps{
+      padding-inline:11px;
+    }
   }
 </style>
 </head>
@@ -360,6 +615,7 @@
 <a href="#fieldwork">Our advantage</a>
 <a href="#products">Products</a>
 <a href="#process">Process</a>
+<a class="nav-tracking" href="https://track.shaikhchinasourcing.com/" target="_blank" rel="noopener noreferrer">Track order</a>
 <a href="#contact">Contact</a>
 <a class="mobile-nav-cta" href="https://wa.me/8613250703045">WhatsApp our team <span aria-hidden="true">↗</span>
 </a>
@@ -1850,9 +2106,16 @@
 <span class="process-kicker">
 <i aria-hidden="true">
 </i>Your sourcing journey</span>
-<h2 id="process-title">A process built<span> around certainty.</span>
+<h2 id="process-title">Know what happens next.<span> Track every milestone.</span>
 </h2>
-<p class="process-lead">Tap each stage to see how your order moves from a product requirement to final delivery.</p>
+<p class="process-lead">We manage your order from the first requirement through sourcing, quality checks, shipping, and delivery—with clear progress at every stage.</p>
+<div class="journey-portal-note">
+<span aria-hidden="true">↗</span>
+<div>
+<strong>Your order stays visible after sourcing begins</strong>
+<p>Customers receive secure portal access to check the current stage, progress, updates, expected completion, and shared product media.</p>
+</div>
+</div>
 <div class="process-steps">
 <button class="process-step is-active " type="button" data-progress="10" aria-pressed="true">
 <span class="step-index">01</span>
@@ -1905,6 +2168,20 @@
 </div>
 </div>
 <aside class="tracking-panel" aria-live="polite">
+<div class="portal-access">
+<span class="portal-access-badge"><i aria-hidden="true"></i>CUSTOMER TRACKING PORTAL</span>
+<h3>Your live order status, in one place.</h3>
+<p>Use the login details provided by our team to securely view your active orders and their latest progress.</p>
+<div class="portal-features" aria-label="Tracking portal features">
+<span>Current stage</span>
+<span>Progress updates</span>
+<span>Order details</span>
+</div>
+</div>
+<div class="tracking-example-label">
+<span>INTERACTIVE JOURNEY PREVIEW</span>
+<span>Tap a stage on the left</span>
+</div>
 <div class="tracking-topline">
 <span>ORDER TRACKER</span>
 <span class="tracking-live">
@@ -1952,8 +2229,9 @@
 <strong>Shared with your team</strong>
 </div>
 </div>
-<a href="https://wa.me/8613250703045">Start your sourcing request <span aria-hidden="true">↗</span>
+<a class="portal-button" href="https://track.shaikhchinasourcing.com/" target="_blank" rel="noopener noreferrer">Open customer tracking portal <span aria-hidden="true">↗</span>
 </a>
+<p class="tracking-help">Already a customer? Sign in with the username and password shared by our team.</p>
 </aside>
 </div>
 </section>
@@ -2108,6 +2386,7 @@
 <a href="#fieldwork">Our advantage</a>
 <a href="#products">Featured products</a>
 <a href="#process">Sourcing process</a>
+<a class="footer-tracking-link" href="https://track.shaikhchinasourcing.com/" target="_blank" rel="noopener noreferrer">Track your order</a>
 </div>
 <div class="footer-column footer-operations">
 <span class="footer-heading">Operations</span>
@@ -2124,6 +2403,11 @@
 <small>WHATSAPP / CALL</small>+8613250703045</a>
 <a href="mailto:info@shaikhchinasourcing.com">
 <small>EMAIL</small>info@shaikhchinasourcing.com</a>
+<a class="footer-portal-card" href="https://track.shaikhchinasourcing.com/" target="_blank" rel="noopener noreferrer">
+<small>CUSTOMER PORTAL</small>
+<strong>Check your order progress</strong>
+<span>Open tracking portal ↗</span>
+</a>
 </div>
 </div>
 <div class="footer-bottom">
@@ -2133,7 +2417,7 @@
 </div>
 </footer>
 <a class="whatsapp-float" href="https://wa.me/8613250703045" aria-label="Chat with Shaikh China Sourcing on WhatsApp">
-<span aria-hidden="true">◉</span>Chat on WhatsApp</a>
+<span aria-hidden="true" class="whatsapp-icon"><svg viewBox="0 0 32 32" role="img" focusable="false"><path fill="currentColor" d="M16.02 3.2A12.7 12.7 0 0 0 5.1 22.37L3.2 29.3l7.1-1.86a12.7 12.7 0 1 0 5.72-24.24Zm0 2.14a10.55 10.55 0 0 1 9.13 15.82 10.55 10.55 0 0 1-13.78 4.02l-.51-.3-4.22 1.1 1.13-4.1-.33-.53A10.55 10.55 0 0 1 16.02 5.34Zm-4.66 5.2c-.23 0-.6.09-.91.43-.31.34-1.2 1.17-1.2 2.86s1.23 3.32 1.4 3.55c.17.23 2.42 3.7 5.86 5.19.82.35 1.46.56 1.96.72.82.26 1.57.22 2.16.13.66-.1 2.03-.83 2.31-1.63.29-.8.29-1.49.2-1.63-.08-.14-.31-.23-.66-.4-.34-.17-2.03-1-2.34-1.12-.31-.11-.54-.17-.77.17-.23.34-.89 1.12-1.09 1.35-.2.23-.4.26-.74.09-.34-.17-1.45-.53-2.76-1.7-1.02-.91-1.71-2.03-1.91-2.37-.2-.34-.02-.53.15-.7.15-.15.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.03-.6-.09-.17-.77-1.86-1.06-2.55-.28-.67-.56-.58-.77-.59h-.66Z"/></svg></span>Chat on WhatsApp</a>
 </main>
 <script>
 (() => {
