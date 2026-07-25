@@ -141,6 +141,53 @@
   .office-list .office-map-link:focus-visible{
     color:#de2910;
   }
+  .product-meta-bar{
+    position:absolute;
+    right:0;
+    bottom:0;
+    left:0;
+    z-index:3;
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    padding:8px 9px;
+    color:#fff;
+    background:rgba(8,8,10,.72);
+    -webkit-backdrop-filter:blur(8px);
+    backdrop-filter:blur(8px);
+    font-size:7px;
+    font-weight:750;
+    line-height:1.25;
+    opacity:0;
+    transform:translateY(100%);
+    transition:opacity .2s ease,transform .2s ease;
+  }
+  .product-meta-bar span{
+    min-width:0;
+    white-space:nowrap;
+  }
+  .product-meta-bar b{
+    color:#ff9a7b;
+    margin-right:3px;
+    font-size:6px;
+    letter-spacing:.08em;
+  }
+  .product-card:hover .product-meta-bar,
+  .product-card:focus-within .product-meta-bar{
+    opacity:1;
+    transform:translateY(0);
+  }
+  @media (hover:none), (width<=760px){
+    .product-meta-bar{
+      padding:6px 7px;
+      font-size:6px;
+      opacity:1;
+      transform:translateY(0);
+    }
+    .product-meta-bar b{
+      font-size:5px;
+    }
+  }
 </style>
 </head>
 <body class="__variable_geist_0tvmz3h antialiased">
@@ -528,8 +575,8 @@
 <div class="product-rows">
 <div class="product-row">
 <div class="product-row-label">
-<span>01</span>Mobile &amp; smart tech</div>
-<div class="product-marquee" role="region" aria-label="Mobile &amp; smart tech products. Swipe or drag horizontally to browse." tabindex="0">
+<span>01</span>Mobile &amp; communication</div>
+<div class="product-marquee" role="region" aria-label="Mobile and communication products. Swipe or drag horizontally to browse." tabindex="0">
 <div class="product-track">
 <div class="product-set">
 <article class="product-card">
@@ -748,8 +795,8 @@
 </div>
 <div class="product-row">
 <div class="product-row-label">
-<span>02</span>Home &amp; kitchen</div>
-<div class="product-marquee" role="region" aria-label="Home &amp; kitchen products. Swipe or drag horizontally to browse." tabindex="0">
+<span>02</span>Smart tech &amp; automotive</div>
+<div class="product-marquee" role="region" aria-label="Smart technology and automotive products. Swipe or drag horizontally to browse." tabindex="0">
 <div class="product-track">
 <div class="product-set">
 <article class="product-card">
@@ -968,8 +1015,8 @@
 </div>
 <div class="product-row">
 <div class="product-row-label">
-<span>03</span>Automotive &amp; tools</div>
-<div class="product-marquee" role="region" aria-label="Automotive &amp; tools products. Swipe or drag horizontally to browse." tabindex="0">
+<span>03</span>Home, energy &amp; EV</div>
+<div class="product-marquee" role="region" aria-label="Home, energy and electric vehicle products. Swipe or drag horizontally to browse." tabindex="0">
 <div class="product-track">
 <div class="product-set">
 <article class="product-card">
@@ -1188,8 +1235,8 @@
 </div>
 <div class="product-row">
 <div class="product-row-label">
-<span>04</span>Industrial equipment</div>
-<div class="product-marquee" role="region" aria-label="Industrial equipment products. Swipe or drag horizontally to browse." tabindex="0">
+<span>04</span>Industrial, tools &amp; building</div>
+<div class="product-marquee" role="region" aria-label="Industrial, tools and building products. Swipe or drag horizontally to browse." tabindex="0">
 <div class="product-track">
 <div class="product-set">
 <article class="product-card">
@@ -1408,8 +1455,8 @@
 </div>
 <div class="product-row">
 <div class="product-row-label">
-<span>05</span>Energy, agriculture &amp; packaging</div>
-<div class="product-marquee" role="region" aria-label="Energy, agriculture &amp; packaging products. Swipe or drag horizontally to browse." tabindex="0">
+<span>05</span>Agriculture &amp; packaging</div>
+<div class="product-marquee" role="region" aria-label="Agriculture and packaging products. Swipe or drag horizontally to browse." tabindex="0">
 <div class="product-track">
 <div class="product-set">
 <article class="product-card">
@@ -1942,6 +1989,70 @@
       menu.setAttribute("aria-expanded", "false");
     }));
   }
+
+  const featuredProducts = [
+    { name: "Luxury Phone Cases", file: "Luxury Phone Cases.jpg", moq: "100 pcs", price: "$2–12" },
+    { name: "Wireless Earbuds / TWS", file: "Wireless Earbuds  TWS.jpg", moq: "100 pcs", price: "$3–18" },
+    { name: "Power Banks", file: "Power Banks.jpg", moq: "100 pcs", price: "$5–35" },
+    { name: "Car Phone Mounts", file: "Car Phone Mounts.jpg", moq: "100 pcs", price: "$1.50–8" },
+    { name: "Smartphone LCD & OLED Screens", file: "Smartphone LCD & OLED Screens.jpg", moq: "10 pcs", price: "$12–85" },
+    { name: "Wi-Fi Routers & Mesh Systems", file: "Wi-Fi Routers & Mesh Systems.jpg", moq: "20 pcs", price: "$15–120" },
+    { name: "Mobile Phone Batteries", file: "Mobile Phone Batteries.jpg", moq: "100 pcs", price: "$3–18" },
+    { name: "CCTV Cameras & Modules", file: "CCTV Cameras & Modules.jpg", moq: "20 pcs", price: "$8–90" },
+    { name: "Smartwatches", file: "Smartwatches.jpg", moq: "100 pcs", price: "$6–45" },
+    { name: "Mini Projectors", file: "Mini Projectors.jpg", moq: "20 pcs", price: "$25–180" },
+    { name: "Bluetooth Speakers", file: "Bluetooth Speakers.jpg", moq: "100 pcs", price: "$4–30" },
+    { name: "Smart Glasses", file: "Smart Glasses.jpg", moq: "50 pcs", price: "$20–120" },
+    { name: "LED Car Headlights", file: "LED Car Headlights.jpg", moq: "50 sets", price: "$8–45" },
+    { name: "Android Car Screens", file: "Android Car Screens.jpg", moq: "10 pcs", price: "$35–180" },
+    { name: "Dash Cameras", file: "Dash Cameras.jpg", moq: "20 pcs", price: "$18–120" },
+    { name: "Car Diagnostic Scanners", file: "Car Diagnostic Scanners.jpg", moq: "5 pcs", price: "$25–250" },
+    { name: "Air Fryers", file: "Air Fryers.jpg", moq: "20 pcs", price: "$18–65" },
+    { name: "Robot Vacuum Cleaners", file: "Robot Vacuum Cleaners.jpg", moq: "10 pcs", price: "$45–180" },
+    { name: "Portable Air Conditioners", file: "Portable Air Conditioners.jpg", moq: "10 pcs", price: "$90–350" },
+    { name: "Coffee Machines", file: "Coffee Machines.jpg", moq: "10 pcs", price: "$45–250" },
+    { name: "Solar Inverters", file: "Solar Inverters.jpg", moq: "5 pcs", price: "$180–1,200" },
+    { name: "Lithium Batteries", file: "Lithium Batteries.jpg", moq: "10 pcs", price: "$80–600" },
+    { name: "Solar Panels", file: "Solar Panels.jpg", moq: "10 pcs", price: "$45–220" },
+    { name: "EV Chargers", file: "EV Chargers.jpg", moq: "2 pcs", price: "$250–1,500" },
+    { name: "CNC Machines", file: "CNC Machines.jpg", moq: "1 set", price: "$2,000–25,000" },
+    { name: "Laser Cutting Machines", file: "Laser Cutting Machines.jpg", moq: "1 set", price: "$3,000–60,000" },
+    { name: "Industrial Air Compressors", file: "Industrial Air Compressors.jpg", moq: "1 unit", price: "$500–8,000" },
+    { name: "Forklifts & Material Handling Equipment", file: "Forklifts & Material Handling Equipment.jpg", moq: "1 unit", price: "$2,500–35,000" },
+    { name: "Power Tools", file: "Power Tools.jpg", moq: "50 pcs", price: "$12–180" },
+    { name: "Sanitary Ware", file: "Sanitary Ware.jpg", moq: "20 sets", price: "$20–300" },
+    { name: "LED Lighting", file: "LED Lighting.jpg", moq: "100 pcs", price: "$2–80" },
+    { name: "Aluminium Doors & Windows", file: "Aluminium Doors & Windows.jpg", moq: "10 m²", price: "$45–180/m²" },
+    { name: "Cow Milking Machines", file: "Cow Milking Machines.jpg", moq: "1 unit", price: "$500–5,000" },
+    { name: "Feed Pellet Machines", file: "Feed Pellet Machines.jpg", moq: "1 set", price: "$1,500–15,000" },
+    { name: "Agricultural Water Pumps", file: "Agricultural Water Pumps.jpg", moq: "10 pcs", price: "$40–500" },
+    { name: "Ventilation & Exhaust Fans", file: "Ventilation & Exhaust Fans.jpg", moq: "20 pcs", price: "$35–400" },
+    { name: "Custom Packaging Boxes", file: "Custom Packaging Boxes.jpg", moq: "500 pcs", price: "$0.20–3" },
+    { name: "Perfume Bottles & Packaging", file: "Perfume Bottles & Packaging.jpg", moq: "500 pcs", price: "$0.30–5" },
+    { name: "Packaging Machines", file: "Packaging Machines.jpg", moq: "1 set", price: "$2,000–30,000" },
+    { name: "Custom Shopping Bags", file: "Custom Shopping Bags.jpg", moq: "500 pcs", price: "$0.10–2" }
+  ];
+  const productBaseUrl = "https://raw.githubusercontent.com/ahmadok12/Shaikh-China-Sourcing/main/Hero%20Products/";
+  document.querySelectorAll(".product-row").forEach((row, rowIndex) => {
+    const rowProducts = featuredProducts.slice(rowIndex * 8, rowIndex * 8 + 8);
+    row.querySelectorAll(".product-set").forEach((set) => {
+      set.querySelectorAll(".product-card").forEach((card, cardIndex) => {
+        const product = rowProducts[cardIndex];
+        if (!product) return;
+        const thumb = card.querySelector(".product-thumb");
+        const title = card.querySelector(".product-card-copy h3");
+        if (thumb) {
+          thumb.innerHTML =
+            '<img src="' + productBaseUrl + encodeURIComponent(product.file) + '" alt="' +
+            product.name.replace(/&/g, "&amp;").replace(/"/g, "&quot;") +
+            '" width="720" height="720" loading="lazy">' +
+            '<div class="product-meta-bar"><span><b>MOQ</b>' + product.moq +
+            '</span><span><b>EST.</b>' + product.price + '</span></div>';
+        }
+        if (title) title.textContent = product.name;
+      });
+    });
+  });
 
   document.querySelectorAll(".product-marquee").forEach((marquee, rowIndex) => {
     let dragging = false;
