@@ -2628,6 +2628,7 @@
 </div>
 </div>
 <form class="sourcing-form">
+<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"/>
 <div class="form-head">
 <div>
 <span>SOURCING REQUEST</span>
@@ -2897,11 +2898,15 @@
     requestAnimationFrame(animate);
   });
 
+  const LEAD_FUNCTION_URL = "https://eourkizstbgmrqkdwnjd.supabase.co/functions/v1/submit-lead";
+  const WEBSITE_SOURCE_CODE = "shaikh_main";
   const form = document.querySelector(".sourcing-form");
   if (form) {
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const data = new FormData(form);
+      const submitButton = form.querySelector('[type="submit"]');
+      const originalButtonText = submitButton.innerHTML;
       const message = [
         "Hello Shaikh China Sourcing, I would like to submit a sourcing request.",
         "",
@@ -2915,11 +2920,39 @@
         "Reference Link: " + (data.get("reference") || ""),
         "Requirement: " + (data.get("message") || "")
       ].join("\n");
-      window.open(
-        "https://wa.me/8613250703045?text=" + encodeURIComponent(message),
-        "_blank",
-        "noopener,noreferrer"
-      );
+      const payload = {
+        source_code: WEBSITE_SOURCE_CODE,
+        source_url: window.location.href,
+        website: data.get("website") || "",
+        name: data.get("name") || "",
+        business: data.get("business") || "",
+        phone: data.get("phone") || "",
+        email: data.get("email") || "",
+        country: data.get("country") || "",
+        product: data.get("product") || "",
+        estimated_quantity: data.get("quantity") || "",
+        reference_url: data.get("reference") || "",
+        message: data.get("message") || ""
+      };
+      submitButton.disabled = true;
+      submitButton.textContent = "Saving your request…";
+      try {
+        const response = await fetch(LEAD_FUNCTION_URL, {
+          method:"POST",
+          headers:{"content-type":"application/json"},
+          body:JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.error || "Could not save your request");
+        submitButton.textContent = "Saved — opening WhatsApp…";
+        window.location.href =
+          "https://wa.me/8613250703045?text=" + encodeURIComponent(message);
+      } catch (error) {
+        console.error(error);
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
+        alert("We could not save your request. Please try again or contact us directly on WhatsApp.");
+      }
     });
   }
 })();
