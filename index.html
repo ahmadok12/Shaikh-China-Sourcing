@@ -1027,6 +1027,280 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=874376715495226&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<!-- Readability and mobile accessibility improvements -->
+<style id="readability-mobile-fixes">
+  /* Comfortable defaults for all real page content. */
+  body {
+    font-size: 16px;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  .primary-nav { font-size: 14px; }
+  .header-contact { font-size: 13px; }
+  .header-contact span { font-size: 13px; }
+  .header-cta,
+  .button { font-size: 15px; }
+  .header-cta-mobile-label { display: none; }
+
+  .eyebrow,
+  .route-kicker,
+  .section-kicker,
+  .products-kicker,
+  .process-kicker,
+  .client-kicker,
+  .contact-kicker { font-size: 13px; }
+
+  .lead,
+  .fieldwork-header > p,
+  .products-intro > p,
+  .process-lead,
+  .contact-copy > p { font-size: 17px; }
+
+  .proof p,
+  .service-list span,
+  .route-copy > p,
+  .products-intro a,
+  .products-bottom,
+  .fieldwork-footer,
+  .review-copy,
+  .client-review > p { font-size: 14px; }
+  .proof strong { font-size: 15px; }
+
+  .video-topbar,
+  .video-caption span,
+  .video-meta,
+  .floating-card small,
+  .accent-stamp small { font-size: 11px; }
+  .floating-card strong { font-size: 14px; }
+
+  .route-legend,
+  .map-card-top,
+  .china-marker small,
+  .location-strip { font-size: 12px; }
+  .china-marker strong { font-size: 13px; }
+
+  .field-index,
+  .field-copy > span { font-size: 12px; }
+  .field-copy h3 { font-size: 24px; }
+  .field-copy p { font-size: 15px; line-height: 1.55; }
+
+  .product-row-label { font-size: 15px; }
+  .product-thumb > span,
+  .product-image-placeholder small { font-size: 10px; }
+  .product-card-copy h3 { font-size: 13px; line-height: 1.35; }
+  .product-card-copy { min-height: 62px; }
+
+  .journey-stage { min-height: 72px; padding: 12px; }
+  .journey-stage > span { font-size: 12px; }
+  .journey-stage strong { font-size: 15px; }
+  .journey-stage small { font-size: 12px; line-height: 1.45; }
+
+  .portal-address,
+  .portal-screen-live,
+  .portal-order-top span,
+  .portal-status-pill,
+  .portal-update p { font-size: 10px !important; }
+  .portal-screen-brand strong,
+  .portal-order-top strong,
+  .portal-update strong { font-size: 12px; }
+  .portal-screen-brand small { font-size: 10px; }
+  .portal-stage-row span { font-size: 9px; line-height: 1.25; }
+
+  .client-photo figcaption,
+  .review-proof,
+  .review-source { font-size: 13px; }
+  .client-photo figcaption strong { font-size: 15px; }
+
+  .contact-action small,
+  .form-head > div > span,
+  .form-step,
+  .form-grid label,
+  .form-note { font-size: 12px; }
+  .contact-action strong,
+  .office-list strong { font-size: 14px; }
+  .office-list p { font-size: 13px; }
+  .office-code { font-size: 10px; }
+  .form-grid input,
+  .form-grid textarea { font-size: 16px; }
+  .sourcing-form > button { font-size: 15px; }
+
+  .footer-eyebrow,
+  .footer-heading,
+  .footer-contact small { font-size: 11px; }
+  .footer-cta p,
+  .footer-brand p,
+  .footer-column,
+  .footer-contact a { font-size: 13px; }
+  .footer-badges span,
+  .footer-bottom { font-size: 11px; }
+  .footer-cta > a,
+  .whatsapp-float { font-size: 14px; }
+
+  /* Keyboard and touch accessibility. */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid #ff6a00;
+    outline-offset: 3px;
+  }
+
+  @media (width <= 760px) {
+    body { font-size: 17px; }
+
+    .site-header {
+      width: min(100% - 24px, 680px);
+      height: 68px;
+    }
+    .menu-toggle { width: 46px; height: 46px; }
+    .header-actions { gap: 7px; }
+    .header-cta {
+      display: inline-flex;
+      min-height: 44px;
+      padding: 0 15px;
+      gap: 0;
+      color: #fff;
+      background: linear-gradient(90deg, var(--orange), var(--red));
+      font-size: 14px;
+      font-weight: 850;
+      white-space: nowrap;
+      box-shadow: 0 9px 20px rgba(222, 41, 16, .22);
+    }
+    .header-cta-desktop-label,
+    .header-cta > span[aria-hidden="true"] { display: none; }
+    .header-cta-mobile-label { display: inline; }
+    .header-wrap.is-scrolled .header-cta {
+      min-height: 38px;
+      padding: 0 12px;
+      font-size: 13px;
+    }
+    .primary-nav { padding: 10px; }
+    .primary-nav a,
+    .primary-nav .nav-tracking,
+    .primary-nav .mobile-nav-cta {
+      min-height: 48px;
+      padding: 14px 16px !important;
+      font-size: 16px;
+    }
+
+    .hero-grid,
+    .location-strip,
+    .route-section,
+    .fieldwork-inner,
+    .products-header,
+    .product-row-label,
+    .products-bottom,
+    .products-explore {
+      width: min(100% - 24px, 680px);
+    }
+    .hero-grid { gap: 42px; padding-top: 108px; }
+    h1 { font-size: clamp(40px, 12vw, 58px); line-height: 1.02; }
+    .lead { font-size: 18px; line-height: 1.65; }
+    .eyebrow { font-size: 13px; line-height: 1.35; }
+    .button { min-height: 54px; font-size: 16px; }
+    .proof p,
+    .service-list span { font-size: 14px; }
+
+    .visual-column { min-height: 570px; }
+    .video-topbar,
+    .video-meta,
+    .video-caption span { font-size: 12px; }
+    .floating-card small { font-size: 11px; }
+    .floating-card strong { font-size: 14px; }
+
+    .route-section { padding: 30px 20px 22px; }
+    .route-copy > p,
+    .fieldwork-header > p,
+    .products-intro > p,
+    .process-lead,
+    .contact-copy > p { font-size: 17px; line-height: 1.65; }
+    .route-legend { font-size: 12px; }
+
+    .fieldwork-inner,
+    .products-section,
+    .process-section,
+    .client-section,
+    .contact-section { padding-top: 64px; padding-bottom: 64px; }
+    .field-card,
+    .tradeshow-card { min-height: 450px; }
+    .field-copy p { font-size: 16px; }
+
+    .product-card { width: 156px; }
+    .product-card-copy { min-height: 66px; padding: 11px 12px; }
+    .product-card-copy h3 { font-size: 14px; }
+    .product-thumb > span,
+    .product-image-placeholder small { font-size: 10px; }
+
+    .journey-stage { min-height: 82px; }
+    .journey-stage strong { font-size: 16px; }
+    .journey-stage small { font-size: 13px; }
+
+    .portal-screen-head { align-items: flex-start; }
+    .portal-stage-row { grid-template-columns: repeat(3, 1fr); gap: 12px 4px; }
+    .portal-stage-row span { font-size: 10px; }
+    .portal-order-card { padding: 16px; }
+    .portal-preview-footer p { font-size: 13px; }
+
+    .client-review { padding: 38px 22px 42px; }
+    .client-photo figcaption { font-size: 13px; }
+
+    .contact-action { min-height: 68px; }
+    .form-grid { gap: 19px; }
+    .form-grid label { gap: 10px; font-size: 13px; }
+    .form-grid input,
+    .form-grid textarea { min-height: 52px; padding: 14px 15px; font-size: 16px; }
+    .sourcing-form > button { min-height: 56px; font-size: 16px; }
+    .form-note { font-size: 12px; }
+
+    .footer-main { gap: 42px 28px; }
+    .footer-column,
+    .footer-contact a,
+    .footer-brand p { font-size: 14px; }
+    .footer-column a { min-height: 36px; display: flex; align-items: center; }
+    .footer-bottom { font-size: 12px; line-height: 1.55; }
+  }
+
+  @media (width <= 460px) {
+    .brand { width: 100px; }
+    .brand img { width: 78px; }
+    .site-header { padding-left: 11px; }
+    .header-actions { gap: 5px; }
+    .header-cta { padding-inline: 12px; font-size: 13px; }
+    .actions { gap: 10px; }
+    .service-list { grid-template-columns: 1fr; }
+    .service-list span { font-size: 15px; }
+    .visual-column { min-height: 550px; }
+
+    .map-card { margin-inline: 0; }
+    .map-card-top { position: static; gap: 8px; padding: 12px 12px 0; font-size: 10px; }
+    .map-stage { min-height: 245px; }
+
+    .field-card,
+    .tradeshow-card { min-height: 420px; }
+
+    .product-card { width: 152px; }
+    .product-card-copy h3 { font-size: 14px; }
+
+    .portal-screen { padding: 12px; }
+    .portal-order-top { flex-direction: column; }
+    .portal-order-top > div:last-child { text-align: left; }
+    .portal-stage-row { grid-template-columns: repeat(2, 1fr); }
+    .portal-stage-row span { font-size: 11px; }
+    .portal-update { grid-template-columns: 38px minmax(0, 1fr); }
+    .portal-update p { font-size: 11px !important; }
+
+    .sourcing-form { padding: 26px 18px; }
+    .footer-main { grid-template-columns: 1fr; }
+    .whatsapp-float {
+      width: 58px;
+      height: 58px;
+      min-height: 58px;
+      font-size: 0;
+    }
+  }
+</style>
 </head>
 <body class="__variable_geist_0tvmz3h antialiased">
 <main>
@@ -1048,7 +1322,7 @@ src="https://www.facebook.com/tr?id=874376715495226&ev=PageView&noscript=1"
 <div class="header-actions">
 <a class="header-contact" href="https://wa.me/8613250703045" aria-label="Contact us on WhatsApp">
 <span aria-hidden="true">●</span>+8613250703045</a>
-<a class="header-cta" href="#contact">Get a sourcing quote <span aria-hidden="true">↗</span>
+<a class="header-cta" href="https://wa.me/8613250703045?text=Hello%2C%20I%20would%20like%20a%20sourcing%20quote." target="_blank" rel="noopener noreferrer" aria-label="Get a sourcing quote on WhatsApp"><span class="header-cta-desktop-label">Get a sourcing quote</span><span class="header-cta-mobile-label">Get quote</span><span aria-hidden="true">↗</span>
 </a>
 <button class="menu-toggle " type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Open navigation menu">
 <span>
